@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="ProgramNodes\" />
+    <Folder Include="ProgramNodes\StatementNode\" />
+    <Folder Include="ProgramNodes\BasicBlockNode\" />
+    <Folder Include="ProgramNodes\ExpressionNode\" />
+    <Folder Include="ProgramNodes\VariableExpressionNode\" />
+    <Folder Include="ProgramNodes\BinaryOperatorNode\" />
+    <Folder Include="ProgramNodes\BinaryAssignOperatorNode\" />
+    <Folder Include="ProgramNodes\BinaryAssignNode\" />
+    <Folder Include="ProgramNodes\BinaryArrayOperatorNode\" />
+    <Folder Include="ProgramNodes\BooleanExpressionNode\" />
+    <Folder Include="ProgramNodes\BinaryRelationalOperatorNode\" />
+    <Folder Include="ProgramNodes\BinaryAndOperatorNode\" />
+    <Folder Include="ProgramNodes\BinaryOrOperatorNode\" />
+    <Folder Include="ProgramNodes\UnaryNotOperatorNode\" />
+    <Folder Include="ProgramNodes\UnaryOperatorNode\" />
+    <Folder Include="ProgramNodes\UnaryPostOperatorNode\" />
+    <Folder Include="ProgramNodes\UnaryPreOperatorNode\" />
+    <Folder Include="ProgramNodes\ExpressionStatementNode\" />
+    <Folder Include="ProgramNodes\ReturnStatementNode\" />
+    <Folder Include="ProgramNodes\TypeNode\" />
+    <Folder Include="ProgramNodes\IntNode\" />
+    <Folder Include="ProgramNodes\FloatNode\" />
+    <Folder Include="ProgramNodes\DoubleNode\" />
+    <Folder Include="ProgramNodes\LongNode\" />
+    <Folder Include="ProgramNodes\ArrayTypeNode\" />
+    <Folder Include="ProgramNodes\IfStatementNode\" />
+    <Folder Include="ProgramNodes\ForStatementNode\" />
+    <Folder Include="ProgramNodes\WhileStatementNode\" />
+    <Folder Include="ProgramNodes\DoWhileStatementNode\" />
+    <Folder Include="ProgramNodes\VariableDeclarationNode\" />
+    <Folder Include="ProgramNodes\FunctionDeclarationNode\" />
+    <Folder Include="Tokenizer\" />
+  </ItemGroup>
+</Project>
