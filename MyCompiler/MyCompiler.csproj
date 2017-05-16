@@ -38,5 +38,16 @@
     <Folder Include="ProgramNodes\VariableDeclarationNode\" />
     <Folder Include="ProgramNodes\FunctionDeclarationNode\" />
     <Folder Include="Tokenizer\" />
+    <Folder Include="Tokenizer\Tokens\" />
+    <Folder Include="Tokenizer\Tokens\Keywords\" />
+    <Folder Include="Tokenizer\Tokens\Punctuation\" />
+    <Folder Include="Tokenizer\Tokens\AssignmentOperators\" />
+    <Folder Include="Tokenizer\Tokens\BooleanOperators\" />
+    <Folder Include="Tokenizer\Tokens\NumericOperators\" />
+    <Folder Include="Tokenizer\Tokens\VariablesAndConstants\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Tokenizer\TokenType.cs" />
+    <Compile Remove="Tokenizer\TokenDefinition.cs" />
   </ItemGroup>
 </Project>
