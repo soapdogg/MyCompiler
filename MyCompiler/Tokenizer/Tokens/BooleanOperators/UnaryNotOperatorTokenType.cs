@@ -5,7 +5,7 @@ namespace MyCompiler.Tokenizer.Tokens.BooleanOperators
     {
         public UnaryNotOperatorTokenType()
         {
-            Pattern = new Regex("!");
+            Pattern = new Regex("^!");
         }
     }
 }

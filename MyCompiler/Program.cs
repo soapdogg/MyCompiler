@@ -1,4 +1,6 @@
-﻿using System;
+﻿using System.IO;
+using System;
+
 
 namespace MyCompiler
 {
@@ -6,7 +8,11 @@ namespace MyCompiler
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+
+            string[] lines = File.ReadAllLines(AppContext.BaseDirectory +Path.DirectorySeparatorChar+ @"Data" + Path.DirectorySeparatorChar + @"test3.c");
+            Tokenizer.Tokenizer t = new Tokenizer.Tokenizer();
+            var result = t.Tokenize(lines[4]);
+
         }
     }
 }

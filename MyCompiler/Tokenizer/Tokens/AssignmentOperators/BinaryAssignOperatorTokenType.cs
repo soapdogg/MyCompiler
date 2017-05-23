@@ -6,7 +6,7 @@ namespace MyCompiler.Tokenizer.Tokens.AssignmentOperators
     {
         public BinaryAssignOperatorTokenType()
         {
-            Pattern = new Regex("(&|/|<<|-|%|\\*|\\|\\||\\+|>>|\\^)=");
+            Pattern = new Regex("^((&|/|<<|-|%|\\*|\\|\\||\\+|>>|\\^)=)");
         }
     }
 }

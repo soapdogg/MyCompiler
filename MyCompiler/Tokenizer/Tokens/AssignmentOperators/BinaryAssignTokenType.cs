@@ -6,7 +6,7 @@ namespace MyCompiler.Tokenizer.Tokens.AssignmentOperators
     {
         public BinaryAssignTokenType()
         {
-            Pattern = new Regex("=");
+            Pattern = new Regex("^=");
         }
     }
 }

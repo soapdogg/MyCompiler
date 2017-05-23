@@ -45,6 +45,7 @@
     <Folder Include="Tokenizer\Tokens\BooleanOperators\" />
     <Folder Include="Tokenizer\Tokens\NumericOperators\" />
     <Folder Include="Tokenizer\Tokens\VariablesAndConstants\" />
+    <Folder Include="Data\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Tokenizer\TokenType.cs" />
@@ -82,5 +83,13 @@
     <Compile Remove="Tokenizer\Tokens\BooleanOperators\BitwiseNegationTokenType.cs" />
     <Compile Remove="Tokenizer\Tokens\BooleanOperators\NegationTokenType.cs" />
     <Compile Remove="Tokenizer\Tokens\Punctuation\DotTokenType.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Data\Test1.c">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\Test3.c">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>

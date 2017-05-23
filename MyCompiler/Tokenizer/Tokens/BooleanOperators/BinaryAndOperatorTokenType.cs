@@ -6,7 +6,7 @@ namespace MyCompiler.Tokenizer.Tokens.BooleanOperators
     {
         public BinaryAndOperatorTokenType()
         {
-            Pattern = new Regex("&&");
+            Pattern = new Regex("^&&");
         }
     }
 }

@@ -5,7 +5,7 @@ namespace MyCompiler.Tokenizer.Tokens.Punctuation
     {
         public RightBraceTokenType()
         {
-            Pattern = new Regex("\\}");
+            Pattern = new Regex("^\\}");
         }
     }
 }

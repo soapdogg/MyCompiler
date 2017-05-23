@@ -5,7 +5,7 @@ namespace MyCompiler.Tokenizer.Tokens.Punctuation
     {
         public SemicolonTokenType()
         {
-            Pattern = new Regex(";");
+            Pattern = new Regex("^;");
         }
     }
 }

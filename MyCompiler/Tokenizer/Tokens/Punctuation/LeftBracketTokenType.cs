@@ -6,7 +6,7 @@ namespace MyCompiler.Tokenizer.Tokens.Punctuation
     {
         public LeftBracketTokenType()
         {
-            Pattern = new Regex("\\[");
+            Pattern = new Regex("^\\[");
         }
     }
 }

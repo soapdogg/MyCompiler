@@ -6,7 +6,7 @@ namespace MyCompiler.Tokenizer.Tokens.VariablesAndConstants
     {
         public IdentifierTokenType()
         {
-            Pattern = new Regex("[_a-zA-Z][_a-zA-Z0-9]*");
+            Pattern = new Regex("^[_a-zA-Z]\\w*");
         }
     }
 }

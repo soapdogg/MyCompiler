@@ -8,7 +8,9 @@ namespace MyCompiler.Tokenizer.Tokens
 
         public TokenMatch Match(string inputString)
         {
-			var match = Pattern.Match(inputString);
+            
+            var match =
+                Pattern.Match(inputString);
 			if (match.Success)
 			{
 				string remainingText = string.Empty;

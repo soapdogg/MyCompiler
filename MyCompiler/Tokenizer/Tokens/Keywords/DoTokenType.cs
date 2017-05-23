@@ -6,7 +6,7 @@ namespace MyCompiler.Tokenizer.Tokens.Keywords
     {
         public DoTokenType()
         {
-            Pattern = new Regex("do");
+            Pattern = new Regex("^do");
         }
     }
 }

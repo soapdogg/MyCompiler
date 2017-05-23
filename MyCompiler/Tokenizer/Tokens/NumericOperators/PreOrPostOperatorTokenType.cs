@@ -6,7 +6,7 @@ namespace MyCompiler.Tokenizer.Tokens.NumericOperators
     {
         public PreOrPostOperatorTokenType()
         {
-            Pattern = new Regex("\\+\\+|--");
+            Pattern = new Regex("^\\+\\+|--");
         }
     }
 }

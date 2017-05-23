@@ -5,7 +5,7 @@ namespace MyCompiler.Tokenizer.Tokens.NumericOperators
     {
         public UnaryOperatorTokenType()
         {
-            Pattern = new Regex("\\+|-|~");
+            Pattern = new Regex("^\\+|-|~");
         }
     }
 }
