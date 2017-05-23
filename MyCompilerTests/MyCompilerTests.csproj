@@ -10,4 +10,45 @@
     <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Tokenizer\" />
+    <Folder Include="Tokenizer\Tokens\" />
+    <Folder Include="Tokenizer\Tokens\Keywords\" />
+    <Folder Include="Tokenizer\Tokens\AssignmentOperators\" />
+    <Folder Include="Tokenizer\Tokens\BooleanOperators\" />
+    <Folder Include="Tokenizer\Tokens\NumericOperators\" />
+    <Folder Include="Tokenizer\Tokens\Punctuation\" />
+    <Folder Include="Tokenizer\Tokens\VariablesAndConstants\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MyCompiler\MyCompiler.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="UnitTest1.cs" />
+    <Compile Remove="Tokenizer\Tokens\AssignmentOperators\AndAssignTokenTypeTests.cs" />
+    <Compile Remove="Tokenizer\Tokens\AssignmentOperators\DivideAssignTokenTypeTests.cs" />
+    <Compile Remove="Tokenizer\Tokens\AssignmentOperators\LeftShiftAssignTokenTypeTests.cs" />
+    <Compile Remove="Tokenizer\Tokens\AssignmentOperators\MinusAssignTokenTypeTests.cs" />
+    <Compile Remove="Tokenizer\Tokens\AssignmentOperators\ModulusAssignTokenTypeTests.cs" />
+    <Compile Remove="Tokenizer\Tokens\AssignmentOperators\MultiplyAssignTokenTypeTests.cs" />
+    <Compile Remove="Tokenizer\Tokens\AssignmentOperators\OrAssignTokenTypeTests.cs" />
+    <Compile Remove="Tokenizer\Tokens\AssignmentOperators\XorAssignTokenTypeTests.cs" />
+    <Compile Remove="Tokenizer\Tokens\BooleanOperators\BitwiseNegationTokenTypeTests.cs" />
+    <Compile Remove="Tokenizer\Tokens\BooleanOperators\BitwiseOrTokenTypeTests.cs" />
+    <Compile Remove="Tokenizer\Tokens\BooleanOperators\BitwiseXorTokenTypeTests.cs" />
+    <Compile Remove="Tokenizer\Tokens\BooleanOperators\EqualsTokenTypeTests.cs" />
+    <Compile Remove="Tokenizer\Tokens\BooleanOperators\GreaterThanOrEqualTokeyTypeTests.cs" />
+    <Compile Remove="Tokenizer\Tokens\BooleanOperators\GreaterThanTokenTypeTests.cs" />
+    <Compile Remove="Tokenizer\Tokens\BooleanOperators\LessThanTokenTypeTests.cs" />
+    <Compile Remove="Tokenizer\Tokens\BooleanOperators\NotEqualToTokenTypeTests.cs" />
+    <Compile Remove="Tokenizer\Tokens\NumericOperators\DivideTokenTypeTests.cs" />
+    <Compile Remove="Tokenizer\Tokens\NumericOperators\LeftShiftTokenTypeTests.cs" />
+    <Compile Remove="Tokenizer\Tokens\NumericOperators\MinusMinusTokenTypeTests.cs" />
+    <Compile Remove="Tokenizer\Tokens\NumericOperators\MinusTokenTypeTests.cs" />
+    <Compile Remove="Tokenizer\Tokens\NumericOperators\ModulusTokenTypeTests.cs" />
+    <Compile Remove="Tokenizer\Tokens\NumericOperators\MultiplyTokenTypeTests.cs" />
+    <Compile Remove="Tokenizer\Tokens\NumericOperators\PlusTokenTypeTests.cs" />
+    <Compile Remove="Tokenizer\Tokens\NumericOperators\RightShiftTokenTypeTests.cs" />
+    <Compile Remove="Tokenizer\Tokens\Punctuation\DotTokenTypeTests.cs" />
+  </ItemGroup>
 </Project>

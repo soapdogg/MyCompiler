@@ -1,12 +1,12 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace MyCompiler.Tokenizer.Tokens
+namespace MyCompiler.Tokenizer.Tokens.Keywords
 {
-    public class DoToken : BaseTokenType
+    public class DoTokenType : BaseTokenType
     {
-        public DoToken()
+        public DoTokenType()
         {
-            Pattern = new Regex("^do");
+            Pattern = new Regex("do");
         }
     }
 }

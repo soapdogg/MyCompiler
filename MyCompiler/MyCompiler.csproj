@@ -49,5 +49,38 @@
   <ItemGroup>
     <Compile Remove="Tokenizer\TokenType.cs" />
     <Compile Remove="Tokenizer\TokenDefinition.cs" />
+    <Compile Remove="Tokenizer\Tokens\NumericOperators\LeftShiftTokenType.cs" />
+    <Compile Remove="Tokenizer\Tokens\NumericOperators\MinusMinusTokenType.cs" />
+    <Compile Remove="Tokenizer\Tokens\NumericOperators\MinusTokenType.cs" />
+    <Compile Remove="Tokenizer\Tokens\NumericOperators\ModulusTokenType.cs" />
+    <Compile Remove="Tokenizer\Tokens\NumericOperators\MultiplyTokenType.cs" />
+    <Compile Remove="Tokenizer\Tokens\NumericOperators\PlusPlusTokenType.cs" />
+    <Compile Remove="Tokenizer\Tokens\NumericOperators\PlusTokenType.cs" />
+    <Compile Remove="Tokenizer\Tokens\NumericOperators\RightShiftTokenType.cs" />
+    <Compile Remove="Tokenizer\Tokens\NumericOperators\DivideTokenType.cs" />
+    <Compile Remove="Tokenizer\Tokens\AssignmentOperators\AndAssignTokenType.cs" />
+    <Compile Remove="Tokenizer\Tokens\AssignmentOperators\DivideAssignTokenType.cs" />
+    <Compile Remove="Tokenizer\Tokens\AssignmentOperators\LeftShiftAssignTokenType.cs" />
+    <Compile Remove="Tokenizer\Tokens\AssignmentOperators\MinusAssignTokenType.cs" />
+    <Compile Remove="Tokenizer\Tokens\AssignmentOperators\ModulusAssignTokenType.cs" />
+    <Compile Remove="Tokenizer\Tokens\AssignmentOperators\MultiplyAssignTokenType.cs" />
+    <Compile Remove="Tokenizer\Tokens\AssignmentOperators\OrAssignTokenType.cs" />
+    <Compile Remove="Tokenizer\Tokens\AssignmentOperators\PlusAssignTokenType.cs" />
+    <Compile Remove="Tokenizer\Tokens\AssignmentOperators\RightShiftAssignTokenType.cs" />
+    <Compile Remove="Tokenizer\Tokens\AssignmentOperators\XorAssignTokenType.cs" />
+    <Compile Remove="Tokenizer\Tokens\BooleanOperators\BitwiseAndTokenType.cs" />
+    <Compile Remove="Tokenizer\Tokens\BooleanOperators\BitwiseOrTokenType.cs" />
+    <Compile Remove="Tokenizer\Tokens\BooleanOperators\BitwiseXorTokenType.cs" />
+    <Compile Remove="Tokenizer\Tokens\BooleanOperators\AndTokenType.cs" />
+    <Compile Remove="Tokenizer\Tokens\BooleanOperators\EqualsTokenType.cs" />
+    <Compile Remove="Tokenizer\Tokens\BooleanOperators\GreaterThanOrEqualTokenType.cs" />
+    <Compile Remove="Tokenizer\Tokens\BooleanOperators\GreaterThanTokenType.cs" />
+    <Compile Remove="Tokenizer\Tokens\BooleanOperators\LessThanOrEqualTokenType.cs" />
+    <Compile Remove="Tokenizer\Tokens\BooleanOperators\LessThanTokenType.cs" />
+    <Compile Remove="Tokenizer\Tokens\BooleanOperators\NotEqualToTokenType.cs" />
+    <Compile Remove="Tokenizer\Tokens\BooleanOperators\OrTokenType.cs" />
+    <Compile Remove="Tokenizer\Tokens\BooleanOperators\BitwiseNegationTokenType.cs" />
+    <Compile Remove="Tokenizer\Tokens\BooleanOperators\NegationTokenType.cs" />
+    <Compile Remove="Tokenizer\Tokens\Punctuation\DotTokenType.cs" />
   </ItemGroup>
 </Project>

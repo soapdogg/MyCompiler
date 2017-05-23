@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace MyCompiler.Tokenizer.Tokens
+namespace MyCompiler.Tokenizer.Tokens.Keywords
 {
     public class DoubleTokenType : BaseTokenType
     {

@@ -6,7 +6,7 @@ namespace MyCompiler.Tokenizer.Tokens.VariablesAndConstants
     {
         public IntegerConstantTokenType()
         {
-            Pattern = new Regex("(+|-)?([1-9][\\d]*|0[0-7]*|(0x|0X)([\\da-fA-F]*))((u|U)(l|L)?|(l|L)(u|U)?)?");
+            Pattern = new Regex("([1-9][\\d]*|0[0-7]*|(0x|0X)([\\da-fA-F]*))((u|U)(l|L)?|(l|L)(u|U)?)?");
         }
     }
 }

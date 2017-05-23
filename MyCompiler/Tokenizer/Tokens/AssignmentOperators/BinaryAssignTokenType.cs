@@ -2,11 +2,11 @@
 
 namespace MyCompiler.Tokenizer.Tokens.AssignmentOperators
 {
-    public class AssignTokenType : BaseTokenType
+    public class BinaryAssignTokenType : BaseTokenType
     {
-        public AssignTokenType()
+        public BinaryAssignTokenType()
         {
-            Pattern = new Regex("^=");
+            Pattern = new Regex("=");
         }
     }
 }
