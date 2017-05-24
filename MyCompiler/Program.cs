@@ -8,10 +8,9 @@ namespace MyCompiler
     {
         static void Main(string[] args)
         {
-
-            string[] lines = File.ReadAllLines(AppContext.BaseDirectory +Path.DirectorySeparatorChar+ @"Data" + Path.DirectorySeparatorChar + @"test3.c");
-            Tokenizer.Tokenizer t = new Tokenizer.Tokenizer();
-            var result = t.Tokenize(lines[4]);
+            
+            Tokenizer.Tokenizer t = new Tokenizer.Tokenizer(new string[]{@"Data", @"test10.c"});
+            var result = t.Tokenize();
 
         }
     }

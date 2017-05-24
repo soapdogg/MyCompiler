@@ -6,7 +6,7 @@ namespace MyCompiler.Tokenizer.Tokens.VariablesAndConstants
     {
         public FloatingPointConstantTokenType()
         {
-            Pattern = new Regex("^\\d*.\\d+");
+            Pattern = new Regex("^(\\d*\\.\\d+)");
         }
     }
 }

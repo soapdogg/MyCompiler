@@ -6,7 +6,7 @@ namespace MyCompiler.Tokenizer.Tokens.BooleanOperators
     {
         public BinaryRelationalOperatorTokenType()
         {
-            Pattern = new Regex("^==|>=|>|<=|<|!=");
+            Pattern = new Regex("^(==|>=|>|<=|<|!=)");
         }
     }
 }

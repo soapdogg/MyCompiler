@@ -1,13 +1,13 @@
 ﻿int test1(){
-    int a;
+    int a ;
         {
-            int b = 5;
+            int b = 5 ;
             {
-                int c = 10;
+                int c = 10 ;
                 {
-                    a = b + c;
+                    a = b + c ;
                 }
             }
         }
-    return a;
+    return a ;
 }

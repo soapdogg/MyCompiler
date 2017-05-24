@@ -85,10 +85,16 @@
     <Compile Remove="Tokenizer\Tokens\Punctuation\DotTokenType.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Data\Test23.c" />
+  </ItemGroup>
+  <ItemGroup>
     <None Update="Data\Test1.c">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Data\Test3.c">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\Test10.c">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

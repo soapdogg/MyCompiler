@@ -6,7 +6,7 @@ namespace MyCompiler.Tokenizer.Tokens.VariablesAndConstants
     {
         public IntegerConstantTokenType()
         {
-            Pattern = new Regex("^([1-9][\\d]* | 0)");
+            Pattern = new Regex("^([1-9]\\d*|0)");
         }
     }
 }
