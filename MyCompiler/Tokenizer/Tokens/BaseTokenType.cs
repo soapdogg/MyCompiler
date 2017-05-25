@@ -1,5 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 
+using MyCompiler.Tokenizer.Tokens.Interfaces;
+
 namespace MyCompiler.Tokenizer.Tokens
 {
     public abstract class BaseTokenType : ITokenType

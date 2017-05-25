@@ -4,12 +4,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 using MyCompiler.Tokenizer.Tokens;
-using MyCompiler.Tokenizer.Tokens.AssignmentOperators;
-using MyCompiler.Tokenizer.Tokens.BooleanOperators;
-using MyCompiler.Tokenizer.Tokens.Keywords;
-using MyCompiler.Tokenizer.Tokens.NumericOperators;
-using MyCompiler.Tokenizer.Tokens.Punctuation;
-using MyCompiler.Tokenizer.Tokens.VariablesAndConstants;
+using MyCompiler.Tokenizer.Tokens.Interfaces;
 
 namespace MyCompiler.Tokenizer
 {
@@ -60,7 +55,7 @@ namespace MyCompiler.Tokenizer
 
         public Tokenizer(string [] pathArray)
         {
-			string path = AppContext.BaseDirectory;
+			string path = AppDomain.CurrentDomain.BaseDirectory;
             foreach (string s in pathArray) path += Path.DirectorySeparatorChar + s;
             lines = File.ReadAllLines(path);
         }

@@ -1,4 +1,4 @@
-﻿using MyCompiler.Tokenizer.Tokens;
+﻿using MyCompiler.Tokenizer.Tokens.Interfaces;
 
 namespace MyCompiler.Tokenizer
 {

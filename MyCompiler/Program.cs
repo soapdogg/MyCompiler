@@ -1,6 +1,4 @@
-﻿using System.IO;
-using System;
-
+﻿using System;
 
 namespace MyCompiler
 {
@@ -8,10 +6,9 @@ namespace MyCompiler
     {
         static void Main(string[] args)
         {
-            
-            Tokenizer.Tokenizer t = new Tokenizer.Tokenizer(new string[]{@"Data", @"test10.c"});
+            Tokenizer.Tokenizer t = new Tokenizer.Tokenizer(new string[] { @"Data", @"test10.c" });
             var result = t.Tokenize();
-
+            Console.ReadLine();
         }
     }
 }
