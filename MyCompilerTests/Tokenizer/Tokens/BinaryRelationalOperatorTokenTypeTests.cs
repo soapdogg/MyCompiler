@@ -22,5 +22,35 @@ namespace MyCompilerTests.Tokenizer.Tokens
         {
             Assert.IsTrue(t.Pattern.IsMatch("=="));
         }
+
+        [TestMethod]
+        public void NotEqualsMatchesTest()
+        {
+            Assert.IsTrue(t.Pattern.IsMatch("!="));
+        }
+
+        [TestMethod]
+        public void GreaterThanMatchesTest()
+        {
+            Assert.IsTrue(t.Pattern.IsMatch(">"));
+        }
+
+        [TestMethod]
+        public void GreaterThanOrEqualToMatchesTest()
+        {
+            Assert.IsTrue(t.Pattern.IsMatch(">="));
+        }
+
+        [TestMethod]
+        public void LessThanMatchesTest()
+        {
+            Assert.IsTrue(t.Pattern.IsMatch(">"));
+        }
+
+        [TestMethod]
+        public void LessThanOrEqualToMatchesTest()
+        {
+            Assert.IsTrue(t.Pattern.IsMatch(">="));
+        }
     }
 }

@@ -4,9 +4,6 @@ namespace MyCompiler.Tokenizer.Tokens
 {
     public class FloatingPointConstantTokenType : BaseTokenType
     {
-        public FloatingPointConstantTokenType()
-        {
-            Pattern = new Regex("^(\\d*\\.\\d+)");
-        }
+        public override Regex Pattern => new Regex("^(\\d*\\.\\d+)");
     }
 }

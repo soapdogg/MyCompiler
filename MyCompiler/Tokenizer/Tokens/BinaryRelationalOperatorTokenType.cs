@@ -4,9 +4,6 @@ namespace MyCompiler.Tokenizer.Tokens
 {
     public class BinaryRelationalOperatorTokenType : BaseTokenType
     {
-        public BinaryRelationalOperatorTokenType()
-        {
-            Pattern = new Regex("^(={2}|>=|>|<=|<|!=)");
-        }
+        public override Regex Pattern => new Regex("^(={2}|>=|>|<=|<|!=)");
     }
 }

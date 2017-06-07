@@ -4,9 +4,6 @@ namespace MyCompiler.Tokenizer.Tokens
 {
     public class ElseTokenType : BaseTokenType
     {
-        public ElseTokenType()
-        {
-            Pattern = new Regex("^else");
-        }
+        public override Regex Pattern => new Regex("^else");
     }
 }

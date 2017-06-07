@@ -6,26 +6,23 @@ namespace MyCompiler.Tokenizer.Tokens
 {
     public abstract class BaseTokenType : ITokenType
     {
-        public Regex Pattern { get; protected set; }
+        public abstract Regex Pattern { get; }
 
         public TokenMatch Match(string inputString)
         {
             
             var match =
                 Pattern.Match(inputString);
-			if (match.Success)
-			{
-				string remainingText = string.Empty;
-				if (match.Length != inputString.Length) remainingText = inputString.Substring(match.Length);
-				return new TokenMatch
-				{
-					IsMatch = true,
-					RemainingText = remainingText,
-					TokenType = this,
-					Value = match.Value
-				};
-			}
-			return new TokenMatch { IsMatch = false };
-		}
+            if (!match.Success) return new TokenMatch {IsMatch = false};
+            string remainingText = string.Empty;
+            if (match.Length != inputString.Length) remainingText = inputString.Substring(match.Length);
+            return new TokenMatch
+            {
+                IsMatch = true,
+                RemainingText = remainingText,
+                TokenType = this,
+                Value = match.Value
+            };
+        }
     }
 }

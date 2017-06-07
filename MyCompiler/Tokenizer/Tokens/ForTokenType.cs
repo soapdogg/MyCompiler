@@ -4,9 +4,6 @@ namespace MyCompiler.Tokenizer.Tokens
 {
     public class ForTokenType : BaseTokenType
     {
-        public ForTokenType()
-        {
-            Pattern = new Regex("^for");
-        }
+        public override Regex Pattern => new Regex("^for");
     }
 }

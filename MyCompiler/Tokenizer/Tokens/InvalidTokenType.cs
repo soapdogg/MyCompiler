@@ -1,10 +1,10 @@
-﻿using System;
+﻿
+using System.Text.RegularExpressions;
+
 namespace MyCompiler.Tokenizer.Tokens
 {
     public class InvalidTokenType : BaseTokenType
     {
-        public InvalidTokenType()
-        {
-        }
+        public override Regex Pattern => new Regex(".*");
     }
 }

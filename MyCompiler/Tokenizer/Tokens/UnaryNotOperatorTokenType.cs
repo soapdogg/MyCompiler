@@ -3,9 +3,6 @@ namespace MyCompiler.Tokenizer.Tokens
 {
     public class UnaryNotOperatorTokenType : BaseTokenType
     {
-        public UnaryNotOperatorTokenType()
-        {
-            Pattern = new Regex("^!");
-        }
+        public override Regex Pattern => new Regex("^!");
     }
 }

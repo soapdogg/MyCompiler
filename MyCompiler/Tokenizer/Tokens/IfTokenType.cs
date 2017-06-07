@@ -4,9 +4,6 @@ namespace MyCompiler.Tokenizer.Tokens
 {
     public class IfTokenType : BaseTokenType
     {
-        public IfTokenType()
-        {
-            Pattern = new Regex("^if");
-        }
+        public override Regex Pattern => new Regex("^if");
     }
 }

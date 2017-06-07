@@ -4,9 +4,6 @@ namespace MyCompiler.Tokenizer.Tokens
 {
     public class IntTokenType : BaseTokenType
     {
-        public IntTokenType()
-        {
-            Pattern = new Regex("^int");
-        }
+        public override Regex Pattern => new Regex("^int");
     }
 }

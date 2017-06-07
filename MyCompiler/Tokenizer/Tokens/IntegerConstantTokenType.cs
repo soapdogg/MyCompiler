@@ -4,9 +4,6 @@ namespace MyCompiler.Tokenizer.Tokens
 {
     public class IntegerConstantTokenType : BaseTokenType
     {
-        public IntegerConstantTokenType()
-        {
-            Pattern = new Regex("^([1-9]\\d*|0)");
-        }
+        public override Regex Pattern => new Regex("^([1-9]\\d*|0)");
     }
 }

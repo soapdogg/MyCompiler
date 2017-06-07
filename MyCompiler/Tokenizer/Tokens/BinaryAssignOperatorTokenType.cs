@@ -4,9 +4,6 @@ namespace MyCompiler.Tokenizer.Tokens
 {
     public class BinaryAssignOperatorTokenType : BaseTokenType
     {
-        public BinaryAssignOperatorTokenType()
-        {
-            Pattern = new Regex("^((&|/|<<|-|%|\\*|\\|\\||\\+|>>|\\^)=)");
-        }
+        public override Regex Pattern => new Regex("^((&|/|<<|-|%|\\*|\\||\\+|>>|\\^)=)");
     }
 }

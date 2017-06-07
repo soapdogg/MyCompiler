@@ -4,9 +4,6 @@ namespace MyCompiler.Tokenizer.Tokens
 {
     public class RightParenthesesTokenType : BaseTokenType
     {
-        public RightParenthesesTokenType()
-        {
-            Pattern = new Regex("^\\)"); 
-        }
+        public override Regex Pattern => new Regex("^\\)");
     }
 }

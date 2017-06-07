@@ -4,9 +4,6 @@ namespace MyCompiler.Tokenizer.Tokens
 {
     public class VoidTokenType : BaseTokenType
     {
-        public VoidTokenType()
-        {
-            Pattern = new Regex("^void");
-        }
+        public override Regex Pattern => new Regex("^void");
     }
 }

@@ -4,9 +4,6 @@ namespace MyCompiler.Tokenizer.Tokens
 {
     public class BinaryAndOperatorTokenType : BaseTokenType
     {
-        public BinaryAndOperatorTokenType()
-        {
-            Pattern = new Regex("^&&");
-        }
+        public override Regex Pattern => new Regex("^&&");
     }
 }

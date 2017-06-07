@@ -4,9 +4,6 @@ namespace MyCompiler.Tokenizer.Tokens
 {
     public class DoTokenType : BaseTokenType
     {
-        public DoTokenType()
-        {
-            Pattern = new Regex("^do");
-        }
+        public override Regex Pattern => new Regex("^do");
     }
 }

@@ -4,9 +4,6 @@ namespace MyCompiler.Tokenizer.Tokens
 {
     public class LongTokenType : BaseTokenType
     {
-        public LongTokenType()
-        {
-            Pattern = new Regex("^long");
-        }
+        public override Regex Pattern => new Regex("^long");
     }
 }

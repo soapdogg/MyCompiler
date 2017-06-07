@@ -3,9 +3,6 @@ namespace MyCompiler.Tokenizer.Tokens
 {
     public class LeftBraceTokenType : BaseTokenType
     {
-        public LeftBraceTokenType()
-        {
-            Pattern = new Regex("^\\{");
-        }
+        public override Regex Pattern => new Regex("^\\{");
     }
 }

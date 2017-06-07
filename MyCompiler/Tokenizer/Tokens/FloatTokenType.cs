@@ -4,9 +4,6 @@ namespace MyCompiler.Tokenizer.Tokens
 {
     public class FloatTokenType : BaseTokenType
     {
-        public FloatTokenType()
-        {
-            Pattern = new Regex("^float");
-        }
+        public override Regex Pattern => new Regex("^float");
     }
 }

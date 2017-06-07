@@ -3,9 +3,6 @@ namespace MyCompiler.Tokenizer.Tokens
 {
     public class SemicolonTokenType : BaseTokenType
     {
-        public SemicolonTokenType()
-        {
-            Pattern = new Regex("^;");
-        }
+        public override Regex Pattern =>  new Regex("^;");
     }
 }

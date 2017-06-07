@@ -4,9 +4,6 @@ namespace MyCompiler.Tokenizer.Tokens
 {
     public class PreOrPostOperatorTokenType : BaseTokenType
     {
-        public PreOrPostOperatorTokenType()
-        {
-            Pattern = new Regex("^\\+\\+|--");
-        }
+        public override Regex Pattern => new Regex("^(\\+\\+|--)");
     }
 }

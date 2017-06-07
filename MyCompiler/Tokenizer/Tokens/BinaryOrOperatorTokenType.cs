@@ -3,9 +3,6 @@ namespace MyCompiler.Tokenizer.Tokens
 {
     public class BinaryOrOperatorTokenType : BaseTokenType
     {
-        public BinaryOrOperatorTokenType()
-        {
-            Pattern = new Regex("^(\\|\\|)");
-        }
+        public override Regex Pattern => new Regex("^(\\|\\|)");
     }
 }
