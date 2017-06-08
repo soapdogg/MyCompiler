@@ -10,9 +10,9 @@ namespace MyCompiler.Tokenizer
 {
     public class Tokenizer
     {
-        string[] lines;
+        private string[] lines;
 
-        static readonly IList<ITokenType> definitions;
+        private static readonly IList<ITokenType> definitions;
 
         static Tokenizer(){
             definitions = new List<ITokenType>
@@ -50,12 +50,7 @@ namespace MyCompiler.Tokenizer
 
         }
 
-        public Tokenizer()
-        {
-            
-        }
-
-        public Tokenizer(string [] pathArray)
+        public Tokenizer(params string [] pathArray )
         {
 			string path = AppDomain.CurrentDomain.BaseDirectory;
             foreach (string s in pathArray) path += Path.DirectorySeparatorChar + s;
@@ -71,13 +66,7 @@ namespace MyCompiler.Tokenizer
 			return tokens;
         }
 
-        public IList<SimpleCToken> Tokenize(string inputText)
-        {
-            lines = new string[] { inputText };
-            return Tokenize();
-        }
-
-        public IList<SimpleCToken> Tokenize(string [] inputText)
+        public IList<SimpleCToken> Tokenize(params string [] inputText)
         {
             lines = inputText;
             return Tokenize();
@@ -120,15 +109,15 @@ namespace MyCompiler.Tokenizer
                 var match = tokenType.Match(inputText);
                 if (match.IsMatch) return match;
             }
-            return new TokenMatch() { IsMatch = false }; 
+            return new TokenMatch { IsMatch = false }; 
         }
 
-        private bool IsWhiteSpace(string inputText)
+        private static bool IsWhiteSpace(string inputText)
         {
             return Regex.IsMatch(inputText, "^\\s+");
         }
 
-        private TokenMatch CreateInvalidTokenMatch(string inputText)
+        private static TokenMatch CreateInvalidTokenMatch(string inputText)
         {
             return new TokenMatch
             {

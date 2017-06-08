@@ -4,6 +4,6 @@ namespace MyCompiler.Tokenizer.Tokens
 {
     public class IntTokenType : BaseTokenType
     {
-        public override Regex Pattern => new Regex("^int");
+        public override Regex Pattern => new Regex("\\bint\\b");
     }
 }

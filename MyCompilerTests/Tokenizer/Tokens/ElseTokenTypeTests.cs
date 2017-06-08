@@ -20,6 +20,18 @@ namespace MyCompilerTests.Tokenizer.Tokens
         {
             Assert.IsTrue(t.Pattern.IsMatch("else"));
         }
+
+        [TestMethod]
+        public void ElseBeforeDoesntMatchTest()
+        {
+            Assert.IsFalse(t.Pattern.IsMatch("45else"));
+        }
+
+        [TestMethod]
+        public void ElseAfterDoesntMatchTest()
+        {
+            Assert.IsFalse(t.Pattern.IsMatch("elsethg"));
+        }
     }
 }
 

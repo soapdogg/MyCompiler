@@ -4,6 +4,6 @@ namespace MyCompiler.Tokenizer.Tokens
 {
     public class ReturnTokenType : BaseTokenType
     {
-        public override Regex Pattern => new Regex("^return");
+        public override Regex Pattern => new Regex("\\breturn\\b");
     }
 }

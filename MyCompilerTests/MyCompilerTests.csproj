@@ -48,6 +48,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Tokenizer\TokenizerTests.cs" />
     <Compile Include="Tokenizer\Tokens\BaseTokenTypeTests.cs" />
     <Compile Include="Tokenizer\Tokens\BinaryAndOperatorTokenTypeTests.cs" />
     <Compile Include="Tokenizer\Tokens\BinaryAssignOperatorTokenTypeTests.cs" />

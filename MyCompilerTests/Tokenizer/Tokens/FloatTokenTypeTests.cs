@@ -20,6 +20,18 @@ namespace MyCompilerTests.Tokenizer.Tokens
         {
             Assert.IsTrue(t.Pattern.IsMatch("float"));
         }
+
+        [TestMethod]
+        public void FloatBeforeDoesntMatchTest()
+        {
+            Assert.IsFalse(t.Pattern.IsMatch("ffloat"));
+        }
+
+        [TestMethod]
+        public void FloatAfterDoesntMatchTest()
+        {
+            Assert.IsFalse(t.Pattern.IsMatch("floatjvh"));
+        }
     }
 }
 

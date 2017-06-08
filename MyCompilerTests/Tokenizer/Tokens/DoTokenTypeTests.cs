@@ -20,6 +20,18 @@ namespace MyCompilerTests.Tokenizer.Tokens
         {
             Assert.IsTrue(t.Pattern.IsMatch("do"));
         }
+
+        [TestMethod]
+        public void DoBeforeDoesntMatchTest()
+        {
+            Assert.IsFalse(t.Pattern.IsMatch("rdo"));
+        }
+
+        [TestMethod]
+        public void DoAfterDoesntMatchTest()
+        {
+            Assert.IsFalse(t.Pattern.IsMatch("dos"));
+        }
     }
 }
 
