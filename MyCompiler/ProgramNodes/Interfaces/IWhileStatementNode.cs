@@ -1,5 +1,4 @@
-﻿using System;
-namespace MyCompiler.ProgramNodes.WhileStatementNode
+﻿namespace MyCompiler.ProgramNodes.Interfaces
 {
     public interface IWhileStatementNode
     {

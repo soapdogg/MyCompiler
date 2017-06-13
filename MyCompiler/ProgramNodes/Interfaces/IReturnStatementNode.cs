@@ -1,5 +1,4 @@
-﻿using System;
-namespace MyCompiler.ProgramNodes.ReturnStatementNode
+﻿namespace MyCompiler.ProgramNodes.Interfaces
 {
     public interface IReturnStatementNode
     {

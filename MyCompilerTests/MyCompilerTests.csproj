@@ -71,6 +71,7 @@
     <Compile Include="Tokenizer\Tokens\LeftBracketTokenTypeTests.cs" />
     <Compile Include="Tokenizer\Tokens\LeftParenthesesTokenTypeTests.cs" />
     <Compile Include="Tokenizer\Tokens\LongTokenTypeTests.cs" />
+    <Compile Include="Tokenizer\Tokens\PlusOrMinusTokenTypeTests.cs" />
     <Compile Include="Tokenizer\Tokens\PreOrPostOperatorTokenTypeTests.cs" />
     <Compile Include="Tokenizer\Tokens\ReturnTokenTypeTests.cs" />
     <Compile Include="Tokenizer\Tokens\RightBraceTokenTypeTests.cs" />

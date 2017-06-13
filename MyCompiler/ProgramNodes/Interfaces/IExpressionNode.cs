@@ -1,5 +1,4 @@
-﻿using System;
-namespace MyCompiler.ProgramNodes.ExpressionNode
+﻿namespace MyCompiler.ProgramNodes.Interfaces
 {
     public interface IExpressionNode
     {

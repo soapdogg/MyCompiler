@@ -1,5 +1,4 @@
-﻿using System;
-namespace MyCompiler.ProgramNodes.FloatNode
+﻿namespace MyCompiler.ProgramNodes.Interfaces
 {
     public interface IFloatNode
     {

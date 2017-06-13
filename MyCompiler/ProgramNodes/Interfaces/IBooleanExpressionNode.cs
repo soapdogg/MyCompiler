@@ -1,5 +1,4 @@
-﻿using System;
-namespace MyCompiler.ProgramNodes.BooleanExpressionNode
+﻿namespace MyCompiler.ProgramNodes.Interfaces
 {
     public interface IBooleanExpressionNode
     {

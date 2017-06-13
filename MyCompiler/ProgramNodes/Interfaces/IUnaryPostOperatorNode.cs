@@ -1,5 +1,4 @@
-﻿using System;
-namespace MyCompiler.ProgramNodes.UnaryPostOperatorNode
+﻿namespace MyCompiler.ProgramNodes.Interfaces
 {
     public interface IUnaryPostOperatorNode
     {

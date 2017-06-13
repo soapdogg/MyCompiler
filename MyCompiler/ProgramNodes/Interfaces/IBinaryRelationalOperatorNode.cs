@@ -1,5 +1,4 @@
-﻿using System;
-namespace MyCompiler.ProgramNodes.BinaryRelationalOperatorNode
+﻿namespace MyCompiler.ProgramNodes.Interfaces
 {
     public interface IBinaryRelationalOperatorNode
     {

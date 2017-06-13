@@ -1,5 +1,4 @@
-﻿using System;
-namespace MyCompiler.ProgramNodes.StatementNode
+﻿namespace MyCompiler.ProgramNodes.Interfaces
 {
     public interface IStatementNode
     {

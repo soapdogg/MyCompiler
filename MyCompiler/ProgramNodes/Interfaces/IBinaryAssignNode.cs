@@ -1,5 +1,4 @@
-﻿using System;
-namespace MyCompiler.ProgramNodes.BinaryAssignNode
+﻿namespace MyCompiler.ProgramNodes.Interfaces
 {
     public interface IBinaryAssignNode
     {

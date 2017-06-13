@@ -1,5 +1,4 @@
-﻿using System;
-namespace MyCompiler.ProgramNodes.BasicBlockNode
+﻿namespace MyCompiler.ProgramNodes.Interfaces
 {
     public interface IBasicBlockNode
     {

@@ -108,6 +108,7 @@
     <Compile Include="Tokenizer\Tokens\LeftBracketTokenType.cs" />
     <Compile Include="Tokenizer\Tokens\LeftParenthesesTokenType.cs" />
     <Compile Include="Tokenizer\Tokens\LongTokenType.cs" />
+    <Compile Include="Tokenizer\Tokens\PlusOrMinusTokenType.cs" />
     <Compile Include="Tokenizer\Tokens\PreOrPostOperatorTokenType.cs" />
     <Compile Include="Tokenizer\Tokens\ReturnTokenType.cs" />
     <Compile Include="Tokenizer\Tokens\RightBraceTokenType.cs" />

@@ -1,5 +1,4 @@
-﻿using System;
-namespace MyCompiler.ProgramNodes.IfStatementNode
+﻿namespace MyCompiler.ProgramNodes.Interfaces
 {
     public interface IIfStatementNode
     {

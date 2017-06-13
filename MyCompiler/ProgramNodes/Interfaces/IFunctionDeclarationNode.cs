@@ -1,5 +1,4 @@
-﻿using System;
-namespace MyCompiler.ProgramNodes.FunctionDeclarationNode
+﻿namespace MyCompiler.ProgramNodes.Interfaces
 {
     public interface IFunctionDeclarationNode
     {

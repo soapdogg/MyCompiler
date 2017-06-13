@@ -1,5 +1,5 @@
 ﻿
-namespace MyCompiler.ProgramNodes.UnaryOperatorNode
+namespace MyCompiler.ProgramNodes.Interfaces
 {
     public interface IUnaryOperatorNode
     {

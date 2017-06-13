@@ -1,5 +1,4 @@
-﻿using System;
-namespace MyCompiler.ProgramNodes.BinaryArrayOperatorNode
+﻿namespace MyCompiler.ProgramNodes.Interfaces
 {
     public interface IBinaryArrayOperatorNode
     {

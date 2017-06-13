@@ -34,12 +34,6 @@ namespace MyCompilerTests.Tokenizer.Tokens
         }
 
         [TestMethod]
-        public void MinusAssignMatchesTest()
-        {
-            Assert.IsTrue(t.Pattern.IsMatch("-"));
-        }
-
-        [TestMethod]
         public void ModulusAssignMatchesTest()
         {
             Assert.IsTrue(t.Pattern.IsMatch("%"));
@@ -55,12 +49,6 @@ namespace MyCompilerTests.Tokenizer.Tokens
         public void OrAssignMatchesTest()
         {
             Assert.IsTrue(t.Pattern.IsMatch("|"));
-        }
-
-        [TestMethod]
-        public void PlusAssignMatchesTest()
-        {
-            Assert.IsTrue(t.Pattern.IsMatch("+"));
         }
 
         [TestMethod]

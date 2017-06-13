@@ -1,5 +1,4 @@
-﻿using System;
-namespace MyCompiler.ProgramNodes.VariableDeclarationNode
+﻿namespace MyCompiler.ProgramNodes.Interfaces
 {
     public interface IVariableDeclarationNode
     {

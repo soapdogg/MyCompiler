@@ -1,5 +1,4 @@
-﻿using System;
-namespace MyCompiler.ProgramNodes.UnaryPreOperatorNode
+﻿namespace MyCompiler.ProgramNodes.Interfaces
 {
     public interface IUnaryPreOperatorNode
     {

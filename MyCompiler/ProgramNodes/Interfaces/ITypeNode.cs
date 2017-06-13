@@ -1,5 +1,5 @@
 ﻿
-namespace MyCompiler.ProgramNodes.TypeNode
+namespace MyCompiler.ProgramNodes.Interfaces
 {
     public interface ITypeNode
     {

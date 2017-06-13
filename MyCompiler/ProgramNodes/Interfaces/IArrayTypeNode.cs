@@ -1,5 +1,4 @@
-﻿using System;
-namespace MyCompiler.ProgramNodes.ArrayTypeNode
+﻿namespace MyCompiler.ProgramNodes.Interfaces
 {
     public interface IArrayTypeNode
     {

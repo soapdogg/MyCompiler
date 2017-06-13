@@ -1,5 +1,4 @@
-﻿using System;
-namespace MyCompiler.ProgramNodes.ForStatementNode
+﻿namespace MyCompiler.ProgramNodes.Interfaces
 {
     public interface IForStatementNode
     {

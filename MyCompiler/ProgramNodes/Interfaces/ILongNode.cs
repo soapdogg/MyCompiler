@@ -1,5 +1,4 @@
-﻿using System;
-namespace MyCompiler.ProgramNodes.LongNode
+﻿namespace MyCompiler.ProgramNodes.Interfaces
 {
     public interface ILongNode
     {
