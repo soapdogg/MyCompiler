@@ -77,7 +77,7 @@ namespace MyCompiler.Tokenizer
         private IList<SimpleCToken> TokenizeLine(string inputText)
         {
             var tokens = new List<SimpleCToken>();
-			string remainingText = inputText;
+			string remainingText = inputText.Trim();
 
 			while (!string.IsNullOrWhiteSpace(remainingText))
 			{
@@ -86,7 +86,7 @@ namespace MyCompiler.Tokenizer
 				if (match.IsMatch)
 				{
 					tokens.Add(new SimpleCToken(match.TokenType, match.Value));
-					remainingText = match.RemainingText;
+					remainingText = match.RemainingText.Trim();
 				}
 				else
 				{

@@ -22,5 +22,10 @@ namespace MyCompiler.Tokenizer
         {
             return new SimpleCToken(TokenType, Value);
         }
+
+        public override string ToString()
+        {
+            return "TokenType: " + TokenType + "\tValue: " + Value;
+        }
     }
 }
