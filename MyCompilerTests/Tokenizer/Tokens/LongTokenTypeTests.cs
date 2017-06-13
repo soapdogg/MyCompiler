@@ -20,6 +20,18 @@ namespace MyCompilerTests.Tokenizer.Tokens
         {
             Assert.IsTrue(t.Pattern.IsMatch("long"));
         }
+
+        [TestMethod]
+        public void LongBeforeDoesntMatchTest()
+        {
+            Assert.IsFalse(t.Pattern.IsMatch("34fdlong"));
+        }
+
+        [TestMethod]
+        public void LongAfterDoesntMatchTest()
+        {
+            Assert.IsFalse(t.Pattern.IsMatch("longg"));
+        }
     }
 }
 

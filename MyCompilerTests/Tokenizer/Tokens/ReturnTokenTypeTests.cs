@@ -20,6 +20,18 @@ namespace MyCompilerTests.Tokenizer.Tokens
         {
             Assert.IsTrue(t.Pattern.IsMatch("return"));
         }
+
+        [TestMethod]
+        public void ReturnBeforeDoesntMatchTest()
+        {
+            Assert.IsFalse(t.Pattern.IsMatch("idkreturn"));
+        }
+
+        [TestMethod]
+        public void ForAfterDoesntMatchTest()
+        {
+            Assert.IsFalse(t.Pattern.IsMatch("returnplx"));
+        }
     }
 }
 

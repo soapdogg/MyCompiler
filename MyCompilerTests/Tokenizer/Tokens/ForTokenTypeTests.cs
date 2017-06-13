@@ -20,5 +20,17 @@ namespace MyCompilerTests.Tokenizer.Tokens
         {
             Assert.IsTrue(t.Pattern.IsMatch("for"));
         }
+
+        [TestMethod]
+        public void ForBeforeDoesntMatchTest()
+        {
+            Assert.IsFalse(t.Pattern.IsMatch("wererefor"));
+        }
+
+        [TestMethod]
+        public void ForAfterDoesntMatchTest()
+        {
+            Assert.IsFalse(t.Pattern.IsMatch("fordfjvh"));
+        }
     }
 }

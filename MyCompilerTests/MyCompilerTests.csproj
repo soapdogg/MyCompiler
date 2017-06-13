@@ -79,7 +79,7 @@
     <Compile Include="Tokenizer\Tokens\RightParenthesesTokenTypeTests.cs" />
     <Compile Include="Tokenizer\Tokens\SemicolonTokenTypeTests.cs" />
     <Compile Include="Tokenizer\Tokens\UnaryNotOperatorTokenTypeTests.cs" />
-    <Compile Include="Tokenizer\Tokens\UnaryOperatorTokenTypeTests.cs" />
+    <Compile Include="Tokenizer\Tokens\BitNegationOperatorTokenTypeTests.cs" />
     <Compile Include="Tokenizer\Tokens\VoidTokenTypeTests.cs" />
     <Compile Include="Tokenizer\Tokens\WhileTokenTypeTests.cs" />
   </ItemGroup>

@@ -20,5 +20,17 @@ namespace MyCompilerTests.Tokenizer.Tokens
         {
             Assert.IsTrue(t.Pattern.IsMatch("void"));
         }
+
+        [TestMethod]
+        public void VoidBeforeDoesntMatchTest()
+        {
+            Assert.IsFalse(t.Pattern.IsMatch("654vjvoid"));
+        }
+
+        [TestMethod]
+        public void VoidAfterDoesntMatchTest()
+        {
+            Assert.IsFalse(t.Pattern.IsMatch("voidlolsdfasdf"));
+        }
     }
 }

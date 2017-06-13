@@ -36,7 +36,7 @@ namespace MyCompiler.Tokenizer
                 new WhileTokenType(),
                 new PreOrPostOperatorTokenType(),
                 new PlusOrMinusTokenType(),
-                new UnaryOperatorTokenType(),
+                new BitNegationOperatorTokenType(),
                 new LeftBraceTokenType(),
                 new LeftBracketTokenType(),
                 new LeftParenthesesTokenType(),

@@ -20,6 +20,18 @@ namespace MyCompilerTests.Tokenizer.Tokens
         {
             Assert.IsTrue(t.Pattern.IsMatch("int"));
         }
+
+        [TestMethod]
+        public void IntBeforeDoesntMatchTest()
+        {
+            Assert.IsFalse(t.Pattern.IsMatch("565int"));
+        }
+
+        [TestMethod]
+        public void IntAfterDoesntMatchTest()
+        {
+            Assert.IsFalse(t.Pattern.IsMatch("int34cdf"));
+        }
     }
 }
 

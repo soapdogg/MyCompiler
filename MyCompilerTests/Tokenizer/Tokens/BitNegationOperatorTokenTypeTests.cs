@@ -5,26 +5,14 @@ using MyCompiler.Tokenizer.Tokens.Interfaces;
 namespace MyCompilerTests.Tokenizer.Tokens
 {
     [TestClass]
-    public class UnaryOperatorTokenTypeTests
+    public class BitNegationOperatorTokenTypeTests
     {
         private ITokenType t;
 
         [TestInitialize]
         public void TestInitialize()
         {
-            t = new UnaryOperatorTokenType();
-        }
-
-        [TestMethod]
-        public void UnaryPositiveMatchesTest()
-        {
-            Assert.IsTrue(t.Pattern.IsMatch("+"));
-        }
-
-        [TestMethod]
-        public void UnaryNegativeMatchesTest()
-        {
-            Assert.IsTrue(t.Pattern.IsMatch("-"));
+            t = new BitNegationOperatorTokenType();
         }
 
         [TestMethod]

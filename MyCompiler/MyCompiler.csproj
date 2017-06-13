@@ -116,7 +116,7 @@
     <Compile Include="Tokenizer\Tokens\RightParenthesesTokenType.cs" />
     <Compile Include="Tokenizer\Tokens\SemicolonTokenType.cs" />
     <Compile Include="Tokenizer\Tokens\UnaryNotOperatorTokenType.cs" />
-    <Compile Include="Tokenizer\Tokens\UnaryOperatorTokenType.cs" />
+    <Compile Include="Tokenizer\Tokens\BitNegationOperatorTokenType.cs" />
     <Compile Include="Tokenizer\Tokens\VoidTokenType.cs" />
     <Compile Include="Tokenizer\Tokens\WhileTokenType.cs" />
   </ItemGroup>

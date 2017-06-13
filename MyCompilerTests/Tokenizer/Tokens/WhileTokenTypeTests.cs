@@ -20,5 +20,17 @@ namespace MyCompilerTests.Tokenizer.Tokens
         {
             Assert.IsTrue(t.Pattern.IsMatch("while"));
         }
+
+        [TestMethod]
+        public void WhileBeforeDoesntMatchTest()
+        {
+            Assert.IsFalse(t.Pattern.IsMatch("wwhile"));
+        }
+
+        [TestMethod]
+        public void ForAfterDoesntMatchTest()
+        {
+            Assert.IsFalse(t.Pattern.IsMatch("whiledfjv"));
+        }
     }
 }
