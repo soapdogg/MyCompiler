@@ -95,6 +95,7 @@
     <Compile Include="Tokenizer\Tokens\DoTokenType.cs" />
     <Compile Include="Tokenizer\Tokens\DoubleTokenType.cs" />
     <Compile Include="Tokenizer\Tokens\ElseTokenType.cs" />
+    <Compile Include="Tokenizer\Tokens\EndOfFileTokenType.cs" />
     <Compile Include="Tokenizer\Tokens\FloatingPointConstantTokenType.cs" />
     <Compile Include="Tokenizer\Tokens\FloatTokenType.cs" />
     <Compile Include="Tokenizer\Tokens\ForTokenType.cs" />

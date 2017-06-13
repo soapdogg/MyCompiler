@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 using MyCompiler.Tokenizer.Tokens;
@@ -51,7 +52,7 @@ namespace MyCompiler.Tokenizer
 
         }
 
-        public Tokenizer(params string [] pathArray )
+        public Tokenizer(params string [] pathArray)
         {
 			string path = AppDomain.CurrentDomain.BaseDirectory;
             foreach (string s in pathArray) path += Path.DirectorySeparatorChar + s;
@@ -63,7 +64,7 @@ namespace MyCompiler.Tokenizer
 			var tokens = new List<SimpleCToken>();
 
             foreach (string line in lines) tokens.AddRange(TokenizeLine(line));
-
+            if(!(tokens.Last().TokenType is InvalidTokenType)) tokens.Add(new SimpleCToken(new EndOfFileTokenType(), "END_OF_FILE"));
 			return tokens;
         }
 
@@ -95,7 +96,7 @@ namespace MyCompiler.Tokenizer
 					{
 						var invalidTokenMatch = CreateInvalidTokenMatch(remainingText);
 						tokens.Add(new SimpleCToken(invalidTokenMatch.TokenType, invalidTokenMatch.Value));
-						remainingText = invalidTokenMatch.RemainingText;
+					    return tokens;
 					}
 				}
 			}
