@@ -7,14 +7,14 @@ using MyCompiler.Tokenizer.Tokens.Interfaces;
 
 namespace MyCompiler.Tokenizer
 {
-    public class Tokenizer
+    public class MyTokenizer : ITokenizer
     {
         private string[] lines;
         private IList<SimpleCToken> tokens;
 
         private static readonly IList<ITokenType> definitions;
 
-        static Tokenizer(){
+        static MyTokenizer(){
             definitions = new List<ITokenType>
             {
                 new BinaryAssignOperatorTokenType(),
@@ -52,12 +52,12 @@ namespace MyCompiler.Tokenizer
 
         }
 
-        public Tokenizer()
+        public MyTokenizer()
         {
             Initialize();
         }
 
-        public Tokenizer(params string [] pathArray)
+        public MyTokenizer(params string [] pathArray)
         {
             Initialize();
 			string path = AppDomain.CurrentDomain.BaseDirectory;
@@ -84,6 +84,19 @@ namespace MyCompiler.Tokenizer
         }
 
         public int Size => tokens.Count;
+
+        public SimpleCToken Pop()
+        {
+            SimpleCToken result = tokens[0];
+            tokens.RemoveAt(0);
+            return result;
+        }
+
+        public SimpleCToken Peek() => tokens[0];
+
+        public ITokenType PeekTokenType() => tokens[0].TokenType;
+
+        public string PeekValue() => tokens[0].Value;
 
         private bool TokenizeLine(string inputText)
         {
