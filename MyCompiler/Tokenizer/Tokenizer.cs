@@ -45,6 +45,7 @@ namespace MyCompiler.Tokenizer
                 new RightBracketTokenType(),
                 new RightParenthesesTokenType(),
                 new SemicolonTokenType(),
+                new CommaTokenType(),
                 new FloatingPointConstantTokenType(),
                 new IdentifierTokenType(),
                 new IntegerConstantTokenType()

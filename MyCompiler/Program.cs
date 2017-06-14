@@ -6,7 +6,7 @@ namespace MyCompiler
     {
         static void Main()
         {
-            Tokenizer.Tokenizer t = new Tokenizer.Tokenizer (@"Data", @"test15.c");
+            Tokenizer.Tokenizer t = new Tokenizer.Tokenizer (@"Data", @"test22.c");
             var result = t.Tokenize();
             foreach(var l in result) Console.WriteLine(l);
             Console.ReadLine();

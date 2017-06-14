@@ -57,6 +57,7 @@
     <Compile Include="Tokenizer\Tokens\BinaryOrOperatorTokenTypeTests.cs" />
     <Compile Include="Tokenizer\Tokens\BinaryRelationalOperatorTokenTypeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tokenizer\Tokens\CommaTokenTypeTests.cs" />
     <Compile Include="Tokenizer\Tokens\DoTokenTypeTests.cs" />
     <Compile Include="Tokenizer\Tokens\DoubleTokenTypeTests.cs" />
     <Compile Include="Tokenizer\Tokens\ElseTokenTypeTests.cs" />

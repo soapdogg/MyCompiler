@@ -92,6 +92,7 @@
     <Compile Include="Tokenizer\Tokens\BinaryOperatorTokenType.cs" />
     <Compile Include="Tokenizer\Tokens\BinaryOrOperatorTokenType.cs" />
     <Compile Include="Tokenizer\Tokens\BinaryRelationalOperatorTokenType.cs" />
+    <Compile Include="Tokenizer\Tokens\CommaTokenType.cs" />
     <Compile Include="Tokenizer\Tokens\DoTokenType.cs" />
     <Compile Include="Tokenizer\Tokens\DoubleTokenType.cs" />
     <Compile Include="Tokenizer\Tokens\ElseTokenType.cs" />
