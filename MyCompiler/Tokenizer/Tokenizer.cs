@@ -2,8 +2,6 @@
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
-
 using MyCompiler.Tokenizer.Tokens;
 using MyCompiler.Tokenizer.Tokens.Interfaces;
 
@@ -12,6 +10,7 @@ namespace MyCompiler.Tokenizer
     public class Tokenizer
     {
         private string[] lines;
+        private IList<SimpleCToken> tokens;
 
         private static readonly IList<ITokenType> definitions;
 
@@ -53,8 +52,14 @@ namespace MyCompiler.Tokenizer
 
         }
 
+        public Tokenizer()
+        {
+            Initialize();
+        }
+
         public Tokenizer(params string [] pathArray)
         {
+            Initialize();
 			string path = AppDomain.CurrentDomain.BaseDirectory;
             foreach (string s in pathArray) path += Path.DirectorySeparatorChar + s;
             lines = File.ReadAllLines(path);
@@ -62,9 +67,12 @@ namespace MyCompiler.Tokenizer
 
         public IList<SimpleCToken> Tokenize()
         {
-			var tokens = new List<SimpleCToken>();
-
-            foreach (string line in lines) tokens.AddRange(TokenizeLine(line));
+            bool continueScanning = true;
+            for (int i = 0; i < lines.Length && continueScanning; ++i)
+            {
+                string line = lines[i];
+                continueScanning = TokenizeLine(line);
+            }
             if(!(tokens.Last().TokenType is InvalidTokenType)) tokens.Add(new SimpleCToken(new EndOfFileTokenType(), "END_OF_FILE"));
 			return tokens;
         }
@@ -75,11 +83,11 @@ namespace MyCompiler.Tokenizer
             return Tokenize();
         }
 
-        private IList<SimpleCToken> TokenizeLine(string inputText)
-        {
-            var tokens = new List<SimpleCToken>();
-			string remainingText = inputText.Trim();
+        public int Size => tokens.Count;
 
+        private bool TokenizeLine(string inputText)
+        {
+			string remainingText = inputText.TrimStart();
 			while (!string.IsNullOrWhiteSpace(remainingText))
 			{
 				var match = FindMatch(remainingText);
@@ -87,25 +95,19 @@ namespace MyCompiler.Tokenizer
 				if (match.IsMatch)
 				{
 					tokens.Add(new SimpleCToken(match.TokenType, match.Value));
-					remainingText = match.RemainingText.Trim();
+					remainingText = match.RemainingText.TrimStart();
 				}
 				else
 				{
-					if (IsWhiteSpace(remainingText))
-						remainingText = remainingText.Substring(1);
-					else
-					{
-						var invalidTokenMatch = CreateInvalidTokenMatch(remainingText);
-						tokens.Add(new SimpleCToken(invalidTokenMatch.TokenType, invalidTokenMatch.Value));
-					    return tokens;
-					}
+					var invalidTokenMatch = CreateInvalidTokenMatch(remainingText);
+					tokens.Add(new SimpleCToken(invalidTokenMatch.TokenType, invalidTokenMatch.Value));
+					return false;
 				}
 			}
-            return tokens;
+            return true;
         }
-
-
-        private TokenMatch FindMatch(string inputText)
+        
+        private static TokenMatch FindMatch(string inputText)
         {
             foreach (var tokenType in definitions)
             {
@@ -113,11 +115,6 @@ namespace MyCompiler.Tokenizer
                 if (match.IsMatch) return match;
             }
             return new TokenMatch { IsMatch = false }; 
-        }
-
-        private static bool IsWhiteSpace(string inputText)
-        {
-            return Regex.IsMatch(inputText, "^\\s+");
         }
 
         private static TokenMatch CreateInvalidTokenMatch(string inputText)
@@ -129,6 +126,12 @@ namespace MyCompiler.Tokenizer
                 TokenType = new InvalidTokenType(),
                 Value = inputText
             };   
+        }
+
+        private void Initialize()
+        {
+            lines = new string[0];
+            tokens = new List<SimpleCToken>();
         }
     }
 }

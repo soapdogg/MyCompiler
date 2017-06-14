@@ -6,9 +6,13 @@ namespace MyCompiler
     {
         static void Main()
         {
-            Tokenizer.Tokenizer t = new Tokenizer.Tokenizer (@"Data", @"test22.c");
-            var result = t.Tokenize();
-            foreach(var l in result) Console.WriteLine(l);
+            for (int i = 7; i <= 22; ++i)
+            {
+                Tokenizer.Tokenizer t = new Tokenizer.Tokenizer(@"Data", @"test" + i + ".c");
+                t.Tokenize();
+                Console.WriteLine(t.Size);
+            }
+            //foreach(var l in result) Console.WriteLine(l);
             Console.ReadLine();
         }
     }

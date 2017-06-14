@@ -13,6 +13,7 @@ namespace MyCompilerTests.Tokenizer
         {
             t = new MyCompiler.Tokenizer.Tokenizer(@"Data", "test1.c");
             t.Tokenize();
+            Assert.AreEqual(35, t.Size);
         }
 
         [TestMethod]
@@ -20,6 +21,7 @@ namespace MyCompilerTests.Tokenizer
         {
             t = new MyCompiler.Tokenizer.Tokenizer(@"Data", "test2.c");
             t.Tokenize();
+            Assert.AreEqual(38, t.Size);
         }
 
         [TestMethod]
@@ -27,6 +29,7 @@ namespace MyCompilerTests.Tokenizer
         {
             t = new MyCompiler.Tokenizer.Tokenizer(@"Data", "test3.c");
             t.Tokenize();
+            Assert.AreEqual(35, t.Size);
         }
 
         [TestMethod]
@@ -34,6 +37,7 @@ namespace MyCompilerTests.Tokenizer
         {
             t = new MyCompiler.Tokenizer.Tokenizer(@"Data", "test4.c");
             t.Tokenize();
+            Assert.AreEqual(29, t.Size);
         }
 
         [TestMethod]
@@ -41,6 +45,7 @@ namespace MyCompilerTests.Tokenizer
         {
             t = new MyCompiler.Tokenizer.Tokenizer(@"Data", "test5.c");
             t.Tokenize();
+            Assert.AreEqual(37, t.Size);
         }
 
         [TestMethod]
@@ -48,6 +53,7 @@ namespace MyCompilerTests.Tokenizer
         {
             t = new MyCompiler.Tokenizer.Tokenizer(@"Data", "test6.c");
             t.Tokenize();
+            Assert.AreEqual(45, t.Size);
         }
 
         [TestMethod]
@@ -55,6 +61,7 @@ namespace MyCompilerTests.Tokenizer
         {
             t = new MyCompiler.Tokenizer.Tokenizer(@"Data", "test7.c");
             t.Tokenize();
+            Assert.AreEqual(70, t.Size);
         }
 
         [TestMethod]
@@ -62,6 +69,7 @@ namespace MyCompilerTests.Tokenizer
         {
             t = new MyCompiler.Tokenizer.Tokenizer(@"Data", "test8.c");
             t.Tokenize();
+            Assert.AreEqual(31, t.Size);
         }
 
         [TestMethod]
@@ -69,6 +77,7 @@ namespace MyCompilerTests.Tokenizer
         {
             t = new MyCompiler.Tokenizer.Tokenizer(@"Data", "test9.c");
             t.Tokenize();
+            Assert.AreEqual(104, t.Size);
         }
 
         [TestMethod]
@@ -76,6 +85,7 @@ namespace MyCompilerTests.Tokenizer
         {
             t = new MyCompiler.Tokenizer.Tokenizer(@"Data", "test10.c");
             t.Tokenize();
+            Assert.AreEqual(23, t.Size);
         }
 
         [TestMethod]
@@ -83,6 +93,7 @@ namespace MyCompilerTests.Tokenizer
         {
             t = new MyCompiler.Tokenizer.Tokenizer(@"Data", "test11.c");
             t.Tokenize();
+            Assert.AreEqual(23, t.Size);
         }
 
         [TestMethod]
@@ -90,6 +101,7 @@ namespace MyCompilerTests.Tokenizer
         {
             t = new MyCompiler.Tokenizer.Tokenizer(@"Data", "test12.c");
             t.Tokenize();
+            Assert.AreEqual(33, t.Size);
         }
 
         [TestMethod]
@@ -97,6 +109,7 @@ namespace MyCompilerTests.Tokenizer
         {
             t = new MyCompiler.Tokenizer.Tokenizer(@"Data", "test13.c");
             t.Tokenize();
+            Assert.AreEqual(31, t.Size);
         }
 
         [TestMethod]
@@ -104,6 +117,7 @@ namespace MyCompilerTests.Tokenizer
         {
             t = new MyCompiler.Tokenizer.Tokenizer(@"Data", "test14.c");
             t.Tokenize();
+            Assert.AreEqual(38, t.Size);
         }
 
         [TestMethod]
@@ -111,6 +125,7 @@ namespace MyCompilerTests.Tokenizer
         {
             t = new MyCompiler.Tokenizer.Tokenizer(@"Data", "test15.c");
             t.Tokenize();
+            Assert.AreEqual(45, t.Size);
         }
 
         [TestMethod]
@@ -118,6 +133,7 @@ namespace MyCompilerTests.Tokenizer
         {
             t = new MyCompiler.Tokenizer.Tokenizer(@"Data", "test16.c");
             t.Tokenize();
+            Assert.AreEqual(43, t.Size);
         }
 
         [TestMethod]
@@ -125,6 +141,7 @@ namespace MyCompilerTests.Tokenizer
         {
             t = new MyCompiler.Tokenizer.Tokenizer(@"Data", "test17.c");
             t.Tokenize();
+            Assert.AreEqual(38, t.Size);
         }
 
         [TestMethod]
@@ -132,6 +149,7 @@ namespace MyCompilerTests.Tokenizer
         {
             t = new MyCompiler.Tokenizer.Tokenizer(@"Data", "test18.c");
             t.Tokenize();
+            Assert.AreEqual(43, t.Size);
         }
 
         [TestMethod]
@@ -139,6 +157,7 @@ namespace MyCompilerTests.Tokenizer
         {
             t = new MyCompiler.Tokenizer.Tokenizer(@"Data", "test19.c");
             t.Tokenize();
+            Assert.AreEqual(40, t.Size);
         }
 
         [TestMethod]
@@ -146,6 +165,7 @@ namespace MyCompilerTests.Tokenizer
         {
             t = new MyCompiler.Tokenizer.Tokenizer(@"Data", "test20.c");
             t.Tokenize();
+            Assert.AreEqual(40, t.Size);
         }
 
         [TestMethod]
@@ -153,6 +173,7 @@ namespace MyCompilerTests.Tokenizer
         {
             t = new MyCompiler.Tokenizer.Tokenizer(@"Data", "test21.c");
             t.Tokenize();
+            Assert.AreEqual(157, t.Size);
         }
 
         [TestMethod]
@@ -160,6 +181,7 @@ namespace MyCompilerTests.Tokenizer
         {
             t = new MyCompiler.Tokenizer.Tokenizer(@"Data", "test22.c");
             t.Tokenize();
+            Assert.AreEqual(368, t.Size);
         }
     }
 }

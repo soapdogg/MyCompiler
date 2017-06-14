@@ -40,4 +40,4 @@ Thumbs.db
 *.dotCover
 
 #.vs
-.vs/MyCompiler/v15/Browse.VC.db
+.vs/
