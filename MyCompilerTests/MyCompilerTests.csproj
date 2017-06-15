@@ -60,19 +60,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tokenizer\Tokens\CommaTokenTypeTests.cs" />
     <Compile Include="Tokenizer\Tokens\DoTokenTypeTests.cs" />
-    <Compile Include="Tokenizer\Tokens\DoubleTokenTypeTests.cs" />
     <Compile Include="Tokenizer\Tokens\ElseTokenTypeTests.cs" />
     <Compile Include="Tokenizer\Tokens\FloatingPointConstantTokenTypeTests.cs" />
-    <Compile Include="Tokenizer\Tokens\FloatTokenTypeTests.cs" />
     <Compile Include="Tokenizer\Tokens\ForTokenTypeTests.cs" />
     <Compile Include="Tokenizer\Tokens\IdentifierTokenTypeTests.cs" />
     <Compile Include="Tokenizer\Tokens\IfTokenTypeTests.cs" />
     <Compile Include="Tokenizer\Tokens\IntegerConstantTokenTypeTests.cs" />
-    <Compile Include="Tokenizer\Tokens\IntTokenTypeTests.cs" />
     <Compile Include="Tokenizer\Tokens\LeftBraceTokenTypeTests.cs" />
     <Compile Include="Tokenizer\Tokens\LeftBracketTokenTypeTests.cs" />
     <Compile Include="Tokenizer\Tokens\LeftParenthesesTokenTypeTests.cs" />
-    <Compile Include="Tokenizer\Tokens\LongTokenTypeTests.cs" />
     <Compile Include="Tokenizer\Tokens\PlusOrMinusTokenTypeTests.cs" />
     <Compile Include="Tokenizer\Tokens\PreOrPostOperatorTokenTypeTests.cs" />
     <Compile Include="Tokenizer\Tokens\ReturnTokenTypeTests.cs" />
@@ -82,7 +78,7 @@
     <Compile Include="Tokenizer\Tokens\SemicolonTokenTypeTests.cs" />
     <Compile Include="Tokenizer\Tokens\UnaryNotOperatorTokenTypeTests.cs" />
     <Compile Include="Tokenizer\Tokens\BitNegationOperatorTokenTypeTests.cs" />
-    <Compile Include="Tokenizer\Tokens\VoidTokenTypeTests.cs" />
+    <Compile Include="Tokenizer\Tokens\TypeTokenTypeTests.cs" />
     <Compile Include="Tokenizer\Tokens\WhileTokenTypeTests.cs" />
   </ItemGroup>
   <ItemGroup>

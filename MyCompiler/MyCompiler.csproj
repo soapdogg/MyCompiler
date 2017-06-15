@@ -56,19 +56,15 @@
     <Compile Include="ProgramNodes\Interfaces\IBooleanExpressionNode.cs" />
     <Compile Include="ProgramNodes\Interfaces\IDeclarationChild.cs" />
     <Compile Include="ProgramNodes\Interfaces\IDeclarationStatementNode.cs" />
-    <Compile Include="ProgramNodes\Interfaces\IDoubleNode.cs" />
     <Compile Include="ProgramNodes\Interfaces\IDoWhileStatementNode.cs" />
     <Compile Include="ProgramNodes\Interfaces\IExpressionChild.cs" />
     <Compile Include="ProgramNodes\Interfaces\IExpressionNode.cs" />
     <Compile Include="ProgramNodes\Interfaces\IExpressionStatementNode.cs" />
-    <Compile Include="ProgramNodes\Interfaces\IFloatNode.cs" />
     <Compile Include="ProgramNodes\Interfaces\IForStatementNode.cs" />
     <Compile Include="ProgramNodes\Interfaces\IFunctionDeclarationNode.cs" />
     <Compile Include="ProgramNodes\Interfaces\IHaveLabels.cs" />
     <Compile Include="ProgramNodes\Interfaces\IIfStatementNode.cs" />
-    <Compile Include="ProgramNodes\Interfaces\IIntNode.cs" />
     <Compile Include="ProgramNodes\Interfaces\ILeftHandValue.cs" />
-    <Compile Include="ProgramNodes\Interfaces\ILongNode.cs" />
     <Compile Include="ProgramNodes\Interfaces\IProgramNode.cs" />
     <Compile Include="ProgramNodes\Interfaces\IProgramRootNode.cs" />
     <Compile Include="ProgramNodes\Interfaces\IReturnStatementNode.cs" />
@@ -83,6 +79,9 @@
     <Compile Include="ProgramNodes\Interfaces\IVariableDeclarationNode.cs" />
     <Compile Include="ProgramNodes\Interfaces\IVariableExpressionNode.cs" />
     <Compile Include="ProgramNodes\Interfaces\IWhileStatementNode.cs" />
+    <Compile Include="ProgramNodes\Translatable.cs" />
+    <Compile Include="ProgramNodes\Utilities\CounterUtilities.cs" />
+    <Compile Include="ProgramNodes\Utilities\PrettyPrintingUtilities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tokenizer\ITokenizer.cs" />
     <Compile Include="Tokenizer\SimpleCToken.cs" />
@@ -97,22 +96,18 @@
     <Compile Include="Tokenizer\Tokens\BinaryRelationalOperatorTokenType.cs" />
     <Compile Include="Tokenizer\Tokens\CommaTokenType.cs" />
     <Compile Include="Tokenizer\Tokens\DoTokenType.cs" />
-    <Compile Include="Tokenizer\Tokens\DoubleTokenType.cs" />
     <Compile Include="Tokenizer\Tokens\ElseTokenType.cs" />
     <Compile Include="Tokenizer\Tokens\EndOfFileTokenType.cs" />
     <Compile Include="Tokenizer\Tokens\FloatingPointConstantTokenType.cs" />
-    <Compile Include="Tokenizer\Tokens\FloatTokenType.cs" />
     <Compile Include="Tokenizer\Tokens\ForTokenType.cs" />
     <Compile Include="Tokenizer\Tokens\IdentifierTokenType.cs" />
     <Compile Include="Tokenizer\Tokens\IfTokenType.cs" />
     <Compile Include="Tokenizer\Tokens\IntegerConstantTokenType.cs" />
-    <Compile Include="Tokenizer\Tokens\IntTokenType.cs" />
     <Compile Include="Tokenizer\Tokens\InvalidTokenType.cs" />
     <Compile Include="Tokenizer\Tokens\Interfaces\ITokenType.cs" />
     <Compile Include="Tokenizer\Tokens\LeftBraceTokenType.cs" />
     <Compile Include="Tokenizer\Tokens\LeftBracketTokenType.cs" />
     <Compile Include="Tokenizer\Tokens\LeftParenthesesTokenType.cs" />
-    <Compile Include="Tokenizer\Tokens\LongTokenType.cs" />
     <Compile Include="Tokenizer\Tokens\PlusOrMinusTokenType.cs" />
     <Compile Include="Tokenizer\Tokens\PreOrPostOperatorTokenType.cs" />
     <Compile Include="Tokenizer\Tokens\ReturnTokenType.cs" />
@@ -120,9 +115,9 @@
     <Compile Include="Tokenizer\Tokens\RightBracketTokenType.cs" />
     <Compile Include="Tokenizer\Tokens\RightParenthesesTokenType.cs" />
     <Compile Include="Tokenizer\Tokens\SemicolonTokenType.cs" />
+    <Compile Include="Tokenizer\Tokens\TypeTokenType.cs" />
     <Compile Include="Tokenizer\Tokens\UnaryNotOperatorTokenType.cs" />
     <Compile Include="Tokenizer\Tokens\BitNegationOperatorTokenType.cs" />
-    <Compile Include="Tokenizer\Tokens\VoidTokenType.cs" />
     <Compile Include="Tokenizer\Tokens\WhileTokenType.cs" />
   </ItemGroup>
   <ItemGroup>

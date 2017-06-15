@@ -29,18 +29,18 @@ namespace MyCompilerTests.Tokenizer.Tokens
         [TestMethod]
         public void MatchSuccessHasRemainderTest()
         {
-            t = new DoubleTokenType();
+            t = new TypeTokenType();
             TokenMatch tm = t.Match("double x = 30.0");
             Assert.IsTrue(tm.IsMatch);
             Assert.AreEqual(tm.RemainingText, " x = 30.0");
-            Assert.IsInstanceOfType(tm.TokenType, typeof(DoubleTokenType));
+            Assert.IsInstanceOfType(tm.TokenType, typeof(TypeTokenType));
             Assert.AreEqual("double", tm.Value);
         }
 
         [TestMethod]
         public void MatchUnsuccessfulTest()
         {
-            t = new VoidTokenType();
+            t = new DoTokenType();
             TokenMatch tm = t.Match("int");
             Assert.IsFalse(tm.IsMatch);
         }
