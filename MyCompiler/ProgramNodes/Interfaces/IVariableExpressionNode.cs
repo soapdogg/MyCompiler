@@ -1,6 +1,6 @@
 ﻿namespace MyCompiler.ProgramNodes.Interfaces
 {
-    public interface IVariableExpressionNode
+    public interface IVariableExpressionNode : ILeftHandValue, IExpressionChild
     {
     }
 }

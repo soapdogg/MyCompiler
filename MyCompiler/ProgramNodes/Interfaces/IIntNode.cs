@@ -1,6 +1,6 @@
 ﻿namespace MyCompiler.ProgramNodes.Interfaces
 {
-    public interface IIntNode
+    public interface IIntNode : IExpressionChild
     {
     }
 }

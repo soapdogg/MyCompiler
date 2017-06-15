@@ -1,6 +1,6 @@
 ﻿namespace MyCompiler.ProgramNodes.Interfaces
 {
-    public interface IDoubleNode
+    public interface IDoubleNode : IExpressionChild
     {
     }
 }

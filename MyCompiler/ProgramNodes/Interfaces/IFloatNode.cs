@@ -1,6 +1,6 @@
 ﻿namespace MyCompiler.ProgramNodes.Interfaces
 {
-    public interface IFloatNode
+    public interface IFloatNode : IExpressionChild
     {
     }
 }

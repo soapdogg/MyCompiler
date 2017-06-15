@@ -1,6 +1,6 @@
 ﻿namespace MyCompiler.ProgramNodes.Interfaces
 {
-    public interface IVariableDeclarationNode
+    public interface IVariableDeclarationNode : IStatementChild, IDeclarationChild
     {
     }
 }

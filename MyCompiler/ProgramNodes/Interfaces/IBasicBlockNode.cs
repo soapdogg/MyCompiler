@@ -1,6 +1,6 @@
 ﻿namespace MyCompiler.ProgramNodes.Interfaces
 {
-    public interface IBasicBlockNode
+    public interface IBasicBlockNode : IStatementChild
     {
     }
 }

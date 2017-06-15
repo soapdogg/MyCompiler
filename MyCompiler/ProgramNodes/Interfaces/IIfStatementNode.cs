@@ -1,6 +1,6 @@
 ﻿namespace MyCompiler.ProgramNodes.Interfaces
 {
-    public interface IIfStatementNode
+    public interface IIfStatementNode : IStatementChild, IHaveLabels
     {
     }
 }

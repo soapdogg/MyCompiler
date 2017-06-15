@@ -1,6 +1,6 @@
 ﻿namespace MyCompiler.ProgramNodes.Interfaces
 {
-    public interface IExpressionStatementNode
+    public interface IExpressionStatementNode : IStatementChild
     {
     }
 }

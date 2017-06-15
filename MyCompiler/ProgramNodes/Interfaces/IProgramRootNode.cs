@@ -1,7 +1,7 @@
 ﻿
 namespace MyCompiler.ProgramNodes.Interfaces
 {
-    public interface IUnaryOperatorNode : IExpressionChild
+    public interface IProgramRootNode
     {
     }
 }

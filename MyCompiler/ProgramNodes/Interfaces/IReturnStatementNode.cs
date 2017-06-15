@@ -1,6 +1,6 @@
 ﻿namespace MyCompiler.ProgramNodes.Interfaces
 {
-    public interface IReturnStatementNode
+    public interface IReturnStatementNode : IStatementChild
     {
     }
 }

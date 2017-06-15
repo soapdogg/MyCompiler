@@ -1,6 +1,6 @@
 ﻿namespace MyCompiler.ProgramNodes.Interfaces
 {
-    public interface IExpressionChild
+    public interface IExpressionChild : ITranslatable
     {
     }
 }

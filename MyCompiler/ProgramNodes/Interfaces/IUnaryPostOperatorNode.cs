@@ -1,6 +1,6 @@
 ﻿namespace MyCompiler.ProgramNodes.Interfaces
 {
-    public interface IUnaryPostOperatorNode
+    public interface IUnaryPostOperatorNode : IExpressionChild
     {
     }
 }

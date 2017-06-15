@@ -1,6 +1,6 @@
 ﻿namespace MyCompiler.ProgramNodes.Interfaces
 {
-    public interface IDoWhileStatementNode
+    public interface IDoWhileStatementNode : IStatementChild, IHaveLabels
     {
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace MyCompiler.ProgramNodes.Interfaces
 {
-    public interface IBinaryArrayOperatorNode
+    public interface IBinaryArrayOperatorNode : IExpressionChild, ILeftHandValue
     {
     }
 }

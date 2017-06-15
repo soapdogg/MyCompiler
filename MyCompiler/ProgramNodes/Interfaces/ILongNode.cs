@@ -1,6 +1,6 @@
 ﻿namespace MyCompiler.ProgramNodes.Interfaces
 {
-    public interface ILongNode
+    public interface ILongNode : IExpressionChild
     {
     }
 }

@@ -55,6 +55,7 @@
     <Compile Include="ProgramNodes\Interfaces\IBooleanExpressionChild.cs" />
     <Compile Include="ProgramNodes\Interfaces\IBooleanExpressionNode.cs" />
     <Compile Include="ProgramNodes\Interfaces\IDeclarationChild.cs" />
+    <Compile Include="ProgramNodes\Interfaces\IDeclarationStatementNode.cs" />
     <Compile Include="ProgramNodes\Interfaces\IDoubleNode.cs" />
     <Compile Include="ProgramNodes\Interfaces\IDoWhileStatementNode.cs" />
     <Compile Include="ProgramNodes\Interfaces\IExpressionChild.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="ProgramNodes\Interfaces\ILeftHandValue.cs" />
     <Compile Include="ProgramNodes\Interfaces\ILongNode.cs" />
     <Compile Include="ProgramNodes\Interfaces\IProgramNode.cs" />
+    <Compile Include="ProgramNodes\Interfaces\IProgramRootNode.cs" />
     <Compile Include="ProgramNodes\Interfaces\IReturnStatementNode.cs" />
     <Compile Include="ProgramNodes\Interfaces\IStatementChild.cs" />
     <Compile Include="ProgramNodes\Interfaces\IStatementNode.cs" />

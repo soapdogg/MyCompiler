@@ -1,6 +1,6 @@
 ﻿namespace MyCompiler.ProgramNodes.Interfaces
 {
-    public interface IFunctionDeclarationNode
+    public interface IFunctionDeclarationNode : IDeclarationChild
     {
     }
 }
