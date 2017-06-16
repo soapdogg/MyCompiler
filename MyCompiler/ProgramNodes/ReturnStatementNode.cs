@@ -1,29 +1,55 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
+using MyCompiler.ProgramNodes.Components;
 using MyCompiler.ProgramNodes.Interfaces;
+using MyCompiler.ProgramNodes.Utilities;
 
 namespace MyCompiler.ProgramNodes
 {
     public class ReturnStatementNode : IReturnStatementNode
     {
-        private Translatable translatable;
+        private readonly Translatable translatable;
+        private bool shouldBeTranslated;
+        private IExpressionNode expression;
 
-        public string Address { get; set; }
-        public string VariableType { get; }
-        public bool IsTranslated => translatable.IsTranslated;
-        public void MarkAsTranslated() => translatable.MarkAsTranslated();
+        public ReturnStatementNode()
+        {
+            translatable = new Translatable();
+        }
+
+        public string Address
+        {
+            get => translatable.Address;
+            set => translatable.Address = value;
+        }
 
         public string Translate()
         {
-            throw new NotImplementedException();
+            if (!shouldBeTranslated) return string.Empty;
+            translatable.MarkAsTranslated();
+            return expression.Translate();
         }
 
-        public IStatementChild NewStatementChildInstance()
+        public IStatementChild NewStatementChildInstance() => new ReturnStatementNode();
+
+        public string PrettyPrint()
         {
-            return new ReturnStatementNode();
+            StringBuilder sb = new StringBuilder();
+            if (translatable.IsTranslated)
+            {
+                sb.Append(expression.PrettyPrint());
+                sb.Append(PrettyPrintingUtilities.GetTabbedNewLine());
+                sb.Append("return ");
+                sb.Append(expression.Address);
+                sb.Append(";");
+            }
+            else
+            {
+                sb.Append(PrettyPrintingUtilities.GetTabbedNewLine());
+                sb.Append("return ");
+                sb.Append(expression.PrettyPrint());
+                sb.Append(";");
+            }
+            return sb.ToString();
         }
     }
 }

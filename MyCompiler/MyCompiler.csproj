@@ -43,6 +43,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
+    <Compile Include="ProgramNodes\BinaryOperatorNode.cs" />
+    <Compile Include="ProgramNodes\Components\Labelable.cs" />
+    <Compile Include="ProgramNodes\DoWhileStatementNode.cs" />
+    <Compile Include="ProgramNodes\ExpressionNode.cs" />
+    <Compile Include="ProgramNodes\ExpressionStatementNode.cs" />
+    <Compile Include="ProgramNodes\ForStatementNode.cs" />
+    <Compile Include="ProgramNodes\IfStatementNode.cs" />
     <Compile Include="ProgramNodes\Interfaces\IArrayTypeNode.cs" />
     <Compile Include="ProgramNodes\Interfaces\IBasicBlockNode.cs" />
     <Compile Include="ProgramNodes\Interfaces\IBinaryAndOperatorNode.cs" />
@@ -62,9 +69,10 @@
     <Compile Include="ProgramNodes\Interfaces\IExpressionStatementNode.cs" />
     <Compile Include="ProgramNodes\Interfaces\IForStatementNode.cs" />
     <Compile Include="ProgramNodes\Interfaces\IFunctionDeclarationNode.cs" />
-    <Compile Include="ProgramNodes\Interfaces\IHaveLabels.cs" />
+    <Compile Include="ProgramNodes\Interfaces\ILabelable.cs" />
     <Compile Include="ProgramNodes\Interfaces\IIfStatementNode.cs" />
     <Compile Include="ProgramNodes\Interfaces\ILeftHandValue.cs" />
+    <Compile Include="ProgramNodes\Interfaces\IPrettyPrintable.cs" />
     <Compile Include="ProgramNodes\Interfaces\IProgramNode.cs" />
     <Compile Include="ProgramNodes\Interfaces\IProgramRootNode.cs" />
     <Compile Include="ProgramNodes\Interfaces\IReturnStatementNode.cs" />
@@ -79,9 +87,12 @@
     <Compile Include="ProgramNodes\Interfaces\IVariableDeclarationNode.cs" />
     <Compile Include="ProgramNodes\Interfaces\IVariableExpressionNode.cs" />
     <Compile Include="ProgramNodes\Interfaces\IWhileStatementNode.cs" />
-    <Compile Include="ProgramNodes\Translatable.cs" />
+    <Compile Include="ProgramNodes\ReturnStatementNode.cs" />
+    <Compile Include="ProgramNodes\StatementNode.cs" />
+    <Compile Include="ProgramNodes\Components\Translatable.cs" />
     <Compile Include="ProgramNodes\Utilities\CounterUtilities.cs" />
     <Compile Include="ProgramNodes\Utilities\PrettyPrintingUtilities.cs" />
+    <Compile Include="ProgramNodes\WhileStatementNode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tokenizer\ITokenizer.cs" />
     <Compile Include="Tokenizer\SimpleCToken.cs" />

@@ -1,9 +1,7 @@
 ﻿namespace MyCompiler.ProgramNodes.Interfaces
 {
-    public interface IHaveLabels
+    public interface ILabelable
     {
-        string [] Labels { get; }
-
         void SetLabel(int i, string label);
 
         string GetLabel(int i);
