@@ -43,7 +43,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
+    <Compile Include="ProgramNodes\BasicBlockNode.cs" />
+    <Compile Include="ProgramNodes\BinaryAndOperatorNode.cs" />
     <Compile Include="ProgramNodes\BinaryOperatorNode.cs" />
+    <Compile Include="ProgramNodes\BinaryOrOperatorNode.cs" />
+    <Compile Include="ProgramNodes\BinaryRelationalOperatorNode.cs" />
+    <Compile Include="ProgramNodes\BooleanExpressionNode.cs" />
     <Compile Include="ProgramNodes\Components\Labelable.cs" />
     <Compile Include="ProgramNodes\DoWhileStatementNode.cs" />
     <Compile Include="ProgramNodes\ExpressionNode.cs" />
@@ -90,6 +95,8 @@
     <Compile Include="ProgramNodes\ReturnStatementNode.cs" />
     <Compile Include="ProgramNodes\StatementNode.cs" />
     <Compile Include="ProgramNodes\Components\Translatable.cs" />
+    <Compile Include="ProgramNodes\TypeNode.cs" />
+    <Compile Include="ProgramNodes\UnaryNotOperatorNode.cs" />
     <Compile Include="ProgramNodes\Utilities\CounterUtilities.cs" />
     <Compile Include="ProgramNodes\Utilities\PrettyPrintingUtilities.cs" />
     <Compile Include="ProgramNodes\WhileStatementNode.cs" />

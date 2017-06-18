@@ -7,14 +7,13 @@ namespace MyCompiler.ProgramNodes
     {
         private readonly Translatable translatable;
 
-       
         public ExpressionNode()
         {
             translatable = new Translatable();
         }
 
-
         public IExpressionChild Child { get; }
+        
         public string Address => translatable.Address;
 
         public string Translate()
