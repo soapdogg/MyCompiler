@@ -29,10 +29,7 @@ namespace MyCompiler.ProgramNodes
 
         public IExpressionChild NewExpressionChildInstance() => new UnaryPostOperatorNode();
 
-        private string PrettyPrintTranslated()
-        {
-            return isLeftArray ? PrettyPrintLeftArray() : PrettyPrintLeftVariable();
-        }
+        private string PrettyPrintTranslated() => isLeftArray ? PrettyPrintLeftArray() : PrettyPrintLeftVariable();
 
         private string PrettyPrintLeftArray()
         {
