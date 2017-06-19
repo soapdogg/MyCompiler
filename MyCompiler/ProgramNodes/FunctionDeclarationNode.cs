@@ -1,6 +1,7 @@
 ﻿using System.Text;
 using MyCompiler.ProgramNodes.Interfaces;
 using MyCompiler.ProgramNodes.Utilities;
+using MyCompiler.Tokenizer;
 
 namespace MyCompiler.ProgramNodes
 {
@@ -11,6 +12,17 @@ namespace MyCompiler.ProgramNodes
         private IBasicBlockNode basicBlock;
 
         public string Address { get; }
+
+        public void Parse(ITokenizer tokenizer)
+        {
+            type = new TypeNode();
+            type.Parse(tokenizer);
+            functionName = tokenizer.Pop().Value;
+            tokenizer.Pop(); //left parentheses
+            tokenizer.Pop(); //right parenttheses
+            basicBlock = new BasicBlockNode();
+            basicBlock.Parse(tokenizer);
+        }
 
         public string Translate() => basicBlock.Translate();
 

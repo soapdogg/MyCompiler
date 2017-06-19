@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text;
 using MyCompiler.ProgramNodes.Components;
 using MyCompiler.ProgramNodes.Interfaces;
+using MyCompiler.Tokenizer;
+using MyCompiler.Tokenizer.Tokens;
 
 namespace MyCompiler.ProgramNodes
 {
@@ -18,7 +18,19 @@ namespace MyCompiler.ProgramNodes
         }
 
         public string Address => translatable.Address;
-        
+
+        public void Parse(ITokenizer tokenizer)
+        {
+            tokenizer.Pop();// left brace
+            while (!(tokenizer.PeekTokenType() is RightBraceTokenType))
+            {
+                IStatementNode statement = new StatementNode();
+                statement.Parse(tokenizer);
+                statements.Add(statement);
+            }
+            tokenizer.Pop(); //right brace
+        }
+
         public string Translate()
         {
             foreach (var statementNode in statements)

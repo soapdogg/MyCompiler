@@ -1,5 +1,6 @@
 ﻿using MyCompiler.ProgramNodes.Components;
 using MyCompiler.ProgramNodes.Interfaces;
+using MyCompiler.Tokenizer;
 
 namespace MyCompiler.ProgramNodes
 {
@@ -15,6 +16,11 @@ namespace MyCompiler.ProgramNodes
         public IExpressionChild Child { get; }
 
         public string Address => translatable.Address;
+
+        public void Parse(ITokenizer tokenizer)
+        {
+
+        }
 
         public string Translate()
         {

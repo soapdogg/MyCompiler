@@ -1,6 +1,6 @@
 ﻿namespace MyCompiler.ProgramNodes.Interfaces
 {
-    public interface IBooleanExpressionNode : IExpressionChild, ILabelable
+    public interface IBooleanExpressionNode : IExpressionChild, ILabelable, IParsable
     {
     }
 }

@@ -2,6 +2,7 @@
 using MyCompiler.ProgramNodes.Components;
 using MyCompiler.ProgramNodes.Interfaces;
 using MyCompiler.ProgramNodes.Utilities;
+using MyCompiler.Tokenizer;
 
 namespace MyCompiler.ProgramNodes
 {
@@ -16,10 +17,15 @@ namespace MyCompiler.ProgramNodes
             translatable = new Translatable();
         }
 
-        public string Address
+        public string Address => translatable.Address;
+
+        public void Parse(ITokenizer tokenizer)
         {
-            get => translatable.Address;
-            set => translatable.Address = value;
+            tokenizer.Pop(); //return token
+            expression = new ExpressionNode();
+            expression.Parse(tokenizer);
+            shouldBeTranslated = false; //expression.Child
+            tokenizer.Pop(); //semicolon token
         }
 
         public string Translate()

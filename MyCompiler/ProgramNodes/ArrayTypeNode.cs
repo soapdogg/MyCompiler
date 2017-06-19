@@ -1,5 +1,7 @@
 ﻿using System.Text;
 using MyCompiler.ProgramNodes.Interfaces;
+using MyCompiler.Tokenizer;
+using MyCompiler.Tokenizer.Tokens;
 
 namespace MyCompiler.ProgramNodes
 {
@@ -7,6 +9,18 @@ namespace MyCompiler.ProgramNodes
     {
         private bool hasIndex;
         private IExpressionNode expression;
+
+        public void Parse(ITokenizer tokenizer)
+        {
+            tokenizer.Pop(); //left bracket token
+            hasIndex = !(tokenizer.PeekTokenType() is RightBracketTokenType);
+            if (hasIndex)
+            {
+                expression = new ExpressionNode();
+                expression.Parse(tokenizer);
+            }
+            tokenizer.Pop(); //right bracket token
+        }
 
         public string PrettyPrint()
         {

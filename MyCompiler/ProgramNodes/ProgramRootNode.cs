@@ -31,9 +31,10 @@ namespace MyCompiler.ProgramNodes
         {
             while (!(tokenizer.PeekTokenType() is EndOfFileTokenType))
             {
-                
+                IDeclarationStatementNode statement = new DeclarationStatementNode();
+                statement.Parse(tokenizer);
+                declarationStatements.Add(statement);
             }
-            throw new System.NotImplementedException();
         }
     }
 }

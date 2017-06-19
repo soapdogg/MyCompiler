@@ -99,6 +99,7 @@
     <Compile Include="ProgramNodes\Interfaces\IUnaryOperatorNode.cs" />
     <Compile Include="ProgramNodes\Interfaces\IUnaryPostOperatorNode.cs" />
     <Compile Include="ProgramNodes\Interfaces\IUnaryPreOperatorNode.cs" />
+    <Compile Include="ProgramNodes\Interfaces\IVariableDeclarationListNode.cs" />
     <Compile Include="ProgramNodes\Interfaces\IVariableDeclarationNode.cs" />
     <Compile Include="ProgramNodes\Interfaces\IVariableExpressionNode.cs" />
     <Compile Include="ProgramNodes\Interfaces\IWhileStatementNode.cs" />
@@ -113,6 +114,7 @@
     <Compile Include="ProgramNodes\UnaryPreOperatorNode.cs" />
     <Compile Include="ProgramNodes\Utilities\CounterUtilities.cs" />
     <Compile Include="ProgramNodes\Utilities\PrettyPrintingUtilities.cs" />
+    <Compile Include="ProgramNodes\VariableDeclarationListNode.cs" />
     <Compile Include="ProgramNodes\VariableDeclarationNode.cs" />
     <Compile Include="ProgramNodes\VariableExpressionNode.cs" />
     <Compile Include="ProgramNodes\WhileStatementNode.cs" />

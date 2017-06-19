@@ -1,5 +1,6 @@
 ﻿using MyCompiler.ProgramNodes.Components;
 using MyCompiler.ProgramNodes.Interfaces;
+using MyCompiler.Tokenizer;
 
 namespace MyCompiler.ProgramNodes
 {
@@ -16,6 +17,11 @@ namespace MyCompiler.ProgramNodes
 
         public string Address => translatable.Address;
 
+        public void Parse(ITokenizer tokenizer)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public string Translate() => Child.Translate();
 
         public string PrettyPrint() => Child.PrettyPrint();
@@ -25,5 +31,6 @@ namespace MyCompiler.ProgramNodes
         public void SetLabel(int i, string label) => Child.SetLabel(i, label);
 
         public string GetLabel(int i) => Child.GetLabel(i);
+
     }
 }

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using MyCompiler.ProgramNodes.Components;
+﻿using MyCompiler.ProgramNodes.Components;
 using MyCompiler.ProgramNodes.Interfaces;
+using MyCompiler.Tokenizer;
 
 namespace MyCompiler.ProgramNodes
 {
@@ -20,6 +15,13 @@ namespace MyCompiler.ProgramNodes
         }
 
         public string Address => translatable.Address;
+
+        public void Parse(ITokenizer tokenizer)
+        {
+            expression = new ExpressionNode();
+            expression.Parse(tokenizer);
+            tokenizer.Pop(); // semicolon
+        }
 
         public string Translate()
         {

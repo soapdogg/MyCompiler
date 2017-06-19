@@ -2,6 +2,7 @@
 using MyCompiler.ProgramNodes.Components;
 using MyCompiler.ProgramNodes.Interfaces;
 using MyCompiler.ProgramNodes.Utilities;
+using MyCompiler.Tokenizer;
 
 namespace MyCompiler.ProgramNodes
 {
@@ -20,6 +21,23 @@ namespace MyCompiler.ProgramNodes
         }
 
         public string Address => translatable.Address;
+
+        public void Parse(ITokenizer tokenizer)
+        {
+            tokenizer.Pop(); // for token
+            tokenizer.Pop(); //left parenthese token
+            initExpressionNode = new ExpressionNode();
+            initExpressionNode.Parse(tokenizer);
+            tokenizer.Pop(); // semicolon token
+            testExpressionNode = new BooleanExpressionNode();
+            testExpressionNode.Parse(tokenizer);
+            tokenizer.Pop(); // semicolon token
+            incrementExpressionNode = new ExpressionNode();
+            incrementExpressionNode.Parse(tokenizer);
+            tokenizer.Pop(); //right parenthese token
+            body = new StatementNode();
+            body.Parse(tokenizer);
+        }
 
         public string Translate()
         {
