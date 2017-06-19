@@ -40,7 +40,7 @@ namespace MyCompiler.ProgramNodes
         private string PrettyPrintTranslated()
         {
             string innerExpressionString = string.Empty;
-            string lValueString = string.Empty;
+            string lValueString;
             if (isLeftArray)
             {
                 IBinaryArrayOperatorNode leftChild = (IBinaryArrayOperatorNode) leftExpression.Child;

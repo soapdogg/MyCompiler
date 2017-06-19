@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Text;
 using MyCompiler.ProgramNodes.Interfaces;
+using MyCompiler.Tokenizer;
+using MyCompiler.Tokenizer.Tokens;
 
 namespace MyCompiler.ProgramNodes
 {
@@ -23,6 +25,15 @@ namespace MyCompiler.ProgramNodes
             foreach (var declarationStatementNode in declarationStatements)
                 sb.Append(declarationStatementNode.PrettyPrint());
             return sb.ToString();
+        }
+
+        public void Parse(ITokenizer tokenizer)
+        {
+            while (!(tokenizer.PeekTokenType() is EndOfFileTokenType))
+            {
+                
+            }
+            throw new System.NotImplementedException();
         }
     }
 }

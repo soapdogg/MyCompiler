@@ -1,7 +1,7 @@
 ﻿
 namespace MyCompiler.ProgramNodes.Interfaces
 {
-    public interface IProgramRootNode : IPrettyPrintable, ITranslatable
+    public interface IProgramRootNode : IPrettyPrintable, ITranslatable, IParsable
     {
     }
 }

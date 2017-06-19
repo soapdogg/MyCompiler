@@ -5,9 +5,10 @@ namespace MyCompiler.Tokenizer
 {
     public interface ITokenizer
     {
-        IList<SimpleCToken> Tokenize();
-        IList<SimpleCToken> Tokenize(params string[] inputText);
+        LinkedList<SimpleCToken> Tokenize();
+        LinkedList<SimpleCToken> Tokenize(params string[] inputText);
         int Size { get; }
+        void Push(SimpleCToken token);
         SimpleCToken Pop();
         SimpleCToken Peek();
         ITokenType PeekTokenType();
