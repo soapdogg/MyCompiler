@@ -13,5 +13,7 @@ namespace MyCompiler.ProgramNodes.Utilities
         public static string GetPrettyPrintedLabel(string label) => "\n\t" + label + ": ;";
 
         public static string GetPrettyPrintedGoto(string label) => "goto " + label + ";";
+
+        public static string GetPrettyPrintTempDeclarations() => "TEMP DECLARATIONS\n";
     }
 }

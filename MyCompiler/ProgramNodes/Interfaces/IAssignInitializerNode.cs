@@ -1,6 +1,6 @@
 ﻿namespace MyCompiler.ProgramNodes.Interfaces
 {
-    public interface IArrayTypeNode : IPrettyPrintable
+    public interface IAssignInitializerNode : IPrettyPrintable
     {
     }
 }

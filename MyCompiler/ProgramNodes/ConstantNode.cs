@@ -3,27 +3,27 @@ using MyCompiler.ProgramNodes.Interfaces;
 
 namespace MyCompiler.ProgramNodes
 {
-    public class ExpressionNode : IExpressionNode
+    public class ConstantNode : IConstantNode
     {
         private readonly Translatable translatable;
+        private string stringRepresentation;
 
-        public ExpressionNode()
+        public ConstantNode()
         {
             translatable = new Translatable();
         }
-
-        public IExpressionChild Child { get; }
 
         public string Address => translatable.Address;
 
         public string Translate()
         {
-            string address = Child.Translate();
-            translatable.Address = address;
             translatable.MarkAsTranslated();
-            return address;
+            translatable.Address = stringRepresentation;
+            return string.Empty;
         }
 
-        public string PrettyPrint() => Child.PrettyPrint();
+        public string PrettyPrint() => translatable.IsTranslated ? string.Empty : stringRepresentation;
+
+        public IExpressionChild NewExpressionChildInstance() => new ConstantNode();
     }
 }

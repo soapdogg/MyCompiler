@@ -2,5 +2,6 @@
 {
     public interface IBinaryArrayOperatorNode : IExpressionChild, ILeftHandValue
     {
+        string TranslatedInnerExpression { get; }
     }
 }
