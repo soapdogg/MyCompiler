@@ -8,7 +8,6 @@ namespace MyCompiler.Tokenizer
         LinkedList<SimpleCToken> Tokenize();
         LinkedList<SimpleCToken> Tokenize(params string[] inputText);
         int Size { get; }
-        void Push(SimpleCToken token);
         SimpleCToken Pop();
         SimpleCToken Peek();
         ITokenType PeekTokenType();

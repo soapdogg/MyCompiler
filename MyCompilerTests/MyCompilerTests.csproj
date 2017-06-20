@@ -48,6 +48,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Program\ParsingTests.cs" />
     <Compile Include="Tokenizer\SimpleCTokenTests.cs" />
     <Compile Include="Tokenizer\TokenizerTests.cs" />
     <Compile Include="Tokenizer\Tokens\BaseTokenTypeTests.cs" />

@@ -61,6 +61,11 @@ namespace MyCompiler.Tokenizer
             lines = File.ReadAllLines(path);
         }
 
+        public MyTokenizer(LinkedList<SimpleCToken> t)
+        {
+            tokens = t;
+        }
+
         public LinkedList<SimpleCToken> Tokenize()
         {
             bool continueScanning = true;
@@ -80,8 +85,6 @@ namespace MyCompiler.Tokenizer
         }
 
         public int Size => tokens.Count;
-
-        public void Push(SimpleCToken token) => tokens.AddFirst(token);
 
         public SimpleCToken Pop()
         {
