@@ -1,13 +1,14 @@
 ﻿using System.Text;
+using MyCompiler.Program.ProgramNodes.Interfaces;
 using MyCompiler.Tokenizer;
 using MyCompiler.Tokenizer.Tokens;
 
 namespace MyCompiler.Program.ProgramNodes
 {
-    public class ArrayTypeNode : Interfaces.IArrayTypeNode
+    public class ArrayTypeNode : IArrayTypeNode
     {
         private bool hasIndex;
-        private Interfaces.IExpressionNode expression;
+        private IExpressionNode expression;
 
         public void Parse(ITokenizer tokenizer)
         {

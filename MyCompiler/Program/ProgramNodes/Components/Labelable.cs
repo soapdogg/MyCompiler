@@ -1,6 +1,8 @@
-﻿namespace MyCompiler.Program.ProgramNodes.Components
+﻿using MyCompiler.Program.ProgramNodes.Interfaces;
+
+namespace MyCompiler.Program.ProgramNodes.Components
 {
-    public class Labelable : Interfaces.ILabelable
+    public class Labelable : ILabelable
     {
         private readonly string[] labels;
         public const int TRUE = 0, SECOND = 1, FALSE = 2, START = 2;

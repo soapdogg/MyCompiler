@@ -1,20 +1,21 @@
 ﻿using System.Collections.Generic;
 using MyCompiler.Program.ProgramNodes.Components;
+using MyCompiler.Program.ProgramNodes.Interfaces;
 using MyCompiler.Tokenizer;
 using MyCompiler.Tokenizer.Tokens;
 using MyCompiler.Tokenizer.Tokens.Interfaces;
 
 namespace MyCompiler.Program.ProgramNodes
 {
-    public class StatementNode : Interfaces.IStatementNode
+    public class StatementNode : IStatementNode
     {
         private readonly Translatable translatable;
-        private static readonly IDictionary<ITokenType, Interfaces.IStatementChild> statementChildDictionary;
+        private static readonly IDictionary<ITokenType, IStatementChild> statementChildDictionary;
 
         static StatementNode()
         {
             statementChildDictionary =
-                new Dictionary<ITokenType, Interfaces.IStatementChild>
+                new Dictionary<ITokenType, IStatementChild>
                 {
                     [new ForTokenType()] = new ForStatementNode(),
                     [new WhileTokenType()] = new WhileStatementNode(),
@@ -31,14 +32,14 @@ namespace MyCompiler.Program.ProgramNodes
             translatable = new Translatable();
         }
 
-        public Interfaces.IStatementChild Child { get; private set; }
+        public IStatementChild Child { get; private set; }
         public string Address => translatable.Address;
 
         public void Parse(ITokenizer tokenizer)
         {
             Child = statementChildDictionary.ContainsKey(tokenizer.PeekTokenType())
                 ? statementChildDictionary[tokenizer.PeekTokenType()]
-                : new ExpressionStatementNode();
+                : (IStatementChild) new ExpressionStatementNode();
             Child = Child.NewStatementChildInstance();
             Child.Parse(tokenizer);
         }

@@ -1,14 +1,16 @@
 ﻿using System.Text;
 using MyCompiler.Program.ProgramNodes.Components;
+using MyCompiler.Program.ProgramNodes.Interfaces;
+using MyCompiler.Program.ProgramNodes.Utilities;
 using MyCompiler.Tokenizer;
 
 namespace MyCompiler.Program.ProgramNodes
 {
-    public class ReturnStatementNode : Interfaces.IReturnStatementNode
+    public class ReturnStatementNode : IReturnStatementNode
     {
         private readonly Translatable translatable;
         private bool shouldBeTranslated;
-        private Interfaces.IExpressionNode expression;
+        private IExpressionNode expression;
 
         public ReturnStatementNode()
         {
@@ -33,7 +35,7 @@ namespace MyCompiler.Program.ProgramNodes
             return expression.Translate();
         }
 
-        public Interfaces.IStatementChild NewStatementChildInstance() => new ReturnStatementNode();
+        public IStatementChild NewStatementChildInstance() => new ReturnStatementNode();
 
         public string PrettyPrint()
         {
@@ -41,14 +43,14 @@ namespace MyCompiler.Program.ProgramNodes
             if (translatable.IsTranslated)
             {
                 sb.Append(expression.PrettyPrint());
-                sb.Append(Utilities.PrettyPrintingUtilities.GetTabbedNewLine());
+                sb.Append(PrettyPrintingUtilities.GetTabbedNewLine());
                 sb.Append("return ");
                 sb.Append(expression.Address);
                 sb.Append(";");
             }
             else
             {
-                sb.Append(Utilities.PrettyPrintingUtilities.GetTabbedNewLine());
+                sb.Append(PrettyPrintingUtilities.GetTabbedNewLine());
                 sb.Append("return ");
                 sb.Append(expression.PrettyPrint());
                 sb.Append(";");

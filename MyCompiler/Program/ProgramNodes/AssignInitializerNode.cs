@@ -1,10 +1,11 @@
-﻿using MyCompiler.Tokenizer;
+﻿using MyCompiler.Program.ProgramNodes.Interfaces;
+using MyCompiler.Tokenizer;
 
 namespace MyCompiler.Program.ProgramNodes
 {
-    public class AssignInitializerNode : Interfaces.IAssignInitializerNode
+    public class AssignInitializerNode : IAssignInitializerNode
     {
-        private Interfaces.IExpressionNode expression;
+        private IExpressionNode expression;
 
         public void Parse(ITokenizer tokenizer)
         {

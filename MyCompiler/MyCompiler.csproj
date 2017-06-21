@@ -55,7 +55,6 @@
     <Compile Include="Program\ProgramNodes\BinaryOperatorNode.cs" />
     <Compile Include="Program\ProgramNodes\BinaryOrOperatorNode.cs" />
     <Compile Include="Program\ProgramNodes\BinaryRelationalOperatorNode.cs" />
-    <Compile Include="Program\ProgramNodes\BooleanExpressionNode.cs" />
     <Compile Include="Program\ProgramNodes\Components\Labelable.cs" />
     <Compile Include="Program\ProgramNodes\ConstantNode.cs" />
     <Compile Include="Program\ProgramNodes\DeclarationStatementNode.cs" />
@@ -75,8 +74,6 @@
     <Compile Include="Program\ProgramNodes\Interfaces\IBinaryOperatorNode.cs" />
     <Compile Include="Program\ProgramNodes\Interfaces\IBinaryOrOperatorNode.cs" />
     <Compile Include="Program\ProgramNodes\Interfaces\IBinaryRelationalOperatorNode.cs" />
-    <Compile Include="Program\ProgramNodes\Interfaces\IBooleanExpressionChild.cs" />
-    <Compile Include="Program\ProgramNodes\Interfaces\IBooleanExpressionNode.cs" />
     <Compile Include="Program\ProgramNodes\Interfaces\IConstantNode.cs" />
     <Compile Include="Program\ProgramNodes\Interfaces\IDeclarationChild.cs" />
     <Compile Include="Program\ProgramNodes\Interfaces\IDeclarationStatementNode.cs" />
@@ -115,6 +112,7 @@
     <Compile Include="Program\ProgramNodes\UnaryPostOperatorNode.cs" />
     <Compile Include="Program\ProgramNodes\UnaryPreOperatorNode.cs" />
     <Compile Include="Program\ProgramNodes\Utilities\CounterUtilities.cs" />
+    <Compile Include="Program\ProgramNodes\Utilities\ExpressionChildGenerator.cs" />
     <Compile Include="Program\ProgramNodes\Utilities\PrettyPrintingUtilities.cs" />
     <Compile Include="Program\ProgramNodes\VariableDeclarationListNode.cs" />
     <Compile Include="Program\ProgramNodes\VariableDeclarationNode.cs" />

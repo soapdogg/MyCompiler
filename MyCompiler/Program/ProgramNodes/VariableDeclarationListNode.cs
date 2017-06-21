@@ -1,14 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Text;
+using MyCompiler.Program.ProgramNodes.Interfaces;
+using MyCompiler.Program.ProgramNodes.Utilities;
 using MyCompiler.Tokenizer;
 using MyCompiler.Tokenizer.Tokens;
 
 namespace MyCompiler.Program.ProgramNodes
 {
-    public class VariableDeclarationListNode : Interfaces.IVariableDeclarationListNode
+    public class VariableDeclarationListNode : IVariableDeclarationListNode
     {
-        private Interfaces.ITypeNode type;
-        private IList<Interfaces.IVariableDeclarationNode> variableDeclarations;
+        private ITypeNode type;
+        private IList<IVariableDeclarationNode> variableDeclarations;
 
         public string Address => string.Empty;
 
@@ -17,15 +19,15 @@ namespace MyCompiler.Program.ProgramNodes
         public void Parse(ITokenizer tokenizer)
         {
             type = new TypeNode();
-            variableDeclarations = new List<Interfaces.IVariableDeclarationNode>();
+            variableDeclarations = new List<IVariableDeclarationNode>();
             type.Parse(tokenizer);
-            Interfaces.IVariableDeclarationNode variableDeclaration = new VariableDeclarationNode();
+            IVariableDeclarationNode variableDeclaration = new VariableDeclarationNode();
             variableDeclaration.Parse(tokenizer);
             variableDeclarations.Add(variableDeclaration);
             while (tokenizer.PeekTokenType() is CommaTokenType)
             {
                 tokenizer.Pop(); //comma token 
-                Interfaces.IVariableDeclarationNode v = new VariableDeclarationNode();
+                IVariableDeclarationNode v = new VariableDeclarationNode();
                 v.Parse(tokenizer);
                 variableDeclarations.Add(v);
             }
@@ -35,9 +37,9 @@ namespace MyCompiler.Program.ProgramNodes
         public string PrettyPrint()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append(Utilities.PrettyPrintingUtilities.GetTabbedNewLine());
+            sb.Append(PrettyPrintingUtilities.GetTabbedNewLine());
             sb.Append(type.PrettyPrint());
-            IEnumerator<Interfaces.IVariableDeclarationNode> enumerator = variableDeclarations.GetEnumerator();
+            IEnumerator<IVariableDeclarationNode> enumerator = variableDeclarations.GetEnumerator();
             bool hasNext = true;
             while (hasNext)
             {
@@ -50,6 +52,6 @@ namespace MyCompiler.Program.ProgramNodes
             return sb.ToString();
         }
 
-        public Interfaces.IStatementChild NewStatementChildInstance() => new VariableDeclarationListNode();
+        public IStatementChild NewStatementChildInstance() => new VariableDeclarationListNode();
     }
 }

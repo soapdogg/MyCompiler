@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using MyCompiler.Program.Interfaces;
+using MyCompiler.Program.ProgramNodes.Utilities;
 
 namespace MyCompiler.Program.ProgramNodes.Components
 {
@@ -23,7 +24,7 @@ namespace MyCompiler.Program.ProgramNodes.Components
         public string Translate()
         {
             MarkAsTranslated();
-            string tempId = Utilities.CounterUtilities.GetNextTempAvailable;
+            string tempId = CounterUtilities.GetNextTempAvailable;
             Address =  tempId;
             AddToTypeTempIdDictionary(VariableType, tempId);
             return tempId;

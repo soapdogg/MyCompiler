@@ -1,13 +1,15 @@
 ﻿using System.Text;
+using MyCompiler.Program.ProgramNodes.Interfaces;
+using MyCompiler.Program.ProgramNodes.Utilities;
 using MyCompiler.Tokenizer;
 
 namespace MyCompiler.Program.ProgramNodes
 {
-    public class FunctionDeclarationNode : Interfaces.IFunctionDeclarationNode
+    public class FunctionDeclarationNode : IFunctionDeclarationNode
     {
         private string functionName;
-        private Interfaces.ITypeNode type;
-        private Interfaces.IBasicBlockNode basicBlock;
+        private ITypeNode type;
+        private IBasicBlockNode basicBlock;
 
         public string Address => string.Empty; 
 
@@ -30,7 +32,7 @@ namespace MyCompiler.Program.ProgramNodes
             sb.Append(type.PrettyPrint());
             sb.Append(functionName);
             sb.Append("(){");
-            sb.Append(Utilities.PrettyPrintingUtilities.GetPrettyPrintTempDeclarations());
+            sb.Append(PrettyPrintingUtilities.GetPrettyPrintTempDeclarations());
             sb.Append(basicBlock.PrettyPrint());
             sb.Append("\n}\n");
             return sb.ToString();

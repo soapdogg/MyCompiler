@@ -1,22 +1,23 @@
 ﻿using System.Collections.Generic;
 using System.Text;
+using MyCompiler.Program.ProgramNodes.Interfaces;
 using MyCompiler.Tokenizer;
 using MyCompiler.Tokenizer.Tokens;
 
 namespace MyCompiler.Program.ProgramNodes
 {
-    public class ProgramRootNode : Interfaces.IProgramRootNode
+    public class ProgramRootNode : IProgramRootNode
     {
-        private IList<Interfaces.IDeclarationStatementNode> declarationStatements;
+        private IList<IDeclarationStatementNode> declarationStatements;
 
         public string Address => string.Empty;
 
         public void Parse(ITokenizer tokenizer)
         {
-            declarationStatements = new List<Interfaces.IDeclarationStatementNode>();
+            declarationStatements = new List<IDeclarationStatementNode>();
             while (!(tokenizer.PeekTokenType() is EndOfFileTokenType))
             {
-                Interfaces.IDeclarationStatementNode statement = new DeclarationStatementNode();
+                IDeclarationStatementNode statement = new DeclarationStatementNode();
                 statement.Parse(tokenizer);
                 declarationStatements.Add(statement);
             }

@@ -10,7 +10,7 @@ namespace MyCompiler.Program.ProgramNodes
     {
         private readonly Translatable translatable;
         private readonly Labelable labelable;
-        private IBooleanExpressionNode expression;
+        private IExpressionNode expression;
         private IStatementNode body;
 
         public DoWhileStatementNode()
@@ -28,7 +28,7 @@ namespace MyCompiler.Program.ProgramNodes
             body.Parse(tokenizer);
             tokenizer.Pop(); //while token
             tokenizer.Pop(); //left parentheses
-            expression = new BooleanExpressionNode();
+            expression = new ExpressionNode();
             expression.Parse(tokenizer);
             tokenizer.Pop(); //right parentheses
             tokenizer.Pop(); //semicolon

@@ -1,15 +1,17 @@
-﻿using MyCompiler.Tokenizer;
+﻿using MyCompiler.Program.ProgramNodes.Components;
+using MyCompiler.Program.ProgramNodes.Interfaces;
+using MyCompiler.Tokenizer;
 
 namespace MyCompiler.Program.ProgramNodes
 {
-    public class ExpressionStatementNode : Interfaces.IExpressionStatementNode
+    public class ExpressionStatementNode : IExpressionStatementNode
     {
-        private readonly Components.Translatable translatable;
-        private Interfaces.IExpressionNode expression;
+        private readonly Translatable translatable;
+        private IExpressionNode expression;
 
         public ExpressionStatementNode()
         {
-            translatable = new Components.Translatable();
+            translatable = new Translatable();
         }
 
         public string Address => translatable.Address;
@@ -29,6 +31,6 @@ namespace MyCompiler.Program.ProgramNodes
 
         public string PrettyPrint() => translatable.IsTranslated ? expression.PrettyPrint() : expression.PrettyPrint() + ";";
 
-        public Interfaces.IStatementChild NewStatementChildInstance() => new ExpressionStatementNode();
+        public IStatementChild NewStatementChildInstance() => new ExpressionStatementNode();
     }
 }

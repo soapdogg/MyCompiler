@@ -1,6 +1,6 @@
 ﻿namespace MyCompiler.Program.ProgramNodes.Interfaces
 {
-    public interface IUnaryNotOperatorNode : IBooleanExpressionChild
+    public interface IUnaryNotOperatorNode : IExpressionChild
     {
     }
 }

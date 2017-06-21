@@ -1,5 +1,6 @@
 ﻿using MyCompiler.Program.ProgramNodes.Components;
 using MyCompiler.Program.ProgramNodes.Interfaces;
+using MyCompiler.Program.ProgramNodes.Utilities;
 
 namespace MyCompiler.Program.ProgramNodes
 {
@@ -32,10 +33,14 @@ namespace MyCompiler.Program.ProgramNodes
             string expressionString = expression.PrettyPrint();
             if (!op.Equals(PLUS))
                 expressionString +=
-                    Utilities.PrettyPrintingUtilities.GetTabbedNewLineAndVariableAssignment(Address, op + expression.Address);
+                    PrettyPrintingUtilities.GetTabbedNewLineAndVariableAssignment(Address, op + expression.Address);
             return expressionString;
         }
 
         public IExpressionChild NewExpressionChildInstance() => new UnaryOperatorNode();
+
+        public void SetLabel(int i, string label){}
+
+        public string GetLabel(int i) => string.Empty;
     }
 }

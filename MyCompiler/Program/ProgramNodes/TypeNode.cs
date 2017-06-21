@@ -1,8 +1,9 @@
-﻿using MyCompiler.Tokenizer;
+﻿using MyCompiler.Program.ProgramNodes.Interfaces;
+using MyCompiler.Tokenizer;
 
 namespace MyCompiler.Program.ProgramNodes
 {
-    public class TypeNode : Interfaces.ITypeNode
+    public class TypeNode : ITypeNode
     {
         private string stringRepresentation;
 

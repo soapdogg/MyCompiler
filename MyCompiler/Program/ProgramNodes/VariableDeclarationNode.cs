@@ -1,14 +1,15 @@
 ﻿using System.Text;
+using MyCompiler.Program.ProgramNodes.Interfaces;
 using MyCompiler.Tokenizer;
 using MyCompiler.Tokenizer.Tokens;
 
 namespace MyCompiler.Program.ProgramNodes
 {
-    public class VariableDeclarationNode : Interfaces.IVariableDeclarationNode
+    public class VariableDeclarationNode : IVariableDeclarationNode
     {
-        private Interfaces.IAssignInitializerNode assignInitializer;
+        private IAssignInitializerNode assignInitializer;
         private string variableName;
-        private Interfaces.IArrayTypeNode arrayType;
+        private IArrayTypeNode arrayType;
         private bool hasArrayType, hasAssignInitializer;
 
         public void Parse(ITokenizer tokenizer)

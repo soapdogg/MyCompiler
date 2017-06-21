@@ -1,5 +1,6 @@
 ﻿using MyCompiler.Program.ProgramNodes.Components;
 using MyCompiler.Program.ProgramNodes.Interfaces;
+using MyCompiler.Program.ProgramNodes.Utilities;
 
 namespace MyCompiler.Program.ProgramNodes
 {
@@ -26,9 +27,13 @@ namespace MyCompiler.Program.ProgramNodes
         }
 
         public string PrettyPrint() => translatable.IsTranslated 
-            ? Utilities.PrettyPrintingUtilities.GetTabbedNewLineAndVariableAssignment(Address, stringRepresentation) 
+            ? PrettyPrintingUtilities.GetTabbedNewLineAndVariableAssignment(Address, stringRepresentation) 
             : stringRepresentation;
 
         public IExpressionChild NewExpressionChildInstance() => new VariableExpressionNode();
+
+        public void SetLabel(int i, string label){}
+
+        public string GetLabel(int i) => string.Empty;
     }
 }

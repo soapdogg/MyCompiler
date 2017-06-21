@@ -1,6 +1,7 @@
 ﻿using System.Text;
 using MyCompiler.Program.ProgramNodes.Components;
 using MyCompiler.Program.ProgramNodes.Interfaces;
+using MyCompiler.Program.ProgramNodes.Utilities;
 
 namespace MyCompiler.Program.ProgramNodes
 {
@@ -39,7 +40,7 @@ namespace MyCompiler.Program.ProgramNodes
             if (translatable.IsTranslated)
             {
                 sb.Append(innerExpression.PrettyPrint());
-                sb.Append(Utilities.PrettyPrintingUtilities.GetTabbedNewLine());
+                sb.Append(PrettyPrintingUtilities.GetTabbedNewLine());
                 sb.Append(Address);
                 sb.Append(" = ");
                 sb.Append(LValueString);
@@ -57,5 +58,8 @@ namespace MyCompiler.Program.ProgramNodes
 
         public IExpressionChild NewExpressionChildInstance() => new BinaryArrayOperatorNode();
 
+        public void SetLabel(int i, string label){}
+
+        public string GetLabel(int i) => string.Empty;
     }
 }

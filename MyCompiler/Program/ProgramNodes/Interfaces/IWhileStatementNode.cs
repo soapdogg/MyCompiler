@@ -1,4 +1,4 @@
-﻿using MyCompiler.Program.ProgramNodes.Components.Interfaces;
+﻿using MyCompiler.Program.ProgramNodes.Interfaces;
 
 namespace MyCompiler.Program.ProgramNodes.Interfaces
 {

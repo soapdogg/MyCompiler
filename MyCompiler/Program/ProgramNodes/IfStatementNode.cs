@@ -12,7 +12,7 @@ namespace MyCompiler.Program.ProgramNodes
         private readonly Translatable translatable;
         private readonly Labelable labelable;
         private IStatementNode trueBody, falseBody;
-        private IBooleanExpressionNode booleanExpression;
+        private IExpressionNode booleanExpression;
         private bool hasFalse;
 
         public IfStatementNode()
@@ -27,7 +27,7 @@ namespace MyCompiler.Program.ProgramNodes
         {
             tokenizer.Pop(); //if token
             tokenizer.Pop(); //left parenthese token
-            booleanExpression = new BooleanExpressionNode();
+            booleanExpression = new ExpressionNode();
             booleanExpression.Parse(tokenizer);
             tokenizer.Pop(); //right parenthese token
             trueBody = new StatementNode();

@@ -1,6 +1,7 @@
 ﻿using System.Text;
 using MyCompiler.Program.ProgramNodes.Components;
 using MyCompiler.Program.ProgramNodes.Interfaces;
+using MyCompiler.Program.ProgramNodes.Utilities;
 using MyCompiler.Tokenizer;
 
 namespace MyCompiler.Program.ProgramNodes
@@ -9,7 +10,7 @@ namespace MyCompiler.Program.ProgramNodes
     {
         private readonly Translatable translatable;
         private readonly Labelable labelable;
-        private IBooleanExpressionNode expression;
+        private IExpressionNode expression;
         private IStatementNode body;
 
         public WhileStatementNode()
@@ -24,7 +25,7 @@ namespace MyCompiler.Program.ProgramNodes
         {
             tokenizer.Pop(); //while token
             tokenizer.Pop(); //left parenthese token
-            expression = new BooleanExpressionNode();
+            expression = new ExpressionNode();
             expression.Parse(tokenizer);
             tokenizer.Pop(); //right parenthese token
             body = new StatementNode();
@@ -33,9 +34,9 @@ namespace MyCompiler.Program.ProgramNodes
 
         public string Translate()
         {
-            expression.SetLabel(Labelable.SECOND, Utilities.CounterUtilities.GetNextLabelAvailable);
-            SetLabel(Labelable.START, Utilities.CounterUtilities.GetNextLabelAvailable);
-            expression.SetLabel(Labelable.TRUE, Utilities.CounterUtilities.GetNextLabelAvailable);
+            expression.SetLabel(Labelable.SECOND, CounterUtilities.GetNextLabelAvailable);
+            SetLabel(Labelable.START, CounterUtilities.GetNextLabelAvailable);
+            expression.SetLabel(Labelable.TRUE, CounterUtilities.GetNextLabelAvailable);
             expression.Translate();
             return body.Translate();
         }
@@ -43,13 +44,13 @@ namespace MyCompiler.Program.ProgramNodes
         public string PrettyPrint()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append(Utilities.PrettyPrintingUtilities.GetPrettyPrintedLabel(GetLabel(Labelable.START)));
+            sb.Append(PrettyPrintingUtilities.GetPrettyPrintedLabel(GetLabel(Labelable.START)));
             sb.Append(expression.PrettyPrint());
-            sb.Append(Utilities.PrettyPrintingUtilities.GetPrettyPrintedLabel(expression.GetLabel(Labelable.TRUE)));
+            sb.Append(PrettyPrintingUtilities.GetPrettyPrintedLabel(expression.GetLabel(Labelable.TRUE)));
             sb.Append(body.PrettyPrint());
-            sb.Append(Utilities.PrettyPrintingUtilities.GetTabbedNewLine());
-            sb.Append(Utilities.PrettyPrintingUtilities.GetPrettyPrintedGoto(GetLabel(Labelable.START)));
-            sb.Append(Utilities.PrettyPrintingUtilities.GetPrettyPrintedLabel(expression.GetLabel(Labelable.SECOND)));
+            sb.Append(PrettyPrintingUtilities.GetTabbedNewLine());
+            sb.Append(PrettyPrintingUtilities.GetPrettyPrintedGoto(GetLabel(Labelable.START)));
+            sb.Append(PrettyPrintingUtilities.GetPrettyPrintedLabel(expression.GetLabel(Labelable.SECOND)));
             return sb.ToString();
         }
 

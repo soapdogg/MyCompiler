@@ -1,21 +1,23 @@
 ﻿using System.Text;
+using MyCompiler.Program.ProgramNodes.Components;
 using MyCompiler.Program.ProgramNodes.Interfaces;
+using MyCompiler.Program.ProgramNodes.Utilities;
 using MyCompiler.Tokenizer;
 
 namespace MyCompiler.Program.ProgramNodes
 {
     public class ForStatementNode : IForStatementNode
     {
-        private readonly Components.Translatable translatable;
-        private readonly Components.Labelable labelable;
+        private readonly Translatable translatable;
+        private readonly Labelable labelable;
         private IExpressionNode initExpressionNode, incrementExpressionNode;
-        private IBooleanExpressionNode testExpressionNode;
+        private IExpressionNode testExpressionNode;
         private IStatementNode body;
 
         public ForStatementNode()
         {
-            translatable = new Components.Translatable();
-            labelable = new Components.Labelable(3);
+            translatable = new Translatable();
+            labelable = new Labelable(3);
         }
 
         public string Address => translatable.Address;
@@ -27,7 +29,7 @@ namespace MyCompiler.Program.ProgramNodes
             initExpressionNode = new ExpressionNode();
             initExpressionNode.Parse(tokenizer);
             tokenizer.Pop(); // semicolon token
-            testExpressionNode = new BooleanExpressionNode();
+            testExpressionNode = new ExpressionNode();
             testExpressionNode.Parse(tokenizer);
             tokenizer.Pop(); // semicolon token
             incrementExpressionNode = new ExpressionNode();
@@ -39,9 +41,9 @@ namespace MyCompiler.Program.ProgramNodes
 
         public string Translate()
         {
-            testExpressionNode.SetLabel(Components.Labelable.SECOND, Utilities.CounterUtilities.GetNextLabelAvailable);
-            SetLabel(Components.Labelable.START, Utilities.CounterUtilities.GetNextLabelAvailable);
-            testExpressionNode.SetLabel(Components.Labelable.TRUE, Utilities.CounterUtilities.GetNextLabelAvailable);
+            testExpressionNode.SetLabel(Labelable.SECOND, CounterUtilities.GetNextLabelAvailable);
+            SetLabel(Labelable.START, CounterUtilities.GetNextLabelAvailable);
+            testExpressionNode.SetLabel(Labelable.TRUE, CounterUtilities.GetNextLabelAvailable);
             initExpressionNode.Translate();
             testExpressionNode.Translate();
             incrementExpressionNode.Translate();
@@ -52,14 +54,14 @@ namespace MyCompiler.Program.ProgramNodes
         {
             StringBuilder sb = new StringBuilder();
             sb.Append(initExpressionNode.PrettyPrint());
-            sb.Append(Utilities.PrettyPrintingUtilities.GetPrettyPrintedLabel(GetLabel(Components.Labelable.START)));
+            sb.Append(PrettyPrintingUtilities.GetPrettyPrintedLabel(GetLabel(Labelable.START)));
             sb.Append(testExpressionNode.PrettyPrint());
-            sb.Append(Utilities.PrettyPrintingUtilities.GetPrettyPrintedLabel(testExpressionNode.GetLabel(Components.Labelable.TRUE)));
+            sb.Append(PrettyPrintingUtilities.GetPrettyPrintedLabel(testExpressionNode.GetLabel(Labelable.TRUE)));
             sb.Append(body.PrettyPrint());
             sb.Append(incrementExpressionNode.PrettyPrint());
-            sb.Append(Utilities.PrettyPrintingUtilities.GetTabbedNewLine());
-            sb.Append(Utilities.PrettyPrintingUtilities.GetPrettyPrintedGoto(GetLabel(Components.Labelable.START)));
-            sb.Append(Utilities.PrettyPrintingUtilities.GetPrettyPrintedLabel(testExpressionNode.GetLabel(Components.Labelable.SECOND)));
+            sb.Append(PrettyPrintingUtilities.GetTabbedNewLine());
+            sb.Append(PrettyPrintingUtilities.GetPrettyPrintedGoto(GetLabel(Labelable.START)));
+            sb.Append(PrettyPrintingUtilities.GetPrettyPrintedLabel(testExpressionNode.GetLabel(Labelable.SECOND)));
             return sb.ToString();
         }
 

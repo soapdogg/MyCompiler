@@ -1,8 +1,9 @@
-﻿using MyCompiler.Tokenizer;
+﻿using MyCompiler.Program.ProgramNodes.Interfaces;
+using MyCompiler.Tokenizer;
 
 namespace MyCompiler.Program.ProgramNodes
 {
-    public class DeclarationStatementNode : Interfaces.IDeclarationStatementNode
+    public class DeclarationStatementNode : IDeclarationStatementNode
     {
         public string Address => string.Empty;
 
@@ -15,7 +16,7 @@ namespace MyCompiler.Program.ProgramNodes
 
         public string PrettyPrint() => Child.PrettyPrint();
 
-        public Interfaces.IDeclarationChild Child { get; private set; }
+        public IDeclarationChild Child { get; private set; }
 
     }
 }
