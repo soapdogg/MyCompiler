@@ -1,4 +1,6 @@
 ﻿using System;
+using MyCompiler.Program;
+using MyCompiler.Tokenizer;
 
 namespace MyCompiler
 {
@@ -6,9 +8,12 @@ namespace MyCompiler
     {
         static void Main()
         {
-            Tokenizer.MyTokenizer t = new Tokenizer.MyTokenizer(@"Data", @"test7.c");
-            var result = t.Tokenize();
-            foreach(var l in result) Console.WriteLine(l);
+            ITokenizer t = new MyTokenizer(@"Data", @"test2.c");
+            t.Tokenize();
+            IProgram p = new MyProgram();
+            p.Parse(t);
+            p.Translate();
+            Console.WriteLine(p.PrettyPrint());
             Console.ReadLine();
         }
     }

@@ -7,16 +7,17 @@ namespace MyCompiler.Program.ProgramNodes
     public class VariableExpressionNode : IVariableExpressionNode
     {
         private readonly Translatable translatable;
-        private string stringRepresentation;
+        private readonly string stringRepresentation;
 
         public string VariableType { get; }
         public bool IsLValue { get; }
         public string LValueString => stringRepresentation;
         public string Address => translatable.Address;
 
-        public VariableExpressionNode()
+        public VariableExpressionNode(string value)
         {
             translatable = new Translatable();
+            stringRepresentation = value;
         }
 
         public string Translate()
@@ -29,8 +30,6 @@ namespace MyCompiler.Program.ProgramNodes
         public string PrettyPrint() => translatable.IsTranslated 
             ? PrettyPrintingUtilities.GetTabbedNewLineAndVariableAssignment(Address, stringRepresentation) 
             : stringRepresentation;
-
-        public IExpressionChild NewExpressionChildInstance() => new VariableExpressionNode();
 
         public void SetLabel(int i, string label){}
 

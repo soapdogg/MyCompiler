@@ -57,7 +57,7 @@ namespace MyCompiler.Tokenizer
         public MyTokenizer(params string [] pathArray)
         {
             Initialize();
-			string path = AppDomain.CurrentDomain.BaseDirectory;
+            string path = @"C:\Users\Eric\Documents\Github\MyCompiler\MyCompiler"; 
             foreach (string s in pathArray) path += Path.DirectorySeparatorChar + s;
             lines = File.ReadAllLines(path);
         }
@@ -87,10 +87,7 @@ namespace MyCompiler.Tokenizer
 
         public int Size => tokens.Count;
 
-        public SimpleCToken Previous()
-        {
-            throw new NotImplementedException();
-        }
+        public SimpleCToken Previous() => tokens[current - 1];
 
         public SimpleCToken Pop()
         {
@@ -106,6 +103,8 @@ namespace MyCompiler.Tokenizer
         public string PeekValue() => Peek().Value;
 
         public bool IsAtEnd() => PeekTokenType() is EndOfFileTokenType;
+
+        public void Retreat() => --current;
 
         private bool TokenizeLine(string inputText)
         {

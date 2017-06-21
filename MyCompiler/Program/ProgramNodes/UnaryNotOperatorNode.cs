@@ -7,12 +7,13 @@ namespace MyCompiler.Program.ProgramNodes
     {
         private readonly Translatable translatable;
         private readonly Labelable labelable;
-        private IExpressionNode innerExpression;
+        private readonly IExpressionNode innerExpression;
 
-        public UnaryNotOperatorNode()
+        public UnaryNotOperatorNode(IExpressionChild inner)
         {
             translatable = new Translatable();
             labelable = new Labelable(2);
+            innerExpression = new ExpressionNode(inner);
         }
 
         public string Address => translatable.Address;
@@ -31,7 +32,5 @@ namespace MyCompiler.Program.ProgramNodes
         public string GetLabel(int i) => labelable.GetLabel(i);
 
         public string PrettyPrint() => innerExpression.PrettyPrint();
-
-        public IExpressionChild NewExpressionChildInstance() => new UnaryNotOperatorNode();
     }
 }

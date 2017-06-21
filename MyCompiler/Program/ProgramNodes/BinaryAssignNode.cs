@@ -9,13 +9,16 @@ namespace MyCompiler.Program.ProgramNodes
     {
         private readonly Translatable translatable;
         private bool isLeftArray;
-        private IExpressionNode leftExpression, rightExpression;
+        private readonly IExpressionNode leftExpression;
+        private readonly IExpressionNode rightExpression;
 
         public string Address => translatable.Address;
 
-        public BinaryAssignNode()
+        public BinaryAssignNode(IExpressionChild left, IExpressionChild right)
         {
             translatable = new Translatable();
+            leftExpression = new ExpressionNode(left);
+            rightExpression = new ExpressionNode(right);
         }
 
         public string Translate()
@@ -39,8 +42,6 @@ namespace MyCompiler.Program.ProgramNodes
                 : PrettyPrintingUtilities.GetVariableAssignment(leftExpression.PrettyPrint(),
                     rightExpression.PrettyPrint());
         }
-
-        public IExpressionChild NewExpressionChildInstance() => new BinaryAssignNode();
 
         public void SetLabel(int i, string label) { }
 

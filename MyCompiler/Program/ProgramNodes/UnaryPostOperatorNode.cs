@@ -8,13 +8,15 @@ namespace MyCompiler.Program.ProgramNodes
     public class UnaryPostOperatorNode : IUnaryPostOperatorNode
     {
         private readonly Translatable translatable;
-        private string op;
+        private readonly string op;
         private bool isLeftArray;
-        private IExpressionNode expression;
+        private readonly IExpressionNode expression;
 
-        public UnaryPostOperatorNode()
+        public UnaryPostOperatorNode(IExpressionChild child, string op)
         {
             translatable = new Translatable();
+            expression = new ExpressionNode(child);
+            this.op = op;
         }
 
         public string Address => translatable.Address;
@@ -26,8 +28,6 @@ namespace MyCompiler.Program.ProgramNodes
         }
 
         public string PrettyPrint() => translatable.IsTranslated ? PrettyPrintTranslated() : expression.PrettyPrint() + op;
-
-        public IExpressionChild NewExpressionChildInstance() => new UnaryPostOperatorNode();
 
         public void SetLabel(int i, string label){}
 

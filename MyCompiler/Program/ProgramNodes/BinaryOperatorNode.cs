@@ -8,12 +8,15 @@ namespace MyCompiler.Program.ProgramNodes
     public class BinaryOperatorNode : IBinaryOperatorNode
     {
         private readonly Translatable translatable;
-        private IExpressionNode leftExpression, rightExpression;
-        private string op;
+        private readonly IExpressionNode leftExpression, rightExpression;
+        private readonly string op;
 
-        public BinaryOperatorNode()
+        public BinaryOperatorNode(IExpressionChild left, IExpressionChild right, string op)
         {
             translatable = new Translatable();
+            leftExpression = new ExpressionNode(left);
+            rightExpression = new ExpressionNode(right);
+            this.op = op;
         }
 
         public string Address => translatable.Address;
@@ -43,8 +46,6 @@ namespace MyCompiler.Program.ProgramNodes
             }
             return sb.ToString();
         }
-
-        public IExpressionChild NewExpressionChildInstance() => new BinaryOperatorNode();
 
         public void SetLabel(int i, string label) { }
 

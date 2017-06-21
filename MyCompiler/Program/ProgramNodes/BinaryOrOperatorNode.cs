@@ -9,12 +9,14 @@ namespace MyCompiler.Program.ProgramNodes
     {
         private readonly Translatable translatable;
         private readonly Labelable labelable;
-        private IExpressionNode leftExpression, rightExpression;
+        private readonly IExpressionNode leftExpression, rightExpression;
 
-        public BinaryOrOperatorNode()
+        public BinaryOrOperatorNode(IExpressionChild left, IExpressionChild right)
         {
             translatable = new Translatable();
             labelable = new Labelable(2);
+            leftExpression = new ExpressionNode(left);
+            rightExpression = new ExpressionNode(right);
         }
 
         public string Address => translatable.Address;
@@ -43,7 +45,5 @@ namespace MyCompiler.Program.ProgramNodes
             sb.Append(rightExpression.PrettyPrint());
             return sb.ToString();
         }
-
-        public IExpressionChild NewExpressionChildInstance() => new BinaryOrOperatorNode();
     }
 }

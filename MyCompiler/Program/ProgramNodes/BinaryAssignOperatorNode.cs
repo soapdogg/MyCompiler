@@ -8,15 +8,18 @@ namespace MyCompiler.Program.ProgramNodes
     public class BinaryAssignOperatorNode : IBinaryAssignOperatorNode
     {
         private readonly Translatable translatable;
-        private string op;
-        private IExpressionNode leftExpression, rightExpression;
+        private readonly string op;
+        private readonly IExpressionNode leftExpression, rightExpression;
         private bool isLeftArray;
 
         public string Address => translatable.Address;
 
-        public BinaryAssignOperatorNode()
+        public BinaryAssignOperatorNode(IExpressionChild left, IExpressionChild right, string op)
         {
             translatable = new Translatable();
+            leftExpression = new ExpressionNode(left);
+            rightExpression = new ExpressionNode(right);
+            this.op = op;
         }
 
         public string Translate()
@@ -32,8 +35,6 @@ namespace MyCompiler.Program.ProgramNodes
                 ? PrettyPrintTranslated()
                 : leftExpression.PrettyPrint() + op + rightExpression.PrettyPrint();
         }
-
-        public IExpressionChild NewExpressionChildInstance() => new BinaryAssignOperatorNode();
 
         public void SetLabel(int i, string label){}
 

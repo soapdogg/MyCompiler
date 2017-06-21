@@ -8,8 +8,8 @@ namespace MyCompiler.Program.ProgramNodes
     public class BinaryArrayOperatorNode : IBinaryArrayOperatorNode
     {
         private readonly Translatable translatable;
-        private IVariableExpressionNode outerExpression;
-        private IExpressionNode innerExpression;
+        private readonly IVariableExpressionNode outerExpression;
+        private readonly IExpressionNode innerExpression;
         private string variableType;
 
         public bool IsLValue { get; }
@@ -17,9 +17,11 @@ namespace MyCompiler.Program.ProgramNodes
         public string TranslatedInnerExpression => innerExpression.PrettyPrint();
         public string Address => translatable.Address;
 
-        public BinaryArrayOperatorNode()
+        public BinaryArrayOperatorNode(IVariableExpressionNode outer, IExpressionChild inner)
         {
             translatable = new Translatable();
+            outerExpression = outer;
+            innerExpression = new ExpressionNode(inner);
         }
 
         public string Translate()
@@ -55,8 +57,6 @@ namespace MyCompiler.Program.ProgramNodes
             }
             return sb.ToString();
         }
-
-        public IExpressionChild NewExpressionChildInstance() => new BinaryArrayOperatorNode();
 
         public void SetLabel(int i, string label){}
 

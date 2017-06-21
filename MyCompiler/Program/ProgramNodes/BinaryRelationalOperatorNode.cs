@@ -9,13 +9,16 @@ namespace MyCompiler.Program.ProgramNodes
     {
         private readonly Translatable translatable;
         private readonly Labelable labelable;
-        private IExpressionNode leftExpression, rightExpression;
-        private string op;
+        private readonly IExpressionNode leftExpression, rightExpression;
+        private readonly string op;
 
-        public BinaryRelationalOperatorNode()
+        public BinaryRelationalOperatorNode(IExpressionChild left, IExpressionChild right, string op)
         {
             translatable = new Translatable();
             labelable = new Labelable(2);
+            leftExpression = new ExpressionNode(left);
+            rightExpression = new ExpressionNode(right);
+            this.op = op;
         }
 
         public string Address => translatable.Address;
@@ -47,7 +50,5 @@ namespace MyCompiler.Program.ProgramNodes
             sb.Append(PrettyPrintingUtilities.GetPrettyPrintedGoto(labelable.GetLabel(Labelable.SECOND)));
             return sb.ToString();
         }
-
-        public IExpressionChild NewExpressionChildInstance() => new BinaryRelationalOperatorNode();
     }
 }

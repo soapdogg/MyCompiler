@@ -1,5 +1,6 @@
 ﻿using MyCompiler.Program.ProgramNodes.Interfaces;
 using MyCompiler.Tokenizer;
+using MyCompiler.Tokenizer.Tokens;
 
 namespace MyCompiler.Program.ProgramNodes
 {
@@ -9,7 +10,17 @@ namespace MyCompiler.Program.ProgramNodes
 
         public void Parse(ITokenizer tokenizer)
         {
-            
+            SimpleCToken typeToken = tokenizer.Pop();
+            SimpleCToken identifierToken = tokenizer.Pop();
+            if (tokenizer.PeekTokenType() is LeftParenthesesTokenType)
+                Child = new FunctionDeclarationNode(typeToken.Value, identifierToken.Value);
+            else
+            {
+                Child = new VariableDeclarationListNode();
+                tokenizer.Retreat();
+                tokenizer.Retreat();
+            }
+            Child.Parse(tokenizer);
         }
 
         public string Translate() => Child.Translate();

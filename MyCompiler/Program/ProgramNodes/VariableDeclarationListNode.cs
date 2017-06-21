@@ -18,9 +18,8 @@ namespace MyCompiler.Program.ProgramNodes
 
         public void Parse(ITokenizer tokenizer)
         {
-            type = new TypeNode();
+            type = new TypeNode(tokenizer.Pop().Value);
             variableDeclarations = new List<IVariableDeclarationNode>();
-            type.Parse(tokenizer);
             IVariableDeclarationNode variableDeclaration = new VariableDeclarationNode();
             variableDeclaration.Parse(tokenizer);
             variableDeclarations.Add(variableDeclaration);

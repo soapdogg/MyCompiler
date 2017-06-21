@@ -6,11 +6,13 @@ namespace MyCompiler.Program.ProgramNodes
     public class ConstantNode : IConstantNode
     {
         private readonly Translatable translatable;
-        private string stringRepresentation, variableType;
+        private readonly string stringRepresentation;
+        private string variableType;
 
-        public ConstantNode()
+        public ConstantNode(string value)
         {
             translatable = new Translatable();
+            stringRepresentation = value;
         }
 
         public string Address => translatable.Address;
@@ -23,8 +25,6 @@ namespace MyCompiler.Program.ProgramNodes
         }
 
         public string PrettyPrint() => translatable.IsTranslated ? string.Empty : stringRepresentation;
-
-        public IExpressionChild NewExpressionChildInstance() => new ConstantNode();
 
         public void SetLabel(int i, string label){}
 

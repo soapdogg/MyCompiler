@@ -14,5 +14,6 @@ namespace MyCompiler.Tokenizer
         ITokenType PeekTokenType();
         string PeekValue();
         bool IsAtEnd();
+        void Retreat();
     }
 }

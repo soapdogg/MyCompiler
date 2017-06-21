@@ -20,8 +20,8 @@ namespace MyCompiler.Program.ProgramNodes.Utilities
                 SimpleCToken token = tokenizer.Previous();
                 IExpressionChild right = ParseLogicalOr(tokenizer);
                 left = token.TokenType is BinaryAssignTokenType
-                    ? (IExpressionChild)new BinaryAssignNode()
-                    : new BinaryAssignOperatorNode();
+                    ? (IExpressionChild)new BinaryAssignNode(left, right)
+                    : new BinaryAssignOperatorNode(left, right, token.Value);
             }
             return left;
         }
@@ -32,9 +32,8 @@ namespace MyCompiler.Program.ProgramNodes.Utilities
             while (tokenizer.PeekTokenType() is BinaryOrOperatorTokenType)
             {
                 tokenizer.Pop();
-                SimpleCToken token = tokenizer.Previous();
                 IExpressionChild right = ParseLogicalAnd(tokenizer);
-                left = new BinaryOrOperatorNode();
+                left = new BinaryOrOperatorNode(left, right);
             }
             return left;
         }
@@ -45,9 +44,8 @@ namespace MyCompiler.Program.ProgramNodes.Utilities
             while (tokenizer.PeekTokenType() is BinaryAndOperatorTokenType)
             {
                 tokenizer.Pop();
-                SimpleCToken token = tokenizer.Previous();
                 IExpressionChild right = ParseBitwiseOr(tokenizer);
-                left = new BinaryAndOperatorNode();
+                left = new BinaryAndOperatorNode(left, right);
             }
             return left;
         }
@@ -57,9 +55,8 @@ namespace MyCompiler.Program.ProgramNodes.Utilities
             while ((tokenizer.PeekTokenType() is BinaryOperatorTokenType) && tokenizer.PeekValue().Equals("|"))
             {
                 tokenizer.Pop();
-                SimpleCToken token = tokenizer.Previous();
                 IExpressionChild right = ParseBitwiseXor(tokenizer);
-                left = new BinaryOperatorNode();
+                left = new BinaryOperatorNode(left, right, "|");
             }
             return left;
         }
@@ -70,22 +67,20 @@ namespace MyCompiler.Program.ProgramNodes.Utilities
             while (tokenizer.PeekTokenType() is BinaryOperatorTokenType && tokenizer.PeekValue().Equals("^"))
             {
                 tokenizer.Pop();
-                SimpleCToken token = tokenizer.Previous();
                 IExpressionChild right = ParseBitwiseAnd(tokenizer);
-                left = new BinaryOperatorNode();
+                left = new BinaryOperatorNode(left, right, "^");
             }
             return left;
         }
 
         private static IExpressionChild ParseBitwiseAnd(ITokenizer tokenizer)
         {
-            IExpressionChild left = ParseShift(tokenizer);
+            IExpressionChild left = ParseRelationalEquals(tokenizer);
             while (tokenizer.PeekTokenType() is BinaryOperatorTokenType && tokenizer.PeekValue().Equals("&"))
             {
                 tokenizer.Pop();
-                SimpleCToken token = tokenizer.Previous();
-                IExpressionChild right = ParseShift(tokenizer);
-                left = new BinaryOperatorNode();
+                IExpressionChild right = ParseRelationalEquals(tokenizer);
+                left = new BinaryOperatorNode(left, right, "&");
             }
             return left;
         }
@@ -99,7 +94,7 @@ namespace MyCompiler.Program.ProgramNodes.Utilities
                 tokenizer.Pop();
                 SimpleCToken token = tokenizer.Previous();
                 IExpressionChild right = ParseRelationalOperator(tokenizer);
-                left = new BinaryRelationalOperatorNode();
+                left = new BinaryRelationalOperatorNode(left, right, token.Value);
             }
             return left;
         }
@@ -113,7 +108,7 @@ namespace MyCompiler.Program.ProgramNodes.Utilities
                 tokenizer.Pop();
                 SimpleCToken token = tokenizer.Previous();
                 IExpressionChild right = ParseShift(tokenizer);
-                left = new BinaryRelationalOperatorNode();
+                left = new BinaryRelationalOperatorNode(left, right, token.Value);
             }
             return left;
         }
@@ -126,7 +121,7 @@ namespace MyCompiler.Program.ProgramNodes.Utilities
                 tokenizer.Pop();
                 SimpleCToken token = tokenizer.Previous();
                 IExpressionChild right = ParseTerm(tokenizer);
-                left = new BinaryOperatorNode();
+                left = new BinaryOperatorNode(left, right, token.Value);
             }
             return left;
         }
@@ -139,7 +134,7 @@ namespace MyCompiler.Program.ProgramNodes.Utilities
                 tokenizer.Pop();
                 SimpleCToken token = tokenizer.Previous();
                 IExpressionChild right = ParseFactor(tokenizer);
-                left = new BinaryOperatorNode();
+                left = new BinaryOperatorNode(left, right, token.Value);
             }
             return left;
         }
@@ -154,7 +149,7 @@ namespace MyCompiler.Program.ProgramNodes.Utilities
                 tokenizer.Pop();
                 SimpleCToken token = tokenizer.Previous();
                 IExpressionChild right = ParseUnary(tokenizer);
-                left = new BinaryOperatorNode();
+                left = new BinaryOperatorNode(left, right, token.Value);
             }
             return left;
         }
@@ -169,9 +164,9 @@ namespace MyCompiler.Program.ProgramNodes.Utilities
                 tokenizer.Pop();
                 SimpleCToken token = tokenizer.Previous();
                 IExpressionChild right = ParseUnary(tokenizer);
-                if (token.TokenType is PlusOrMinusTokenType || token.TokenType is BitNegationOperatorTokenType) return new UnaryOperatorNode();
-                if (token.TokenType is UnaryNotOperatorTokenType) return new UnaryNotOperatorNode();
-                return new UnaryPreOperatorNode();
+                if (token.TokenType is PlusOrMinusTokenType || token.TokenType is BitNegationOperatorTokenType) return new UnaryOperatorNode(right, token.Value);
+                if (token.TokenType is UnaryNotOperatorTokenType) return new UnaryNotOperatorNode(right);
+                return new UnaryPreOperatorNode(right, token.Value);
             }
             return ParsePrimary(tokenizer);
         }
@@ -183,24 +178,25 @@ namespace MyCompiler.Program.ProgramNodes.Utilities
             {
                 tokenizer.Pop();
                 SimpleCToken token = tokenizer.Previous();
-                return new ConstantNode();
+                return new ConstantNode(token.Value);
             }
             if (tokenizer.PeekTokenType() is IdentifierTokenType)
             {
                 tokenizer.Pop();
                 SimpleCToken token = tokenizer.Previous();
-                IExpressionChild varExpr = new VariableExpressionNode();
+                IExpressionChild varExpr = new VariableExpressionNode(token.Value);
                 if (tokenizer.PeekTokenType() is LeftBracketTokenType)
                 {
                     tokenizer.Pop(); //left bracket
                     IExpressionChild inside = ParseExpression(tokenizer);
                     tokenizer.Pop(); //right bracket
-                    varExpr = new BinaryArrayOperatorNode();
+                    varExpr = new BinaryArrayOperatorNode((IVariableExpressionNode)varExpr, inside);
                 }
                 if (tokenizer.PeekTokenType() is PreOrPostOperatorTokenType)
                 {
                     tokenizer.Pop(); //Post operator
-                    varExpr = new UnaryPostOperatorNode();
+                    token = tokenizer.Previous();
+                    varExpr = new UnaryPostOperatorNode(varExpr, token.Value);
                 }
                 return varExpr;
             }

@@ -8,12 +8,14 @@ namespace MyCompiler.Program.ProgramNodes
     {
         private const string PLUS = "+";
         private readonly Translatable translatable;
-        private IExpressionNode expression;
-        private string op;
+        private readonly IExpressionNode expression;
+        private readonly string op;
 
-        public UnaryOperatorNode()
+        public UnaryOperatorNode(IExpressionChild child, string op)
         {
             translatable = new Translatable();
+            expression = new ExpressionNode(child);
+            this.op = op;
         }
 
         public string Address => translatable.Address;
@@ -36,8 +38,6 @@ namespace MyCompiler.Program.ProgramNodes
                     PrettyPrintingUtilities.GetTabbedNewLineAndVariableAssignment(Address, op + expression.Address);
             return expressionString;
         }
-
-        public IExpressionChild NewExpressionChildInstance() => new UnaryOperatorNode();
 
         public void SetLabel(int i, string label){}
 

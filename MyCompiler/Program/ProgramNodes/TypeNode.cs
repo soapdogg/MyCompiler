@@ -7,6 +7,11 @@ namespace MyCompiler.Program.ProgramNodes
     {
         private string stringRepresentation;
 
+        public TypeNode(string type)
+        {
+            this.stringRepresentation = type;
+        }
+
         public void Parse(ITokenizer tokenizer) => stringRepresentation = tokenizer.Pop().Value;
 
         public string PrettyPrint() => stringRepresentation;

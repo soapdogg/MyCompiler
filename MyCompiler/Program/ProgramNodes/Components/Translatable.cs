@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using MyCompiler.Program.Interfaces;
+﻿using MyCompiler.Program.Interfaces;
 using MyCompiler.Program.ProgramNodes.Utilities;
 
 namespace MyCompiler.Program.ProgramNodes.Components
@@ -9,13 +8,7 @@ namespace MyCompiler.Program.ProgramNodes.Components
         public bool IsTranslated { get; private set; }
         public string Address { get; set; }
         public string VariableType { get; protected set; }
-        private static IDictionary<string, string> typeTempIdDictionary;
-
-        static Translatable()
-        {
-            typeTempIdDictionary = new Dictionary<string, string>();
-        }
-
+        
         public void MarkAsTranslated()
         {
             IsTranslated = true;
@@ -26,13 +19,8 @@ namespace MyCompiler.Program.ProgramNodes.Components
             MarkAsTranslated();
             string tempId = CounterUtilities.GetNextTempAvailable;
             Address =  tempId;
-            AddToTypeTempIdDictionary(VariableType, tempId);
+            PrettyPrintingUtilities.AddToTypeTempIdDictionary(VariableType, tempId);
             return tempId;
-        }
-
-        private static void AddToTypeTempIdDictionary(string variableType, string tempId)
-        {
-            typeTempIdDictionary[variableType] = tempId;
         }
     }
 }

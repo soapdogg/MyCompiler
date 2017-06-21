@@ -14,6 +14,12 @@ namespace MyCompiler.Program.ProgramNodes
             translatable = new Translatable();
         }
 
+        public ExpressionNode(IExpressionChild child)
+        {
+            translatable = new Translatable();
+            Child = child;
+        }
+
         public IExpressionChild Child { get; private set; }
 
         public string Address => translatable.Address;
