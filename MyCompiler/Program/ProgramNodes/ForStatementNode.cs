@@ -1,15 +1,16 @@
 ﻿using System.Text;
+using MyCompiler.Program.ProgramNodes.Interfaces;
 using MyCompiler.Tokenizer;
 
 namespace MyCompiler.Program.ProgramNodes
 {
-    public class ForStatementNode : Interfaces.IForStatementNode
+    public class ForStatementNode : IForStatementNode
     {
         private readonly Components.Translatable translatable;
         private readonly Components.Labelable labelable;
-        private Interfaces.IExpressionNode initExpressionNode, incrementExpressionNode;
-        private Interfaces.IBooleanExpressionNode testExpressionNode;
-        private Interfaces.IStatementNode body;
+        private IExpressionNode initExpressionNode, incrementExpressionNode;
+        private IBooleanExpressionNode testExpressionNode;
+        private IStatementNode body;
 
         public ForStatementNode()
         {
@@ -62,7 +63,7 @@ namespace MyCompiler.Program.ProgramNodes
             return sb.ToString();
         }
 
-        public Interfaces.IStatementChild NewStatementChildInstance() => new ForStatementNode();
+        public IStatementChild NewStatementChildInstance() => new ForStatementNode();
 
         public void SetLabel(int i, string label) => labelable.SetLabel(i, label);
 

@@ -1,26 +1,23 @@
 ﻿using System.Text;
-using MyCompiler.Tokenizer;
+using MyCompiler.Program.ProgramNodes.Components;
+using MyCompiler.Program.ProgramNodes.Interfaces;
+using MyCompiler.Program.ProgramNodes.Utilities;
 
 namespace MyCompiler.Program.ProgramNodes
 {
-    public class UnaryPostOperatorNode : Interfaces.IUnaryPostOperatorNode
+    public class UnaryPostOperatorNode : IUnaryPostOperatorNode
     {
-        private readonly Components.Translatable translatable;
+        private readonly Translatable translatable;
         private string op;
         private bool isLeftArray;
-        private Interfaces.IExpressionNode expression;
+        private IExpressionNode expression;
 
         public UnaryPostOperatorNode()
         {
-            translatable = new Components.Translatable();
+            translatable = new Translatable();
         }
 
         public string Address => translatable.Address;
-
-        public void Parse(ITokenizer tokenizer)
-        {
-            throw new System.NotImplementedException();
-        }
 
         public string Translate()
         {
@@ -30,32 +27,36 @@ namespace MyCompiler.Program.ProgramNodes
 
         public string PrettyPrint() => translatable.IsTranslated ? PrettyPrintTranslated() : expression.PrettyPrint() + op;
 
-        public Interfaces.IExpressionChild NewExpressionChildInstance() => new UnaryPostOperatorNode();
+        public IExpressionChild NewExpressionChildInstance() => new UnaryPostOperatorNode();
+
+        public void SetLabel(int i, string label){}
+
+        public string GetLabel(int i) => string.Empty; 
 
         private string PrettyPrintTranslated() => isLeftArray ? PrettyPrintLeftArray() : PrettyPrintLeftVariable();
 
         private string PrettyPrintLeftArray()
         {
-            Interfaces.IBinaryArrayOperatorNode leftChild = (Interfaces.IBinaryArrayOperatorNode) expression.Child;
+            IBinaryArrayOperatorNode leftChild = (IBinaryArrayOperatorNode) expression.Child;
             string leftChildLValue = leftChild.LValueString;
             StringBuilder sb = new StringBuilder();
             sb.Append(leftChild.TranslatedInnerExpression);
-            sb.Append(Utilities.PrettyPrintingUtilities.GetTabbedNewLineAndVariableAssignment(Address, leftChildLValue));
-            sb.Append(Utilities.PrettyPrintingUtilities
+            sb.Append(PrettyPrintingUtilities.GetTabbedNewLineAndVariableAssignment(Address, leftChildLValue));
+            sb.Append(PrettyPrintingUtilities
                 .GetTabbedNewLineAndVariableAssignment(Address, Address + " " + op + " 1"));
-            sb.Append(Utilities.PrettyPrintingUtilities.GetTabbedNewLineAndVariableAssignment(leftChildLValue, Address));
+            sb.Append(PrettyPrintingUtilities.GetTabbedNewLineAndVariableAssignment(leftChildLValue, Address));
             string xop = op.Contains("+") ? "-" : "+";
-            sb.Append(Utilities.PrettyPrintingUtilities.GetTabbedNewLineAndVariableAssignment(Address, Address + xop + " 1"));
+            sb.Append(PrettyPrintingUtilities.GetTabbedNewLineAndVariableAssignment(Address, Address + xop + " 1"));
             return sb.ToString();
         }
 
         private string PrettyPrintLeftVariable()
         {
-            Interfaces.IVariableExpressionNode leftChild = (Interfaces.IVariableExpressionNode) expression.Child;
+            IVariableExpressionNode leftChild = (IVariableExpressionNode) expression.Child;
             string leftChildLValue = leftChild.LValueString;
             StringBuilder sb = new StringBuilder();
-            sb.Append(Utilities.PrettyPrintingUtilities.GetTabbedNewLineAndVariableAssignment(Address, leftChildLValue));
-            sb.Append(Utilities.PrettyPrintingUtilities.GetTabbedNewLineAndVariableAssignment(leftChildLValue,
+            sb.Append(PrettyPrintingUtilities.GetTabbedNewLineAndVariableAssignment(Address, leftChildLValue));
+            sb.Append(PrettyPrintingUtilities.GetTabbedNewLineAndVariableAssignment(leftChildLValue,
                 leftChildLValue + op + " 1"));
             return sb.ToString();
         }

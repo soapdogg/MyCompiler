@@ -1,23 +1,19 @@
-﻿using MyCompiler.Tokenizer;
+﻿using MyCompiler.Program.ProgramNodes.Components;
+using MyCompiler.Program.ProgramNodes.Interfaces;
 
 namespace MyCompiler.Program.ProgramNodes
 {
-    public class ConstantNode : Interfaces.IConstantNode
+    public class ConstantNode : IConstantNode
     {
-        private readonly Components.Translatable translatable;
+        private readonly Translatable translatable;
         private string stringRepresentation, variableType;
 
         public ConstantNode()
         {
-            translatable = new Components.Translatable();
+            translatable = new Translatable();
         }
 
         public string Address => translatable.Address;
-
-        public void Parse(ITokenizer tokenizer)
-        {
-            stringRepresentation = tokenizer.Pop().Value; //floating point or integer constant
-        }
 
         public string Translate()
         {
@@ -28,6 +24,10 @@ namespace MyCompiler.Program.ProgramNodes
 
         public string PrettyPrint() => translatable.IsTranslated ? string.Empty : stringRepresentation;
 
-        public Interfaces.IExpressionChild NewExpressionChildInstance() => new ConstantNode();
+        public IExpressionChild NewExpressionChildInstance() => new ConstantNode();
+
+        public void SetLabel(int i, string label){}
+
+        public string GetLabel(int i) => string.Empty;
     }
 }

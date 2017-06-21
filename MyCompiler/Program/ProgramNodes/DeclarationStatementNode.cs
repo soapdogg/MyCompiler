@@ -1,5 +1,4 @@
 ﻿using MyCompiler.Tokenizer;
-using MyCompiler.Tokenizer.Tokens;
 
 namespace MyCompiler.Program.ProgramNodes
 {
@@ -9,13 +8,7 @@ namespace MyCompiler.Program.ProgramNodes
 
         public void Parse(ITokenizer tokenizer)
         {
-            SimpleCToken typeToken = tokenizer.Pop();
-            SimpleCToken identifierToken = tokenizer.Pop();
-            if(tokenizer.PeekTokenType() is LeftParenthesesTokenType) Child = new FunctionDeclarationNode();
-            else Child = new VariableDeclarationListNode();
-            tokenizer.Push(identifierToken);
-            tokenizer.Push(typeToken);
-            Child.Parse(tokenizer);
+            
         }
 
         public string Translate() => Child.Translate();

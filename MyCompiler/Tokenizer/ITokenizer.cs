@@ -5,12 +5,14 @@ namespace MyCompiler.Tokenizer
 {
     public interface ITokenizer
     {
-        LinkedList<SimpleCToken> Tokenize();
-        LinkedList<SimpleCToken> Tokenize(params string[] inputText);
+        List<SimpleCToken> Tokenize();
+        List<SimpleCToken> Tokenize(params string[] inputText);
         int Size { get; }
+        SimpleCToken Previous();
         SimpleCToken Pop();
         SimpleCToken Peek();
         ITokenType PeekTokenType();
         string PeekValue();
+        bool IsAtEnd();
     }
 }

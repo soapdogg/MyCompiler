@@ -1,21 +1,24 @@
 ﻿using System.Text;
+using MyCompiler.Program.ProgramNodes.Components;
+using MyCompiler.Program.ProgramNodes.Interfaces;
+using MyCompiler.Program.ProgramNodes.Utilities;
 using MyCompiler.Tokenizer;
 using MyCompiler.Tokenizer.Tokens;
 
 namespace MyCompiler.Program.ProgramNodes
 {
-    public class IfStatementNode : Interfaces.IIfStatementNode
+    public class IfStatementNode : IIfStatementNode
     {
-        private readonly Components.Translatable translatable;
-        private readonly Components.Labelable labelable;
-        private Interfaces.IStatementNode trueBody, falseBody;
-        private Interfaces.IBooleanExpressionNode booleanExpression;
+        private readonly Translatable translatable;
+        private readonly Labelable labelable;
+        private IStatementNode trueBody, falseBody;
+        private IBooleanExpressionNode booleanExpression;
         private bool hasFalse;
 
         public IfStatementNode()
         {
-            translatable = new Components.Translatable();
-            labelable = new Components.Labelable(3);
+            translatable = new Translatable();
+            labelable = new Labelable(3);
         }
 
         public string Address => translatable.Address;
@@ -37,11 +40,11 @@ namespace MyCompiler.Program.ProgramNodes
 
         public string Translate()
         {
-            SetLabel(Components.Labelable.SECOND, Utilities.CounterUtilities.GetNextLabelAvailable);
-            SetLabel(Components.Labelable.TRUE, Utilities.CounterUtilities.GetNextLabelAvailable);
-            booleanExpression.SetLabel(Components.Labelable.TRUE, GetLabel(Components.Labelable.TRUE));
-            SetLabel(Components.Labelable.SECOND, hasFalse ? Utilities.CounterUtilities.GetNextLabelAvailable : GetLabel(Components.Labelable.FALSE));
-            booleanExpression.SetLabel(Components.Labelable.SECOND, GetLabel(Components.Labelable.SECOND));
+            SetLabel(Labelable.SECOND, CounterUtilities.GetNextLabelAvailable);
+            SetLabel(Labelable.TRUE, CounterUtilities.GetNextLabelAvailable);
+            booleanExpression.SetLabel(Labelable.TRUE, GetLabel(Labelable.TRUE));
+            SetLabel(Labelable.SECOND, hasFalse ? CounterUtilities.GetNextLabelAvailable : GetLabel(Labelable.FALSE));
+            booleanExpression.SetLabel(Labelable.SECOND, GetLabel(Labelable.SECOND));
             booleanExpression.Translate();
             trueBody.Translate();
             if (hasFalse) falseBody.Translate();
@@ -52,24 +55,24 @@ namespace MyCompiler.Program.ProgramNodes
         {
             StringBuilder sb = new StringBuilder();
             sb.Append(booleanExpression.PrettyPrint());
-            sb.Append(Utilities.PrettyPrintingUtilities.GetPrettyPrintedLabel(GetLabel(Components.Labelable.TRUE)));
+            sb.Append(PrettyPrintingUtilities.GetPrettyPrintedLabel(GetLabel(Labelable.TRUE)));
             sb.Append(trueBody.PrettyPrint());
             if (hasFalse)
             {
-                sb.Append(Utilities.PrettyPrintingUtilities.GetTabbedNewLine());
-                sb.Append(Utilities.PrettyPrintingUtilities.GetPrettyPrintedGoto(GetLabel(Components.Labelable.FALSE)));
-                sb.Append(Utilities.PrettyPrintingUtilities.GetPrettyPrintedLabel(GetLabel(Components.Labelable.SECOND)));
+                sb.Append(PrettyPrintingUtilities.GetTabbedNewLine());
+                sb.Append(PrettyPrintingUtilities.GetPrettyPrintedGoto(GetLabel(Labelable.FALSE)));
+                sb.Append(PrettyPrintingUtilities.GetPrettyPrintedLabel(GetLabel(Labelable.SECOND)));
                 sb.Append(falseBody.PrettyPrint());
-                sb.Append(Utilities.PrettyPrintingUtilities.GetPrettyPrintedLabel(GetLabel(Components.Labelable.FALSE)));
+                sb.Append(PrettyPrintingUtilities.GetPrettyPrintedLabel(GetLabel(Labelable.FALSE)));
             }
             else
             {
-                sb.Append(Utilities.PrettyPrintingUtilities.GetPrettyPrintedLabel(GetLabel(Components.Labelable.SECOND)));
+                sb.Append(PrettyPrintingUtilities.GetPrettyPrintedLabel(GetLabel(Labelable.SECOND)));
             }
             return sb.ToString();
         }
 
-        public Interfaces.IStatementChild NewStatementChildInstance() => new IfStatementNode();
+        public IStatementChild NewStatementChildInstance() => new IfStatementNode();
 
         public void SetLabel(int i, string label) => labelable.SetLabel(i, label);
 

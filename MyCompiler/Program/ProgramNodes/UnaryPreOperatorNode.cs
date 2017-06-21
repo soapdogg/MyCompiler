@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using MyCompiler.Program.ProgramNodes.Components;
 using MyCompiler.Program.ProgramNodes.Interfaces;
-using MyCompiler.Tokenizer;
+using MyCompiler.Program.ProgramNodes.Utilities;
 
 namespace MyCompiler.Program.ProgramNodes
 {
@@ -19,11 +19,6 @@ namespace MyCompiler.Program.ProgramNodes
 
         public string Address => translatable.Address;
 
-        public void Parse(ITokenizer tokenizer)
-        {
-            throw new System.NotImplementedException();
-        }
-
         public string Translate()
         {
             expression.Translate();
@@ -34,6 +29,10 @@ namespace MyCompiler.Program.ProgramNodes
 
         public IExpressionChild NewExpressionChildInstance() => new UnaryPreOperatorNode();
 
+        public void SetLabel(int i, string label) { }
+
+        public string GetLabel(int i) => string.Empty;
+
         private string PrettyPrintTranslated() => isLeftArray ? PrettyPrintLeftArray() : PrettyPrintLeftVariable();
 
         private string PrettyPrintLeftArray()
@@ -42,10 +41,10 @@ namespace MyCompiler.Program.ProgramNodes
             string leftChildLValue = leftChild.LValueString;
             StringBuilder sb = new StringBuilder();
             sb.Append(leftChild.TranslatedInnerExpression);
-            sb.Append(Utilities.PrettyPrintingUtilities.GetTabbedNewLineAndVariableAssignment(Address, leftChildLValue));
-            sb.Append(Utilities.PrettyPrintingUtilities
+            sb.Append(PrettyPrintingUtilities.GetTabbedNewLineAndVariableAssignment(Address, leftChildLValue));
+            sb.Append(PrettyPrintingUtilities
                 .GetTabbedNewLineAndVariableAssignment(Address, Address + " " + op + " 1"));
-            sb.Append(Utilities.PrettyPrintingUtilities.GetTabbedNewLineAndVariableAssignment(leftChildLValue, Address));
+            sb.Append(PrettyPrintingUtilities.GetTabbedNewLineAndVariableAssignment(leftChildLValue, Address));
             return sb.ToString();
         }
 
@@ -54,9 +53,9 @@ namespace MyCompiler.Program.ProgramNodes
             IVariableExpressionNode leftChild = (IVariableExpressionNode)expression.Child;
             string leftChildLValue = leftChild.LValueString;
             StringBuilder sb = new StringBuilder();
-            sb.Append(Utilities.PrettyPrintingUtilities.GetTabbedNewLineAndVariableAssignment(leftChildLValue,
+            sb.Append(PrettyPrintingUtilities.GetTabbedNewLineAndVariableAssignment(leftChildLValue,
                 leftChildLValue + op + " 1"));
-            sb.Append(Utilities.PrettyPrintingUtilities.GetTabbedNewLineAndVariableAssignment(Address, leftChildLValue));
+            sb.Append(PrettyPrintingUtilities.GetTabbedNewLineAndVariableAssignment(Address, leftChildLValue));
             return sb.ToString();
         }
     }

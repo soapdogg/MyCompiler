@@ -10,7 +10,8 @@ namespace MyCompiler.Tokenizer
     public class MyTokenizer : ITokenizer
     {
         private string[] lines;
-        private LinkedList<SimpleCToken> tokens;
+        private List<SimpleCToken> tokens;
+        private int current;
 
         private static readonly IList<ITokenType> definitions;
 
@@ -61,12 +62,12 @@ namespace MyCompiler.Tokenizer
             lines = File.ReadAllLines(path);
         }
 
-        public MyTokenizer(LinkedList<SimpleCToken> t)
+        public MyTokenizer(List<SimpleCToken> t)
         {
             tokens = t;
         }
 
-        public LinkedList<SimpleCToken> Tokenize()
+        public List<SimpleCToken> Tokenize()
         {
             bool continueScanning = true;
             for (int i = 0; i < lines.Length && continueScanning; ++i)
@@ -74,11 +75,11 @@ namespace MyCompiler.Tokenizer
                 string line = lines[i];
                 continueScanning = TokenizeLine(line);
             }
-            if(!(tokens.Last().TokenType is InvalidTokenType)) tokens.AddLast(new SimpleCToken(new EndOfFileTokenType(), "END_OF_FILE"));
+            if(!(tokens.Last().TokenType is InvalidTokenType)) tokens.Add(new SimpleCToken(new EndOfFileTokenType(), "END_OF_FILE"));
 			return tokens;
         }
 
-        public LinkedList<SimpleCToken> Tokenize(params string [] inputText)
+        public List<SimpleCToken> Tokenize(params string [] inputText)
         {
             lines = inputText;
             return Tokenize();
@@ -86,18 +87,25 @@ namespace MyCompiler.Tokenizer
 
         public int Size => tokens.Count;
 
+        public SimpleCToken Previous()
+        {
+            throw new NotImplementedException();
+        }
+
         public SimpleCToken Pop()
         {
-            SimpleCToken result = tokens.First.Value;
-            tokens.RemoveFirst();
+            SimpleCToken result = Peek();
+            ++current;
             return result;
         }
 
-        public SimpleCToken Peek() => tokens.First.Value;
+        public SimpleCToken Peek() => tokens[current];
 
-        public ITokenType PeekTokenType() => tokens.First.Value.TokenType;
+        public ITokenType PeekTokenType() => Peek().TokenType;
 
-        public string PeekValue() => tokens.First.Value.Value;
+        public string PeekValue() => Peek().Value;
+
+        public bool IsAtEnd() => PeekTokenType() is EndOfFileTokenType;
 
         private bool TokenizeLine(string inputText)
         {
@@ -108,13 +116,13 @@ namespace MyCompiler.Tokenizer
 
 				if (match.IsMatch)
 				{
-					tokens.AddLast(new SimpleCToken(match.TokenType, match.Value));
+					tokens.Add(new SimpleCToken(match.TokenType, match.Value));
 					remainingText = match.RemainingText.TrimStart();
 				}
 				else
 				{
 					var invalidTokenMatch = CreateInvalidTokenMatch(remainingText);
-					tokens.AddLast(new SimpleCToken(invalidTokenMatch.TokenType, invalidTokenMatch.Value));
+					tokens.Add(new SimpleCToken(invalidTokenMatch.TokenType, invalidTokenMatch.Value));
 					return false;
 				}
 			}
@@ -145,7 +153,8 @@ namespace MyCompiler.Tokenizer
         private void Initialize()
         {
             lines = new string[0];
-            tokens = new LinkedList<SimpleCToken>();
+            tokens = new List<SimpleCToken>();
+            current = 0;
         }
     }
 }

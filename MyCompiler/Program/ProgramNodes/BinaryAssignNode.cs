@@ -1,12 +1,13 @@
 ﻿using System.Text;
+using MyCompiler.Program.ProgramNodes.Components;
 using MyCompiler.Program.ProgramNodes.Interfaces;
-using MyCompiler.Tokenizer;
+using MyCompiler.Program.ProgramNodes.Utilities;
 
 namespace MyCompiler.Program.ProgramNodes
 {
     public class BinaryAssignNode : IBinaryAssignNode
     {
-        private readonly Components.Translatable translatable;
+        private readonly Translatable translatable;
         private bool isLeftArray;
         private IExpressionNode leftExpression, rightExpression;
 
@@ -14,12 +15,7 @@ namespace MyCompiler.Program.ProgramNodes
 
         public BinaryAssignNode()
         {
-            translatable = new Components.Translatable();
-        }
-
-        public void Parse(ITokenizer tokenizer)
-        {
-            throw new System.NotImplementedException();
+            translatable = new Translatable();
         }
 
         public string Translate()
@@ -40,11 +36,15 @@ namespace MyCompiler.Program.ProgramNodes
         {
             return translatable.IsTranslated
                 ? PrettyPrintTranslated()
-                : Utilities.PrettyPrintingUtilities.GetVariableAssignment(leftExpression.PrettyPrint(),
+                : PrettyPrintingUtilities.GetVariableAssignment(leftExpression.PrettyPrint(),
                     rightExpression.PrettyPrint());
         }
 
         public IExpressionChild NewExpressionChildInstance() => new BinaryAssignNode();
+
+        public void SetLabel(int i, string label) { }
+
+        public string GetLabel(int i) => string.Empty;
 
         private string PrettyPrintTranslated()
         {
@@ -64,7 +64,7 @@ namespace MyCompiler.Program.ProgramNodes
             StringBuilder sb = new StringBuilder();
             sb.Append(innerExpressionString);
             sb.Append(rightExpression.PrettyPrint());
-            sb.Append(Utilities.PrettyPrintingUtilities.GetTabbedNewLineAndVariableAssignment(lValueString,
+            sb.Append(PrettyPrintingUtilities.GetTabbedNewLineAndVariableAssignment(lValueString,
                 rightExpression.Address));
             return sb.ToString();
         }

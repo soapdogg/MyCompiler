@@ -2,7 +2,7 @@
 
 namespace MyCompiler.Program.ProgramNodes.Interfaces
 {
-    public interface IExpressionChild : ITranslatable, IPrettyPrintable, IParsable
+    public interface IExpressionChild : ITranslatable, ILabelable, IPrettyPrintable
     {
         IExpressionChild NewExpressionChildInstance();
     }

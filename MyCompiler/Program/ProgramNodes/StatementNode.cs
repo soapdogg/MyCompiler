@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using MyCompiler.Program.ProgramNodes.Components;
 using MyCompiler.Tokenizer;
 using MyCompiler.Tokenizer.Tokens;
 using MyCompiler.Tokenizer.Tokens.Interfaces;
@@ -7,7 +8,7 @@ namespace MyCompiler.Program.ProgramNodes
 {
     public class StatementNode : Interfaces.IStatementNode
     {
-        private readonly Components.Translatable translatable;
+        private readonly Translatable translatable;
         private static readonly IDictionary<ITokenType, Interfaces.IStatementChild> statementChildDictionary;
 
         static StatementNode()
@@ -27,7 +28,7 @@ namespace MyCompiler.Program.ProgramNodes
 
         public StatementNode()
         {
-            translatable = new Components.Translatable();
+            translatable = new Translatable();
         }
 
         public Interfaces.IStatementChild Child { get; private set; }

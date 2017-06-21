@@ -1,26 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using MyCompiler.Program.ProgramNodes.Components;
 using MyCompiler.Program.ProgramNodes.Interfaces;
+using MyCompiler.Program.ProgramNodes.Utilities;
 using MyCompiler.Tokenizer;
-using MyCompiler.Tokenizer.Tokens;
-using MyCompiler.Tokenizer.Tokens.Interfaces;
 
 namespace MyCompiler.Program.ProgramNodes
 {
     public class ExpressionNode : IExpressionNode
     {
-        private readonly Components.Translatable translatable;
-        private static readonly IDictionary<ITokenType, IExpressionChild> firstPrecedenceTokenType;
-
-        static ExpressionNode()
-        {
-            
-        }
+        private readonly Translatable translatable;
 
         public ExpressionNode()
         {
-            translatable = new Components.Translatable();
+            translatable = new Translatable();
         }
 
         public IExpressionChild Child { get; private set; }
@@ -29,7 +20,7 @@ namespace MyCompiler.Program.ProgramNodes
 
         public void Parse(ITokenizer tokenizer)
         {
-
+            Child = ExpressionChildGenerator.ParseExpression(tokenizer);
         }
 
         public string Translate()
@@ -41,5 +32,9 @@ namespace MyCompiler.Program.ProgramNodes
         }
 
         public string PrettyPrint() => Child.PrettyPrint();
+
+        public void SetLabel(int i, string label) => Child.SetLabel(i, label);
+
+        public string GetLabel(int i) => Child.GetLabel(i);
     }
 }

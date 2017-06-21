@@ -1,14 +1,14 @@
 ﻿using System.Text;
 using MyCompiler.Program.ProgramNodes.Components;
-using MyCompiler.Tokenizer;
+using MyCompiler.Program.ProgramNodes.Interfaces;
 
 namespace MyCompiler.Program.ProgramNodes
 {
-    public class BinaryArrayOperatorNode : Interfaces.IBinaryArrayOperatorNode
+    public class BinaryArrayOperatorNode : IBinaryArrayOperatorNode
     {
         private readonly Translatable translatable;
-        private Interfaces.IVariableExpressionNode outerExpression;
-        private Interfaces.IExpressionNode innerExpression;
+        private IVariableExpressionNode outerExpression;
+        private IExpressionNode innerExpression;
         private string variableType;
 
         public bool IsLValue { get; }
@@ -19,10 +19,6 @@ namespace MyCompiler.Program.ProgramNodes
         public BinaryArrayOperatorNode()
         {
             translatable = new Translatable();
-        }
-
-        public void Parse(ITokenizer tokenizer)
-        {
         }
 
         public string Translate()
@@ -59,7 +55,7 @@ namespace MyCompiler.Program.ProgramNodes
             return sb.ToString();
         }
 
-        public Interfaces.IExpressionChild NewExpressionChildInstance() => new BinaryArrayOperatorNode();
+        public IExpressionChild NewExpressionChildInstance() => new BinaryArrayOperatorNode();
 
     }
 }

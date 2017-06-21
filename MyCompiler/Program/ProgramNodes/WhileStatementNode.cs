@@ -1,19 +1,21 @@
 ﻿using System.Text;
+using MyCompiler.Program.ProgramNodes.Components;
+using MyCompiler.Program.ProgramNodes.Interfaces;
 using MyCompiler.Tokenizer;
 
 namespace MyCompiler.Program.ProgramNodes
 {
-    public class WhileStatementNode : Interfaces.IWhileStatementNode
+    public class WhileStatementNode : IWhileStatementNode
     {
-        private readonly Components.Translatable translatable;
-        private readonly Components.Labelable labelable;
-        private Interfaces.IBooleanExpressionNode expression;
-        private Interfaces.IStatementNode body;
+        private readonly Translatable translatable;
+        private readonly Labelable labelable;
+        private IBooleanExpressionNode expression;
+        private IStatementNode body;
 
         public WhileStatementNode()
         {
-            translatable = new Components.Translatable();
-            labelable = new Components.Labelable(3);
+            translatable = new Translatable();
+            labelable = new Labelable(3);
         }
 
         public string Address => translatable.Address;
@@ -31,9 +33,9 @@ namespace MyCompiler.Program.ProgramNodes
 
         public string Translate()
         {
-            expression.SetLabel(Components.Labelable.SECOND, Utilities.CounterUtilities.GetNextLabelAvailable);
-            SetLabel(Components.Labelable.START, Utilities.CounterUtilities.GetNextLabelAvailable);
-            expression.SetLabel(Components.Labelable.TRUE, Utilities.CounterUtilities.GetNextLabelAvailable);
+            expression.SetLabel(Labelable.SECOND, Utilities.CounterUtilities.GetNextLabelAvailable);
+            SetLabel(Labelable.START, Utilities.CounterUtilities.GetNextLabelAvailable);
+            expression.SetLabel(Labelable.TRUE, Utilities.CounterUtilities.GetNextLabelAvailable);
             expression.Translate();
             return body.Translate();
         }
@@ -41,17 +43,17 @@ namespace MyCompiler.Program.ProgramNodes
         public string PrettyPrint()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append(Utilities.PrettyPrintingUtilities.GetPrettyPrintedLabel(GetLabel(Components.Labelable.START)));
+            sb.Append(Utilities.PrettyPrintingUtilities.GetPrettyPrintedLabel(GetLabel(Labelable.START)));
             sb.Append(expression.PrettyPrint());
-            sb.Append(Utilities.PrettyPrintingUtilities.GetPrettyPrintedLabel(expression.GetLabel(Components.Labelable.TRUE)));
+            sb.Append(Utilities.PrettyPrintingUtilities.GetPrettyPrintedLabel(expression.GetLabel(Labelable.TRUE)));
             sb.Append(body.PrettyPrint());
             sb.Append(Utilities.PrettyPrintingUtilities.GetTabbedNewLine());
-            sb.Append(Utilities.PrettyPrintingUtilities.GetPrettyPrintedGoto(GetLabel(Components.Labelable.START)));
-            sb.Append(Utilities.PrettyPrintingUtilities.GetPrettyPrintedLabel(expression.GetLabel(Components.Labelable.SECOND)));
+            sb.Append(Utilities.PrettyPrintingUtilities.GetPrettyPrintedGoto(GetLabel(Labelable.START)));
+            sb.Append(Utilities.PrettyPrintingUtilities.GetPrettyPrintedLabel(expression.GetLabel(Labelable.SECOND)));
             return sb.ToString();
         }
 
-        public Interfaces.IStatementChild NewStatementChildInstance() => new WhileStatementNode();
+        public IStatementChild NewStatementChildInstance() => new WhileStatementNode();
 
         public void SetLabel(int i, string label) => labelable.SetLabel(i, label);
 

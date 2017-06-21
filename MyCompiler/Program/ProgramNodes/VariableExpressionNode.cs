@@ -1,7 +1,5 @@
-﻿using System;
-using MyCompiler.Program.ProgramNodes.Components;
+﻿using MyCompiler.Program.ProgramNodes.Components;
 using MyCompiler.Program.ProgramNodes.Interfaces;
-using MyCompiler.Tokenizer;
 
 namespace MyCompiler.Program.ProgramNodes
 {
@@ -18,11 +16,6 @@ namespace MyCompiler.Program.ProgramNodes
         public VariableExpressionNode()
         {
             translatable = new Translatable();
-        }
-
-        public void Parse(ITokenizer tokenizer)
-        {
-            throw new NotImplementedException();
         }
 
         public string Translate()

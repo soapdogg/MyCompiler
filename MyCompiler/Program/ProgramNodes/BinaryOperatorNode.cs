@@ -1,25 +1,22 @@
 ﻿using System.Text;
-using MyCompiler.Tokenizer;
+using MyCompiler.Program.ProgramNodes.Components;
+using MyCompiler.Program.ProgramNodes.Interfaces;
+using MyCompiler.Program.ProgramNodes.Utilities;
 
 namespace MyCompiler.Program.ProgramNodes
 {
-    public class BinaryOperatorNode : Interfaces.IBinaryOperatorNode
+    public class BinaryOperatorNode : IBinaryOperatorNode
     {
-        private readonly Components.Translatable translatable;
-        private Interfaces.IExpressionNode leftExpression, rightExpression;
+        private readonly Translatable translatable;
+        private IExpressionNode leftExpression, rightExpression;
         private string op;
 
         public BinaryOperatorNode()
         {
-            translatable = new Components.Translatable();
+            translatable = new Translatable();
         }
 
         public string Address => translatable.Address;
-
-        public void Parse(ITokenizer tokenizer)
-        {
-            throw new System.NotImplementedException();
-        }
 
         public string Translate()
         {
@@ -35,7 +32,7 @@ namespace MyCompiler.Program.ProgramNodes
             {
                 sb.Append(leftExpression.PrettyPrint());
                 sb.Append(rightExpression.PrettyPrint());
-                sb.Append(Utilities.PrettyPrintingUtilities.GetTabbedNewLineAndVariableAssignment(Address,
+                sb.Append(PrettyPrintingUtilities.GetTabbedNewLineAndVariableAssignment(Address,
                     leftExpression.Address + op + rightExpression.Address));
             }
             else
@@ -47,6 +44,10 @@ namespace MyCompiler.Program.ProgramNodes
             return sb.ToString();
         }
 
-        public Interfaces.IExpressionChild NewExpressionChildInstance() => new BinaryOperatorNode();
+        public IExpressionChild NewExpressionChildInstance() => new BinaryOperatorNode();
+
+        public void SetLabel(int i, string label) { }
+
+        public string GetLabel(int i) => string.Empty;
     }
 }

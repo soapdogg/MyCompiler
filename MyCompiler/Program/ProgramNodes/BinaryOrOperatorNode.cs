@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Text;
+﻿using System.Text;
 using MyCompiler.Program.ProgramNodes.Components;
 using MyCompiler.Program.ProgramNodes.Interfaces;
-using MyCompiler.Tokenizer;
-using MyCompiler.Tokenizer.Tokens;
+using MyCompiler.Program.ProgramNodes.Utilities;
 
 namespace MyCompiler.Program.ProgramNodes
 {
@@ -11,7 +9,7 @@ namespace MyCompiler.Program.ProgramNodes
     {
         private readonly Translatable translatable;
         private readonly Labelable labelable;
-        private IBooleanExpressionNode leftExpression, rightExpression;
+        private IExpressionNode leftExpression, rightExpression;
 
         public BinaryOrOperatorNode()
         {
@@ -21,22 +19,10 @@ namespace MyCompiler.Program.ProgramNodes
 
         public string Address => translatable.Address;
 
-        public void Parse(ITokenizer tokenizer)
-        {
-            LinkedList<SimpleCToken> temp = new LinkedList<SimpleCToken>();
-            while(!(tokenizer.PeekTokenType() is BinaryOrOperatorTokenType)) temp.AddLast(tokenizer.Pop());
-            tokenizer.Pop();// binary or operator token
-            ITokenizer leftTokenizer = new MyTokenizer(temp);
-            leftExpression = new BooleanExpressionNode();
-            rightExpression = new BooleanExpressionNode();
-            leftExpression.Parse(leftTokenizer);
-            rightExpression.Parse(tokenizer);
-        }
-
         public string Translate()
         {
             leftExpression.SetLabel(Labelable.TRUE, labelable.GetLabel(Labelable.TRUE));
-            leftExpression.SetLabel(Labelable.SECOND, Utilities.CounterUtilities.GetNextLabelAvailable);
+            leftExpression.SetLabel(Labelable.SECOND, CounterUtilities.GetNextLabelAvailable);
             rightExpression.SetLabel(Labelable.TRUE, labelable.GetLabel(Labelable.TRUE));
             rightExpression.SetLabel(Labelable.SECOND, labelable.GetLabel(Labelable.SECOND));
             leftExpression.Translate();
@@ -53,11 +39,11 @@ namespace MyCompiler.Program.ProgramNodes
         {
             StringBuilder sb = new StringBuilder();
             sb.Append(leftExpression.PrettyPrint());
-            sb.Append(Utilities.PrettyPrintingUtilities.GetPrettyPrintedLabel(leftExpression.GetLabel(Labelable.SECOND)));
+            sb.Append(PrettyPrintingUtilities.GetPrettyPrintedLabel(leftExpression.GetLabel(Labelable.SECOND)));
             sb.Append(rightExpression.PrettyPrint());
             return sb.ToString();
         }
 
-        public IBooleanExpressionChild NewBooleanExpressionChildInstance => new BinaryOrOperatorNode();
+        public IExpressionChild NewExpressionChildInstance() => new BinaryOrOperatorNode();
     }
 }

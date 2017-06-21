@@ -1,34 +1,21 @@
-﻿using MyCompiler.Program.ProgramNodes.Interfaces;
-using MyCompiler.Tokenizer;
-using MyCompiler.Tokenizer.Tokens;
+﻿using MyCompiler.Program.ProgramNodes.Components;
+using MyCompiler.Program.ProgramNodes.Interfaces;
 
 namespace MyCompiler.Program.ProgramNodes
 {
     public class UnaryOperatorNode : IUnaryOperatorNode
     {
         private const string PLUS = "+";
-        private readonly Components.Translatable translatable;
+        private readonly Translatable translatable;
         private IExpressionNode expression;
         private string op;
 
         public UnaryOperatorNode()
         {
-            translatable = new Components.Translatable();
+            translatable = new Translatable();
         }
 
         public string Address => translatable.Address;
-
-        public void Parse(ITokenizer tokenizer)
-        {
-            SimpleCToken temp = tokenizer.Pop();
-            op = temp.TokenType is BitNegationOperatorTokenType
-                ? "~"
-                : temp.Value.Contains(PLUS)
-                    ? PLUS
-                    : "-";
-            expression = new ExpressionNode();
-            expression.Parse(tokenizer);
-        }
 
         public string Translate()
         {

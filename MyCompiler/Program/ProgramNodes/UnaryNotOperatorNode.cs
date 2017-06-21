@@ -1,30 +1,26 @@
-﻿using MyCompiler.Tokenizer;
+﻿using MyCompiler.Program.ProgramNodes.Components;
+using MyCompiler.Program.ProgramNodes.Interfaces;
 
 namespace MyCompiler.Program.ProgramNodes
 {
-    public class UnaryNotOperatorNode : Interfaces.IUnaryNotOperatorNode
+    public class UnaryNotOperatorNode : IUnaryNotOperatorNode
     {
-        private readonly Components.Translatable translatable;
-        private readonly Components.Labelable labelable;
-        private Interfaces.IBooleanExpressionNode innerExpression;
+        private readonly Translatable translatable;
+        private readonly Labelable labelable;
+        private IExpressionNode innerExpression;
 
         public UnaryNotOperatorNode()
         {
-            translatable = new Components.Translatable();
-            labelable = new Components.Labelable(2);
+            translatable = new Translatable();
+            labelable = new Labelable(2);
         }
 
         public string Address => translatable.Address;
 
-        public void Parse(ITokenizer tokenizer)
-        {
-            throw new System.NotImplementedException();
-        }
-
         public string Translate()
         {
-            innerExpression.SetLabel(Components.Labelable.TRUE, labelable.GetLabel(Components.Labelable.SECOND));
-            innerExpression.SetLabel(Components.Labelable.SECOND, labelable.GetLabel(Components.Labelable.TRUE));
+            innerExpression.SetLabel(Labelable.TRUE, labelable.GetLabel(Labelable.SECOND));
+            innerExpression.SetLabel(Labelable.SECOND, labelable.GetLabel(Labelable.TRUE));
             innerExpression.Translate();
             translatable.MarkAsTranslated();
             return string.Empty;
@@ -36,6 +32,6 @@ namespace MyCompiler.Program.ProgramNodes
 
         public string PrettyPrint() => innerExpression.PrettyPrint();
 
-        public Interfaces.IBooleanExpressionChild NewBooleanExpressionChildInstance => new UnaryNotOperatorNode();
+        public IExpressionChild NewExpressionChildInstance() => new UnaryNotOperatorNode();
     }
 }

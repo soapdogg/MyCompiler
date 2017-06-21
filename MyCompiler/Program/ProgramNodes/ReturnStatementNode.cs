@@ -1,17 +1,18 @@
 ﻿using System.Text;
+using MyCompiler.Program.ProgramNodes.Components;
 using MyCompiler.Tokenizer;
 
 namespace MyCompiler.Program.ProgramNodes
 {
     public class ReturnStatementNode : Interfaces.IReturnStatementNode
     {
-        private readonly Components.Translatable translatable;
+        private readonly Translatable translatable;
         private bool shouldBeTranslated;
         private Interfaces.IExpressionNode expression;
 
         public ReturnStatementNode()
         {
-            translatable = new Components.Translatable();
+            translatable = new Translatable();
         }
 
         public string Address => translatable.Address;
