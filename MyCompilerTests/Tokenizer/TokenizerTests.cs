@@ -61,7 +61,7 @@ namespace MyCompilerTests.Tokenizer
         {
             t = new MyTokenizer(@"Data", "test7.c");
             t.Tokenize();
-            Assert.AreEqual(70, t.Size);
+            Assert.AreEqual(72, t.Size);
         }
 
         [TestMethod]

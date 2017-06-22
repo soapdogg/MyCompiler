@@ -21,8 +21,8 @@ namespace MyCompiler.Program.ProgramNodes
         }
 
         public IExpressionChild Child { get; private set; }
-
-        public string Address => translatable.Address;
+        public string Type => Child.Type;
+        public string Address => Child.Address;
 
         public void Parse(ITokenizer tokenizer)
         {

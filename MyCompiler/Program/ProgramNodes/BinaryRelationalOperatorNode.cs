@@ -50,5 +50,7 @@ namespace MyCompiler.Program.ProgramNodes
             sb.Append(PrettyPrintingUtilities.GetPrettyPrintedGoto(labelable.GetLabel(Labelable.SECOND)));
             return sb.ToString();
         }
+
+        public string Type => "bool";
     }
 }

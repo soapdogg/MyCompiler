@@ -1,7 +1,8 @@
-﻿namespace MyCompiler.Program.ProgramNodes.Interfaces
+﻿using MyCompiler.Program.Interfaces;
+
+namespace MyCompiler.Program.ProgramNodes.Interfaces
 {
     public interface IVariableExpressionNode : ILeftHandValue, IExpressionChild
     {
-        string VariableType { get; }
     }
 }

@@ -17,15 +17,19 @@ namespace MyCompiler.Program.ProgramNodes
             leftExpression = new ExpressionNode(left);
             rightExpression = new ExpressionNode(right);
             this.op = op;
+            translatable.Type = leftExpression.Type.Equals("double") || rightExpression.Type.Equals("double")
+                ? "double"
+                : "int";
         }
 
         public string Address => translatable.Address;
+        public string Type => translatable.Type;
 
         public string Translate()
         {
             leftExpression.Translate();
             rightExpression.Translate();
-            return translatable.Translate();
+          return translatable.Translate();
         }
 
         public string PrettyPrint()
@@ -36,7 +40,7 @@ namespace MyCompiler.Program.ProgramNodes
                 sb.Append(leftExpression.PrettyPrint());
                 sb.Append(rightExpression.PrettyPrint());
                 sb.Append(PrettyPrintingUtilities.GetTabbedNewLineAndVariableAssignment(Address,
-                    leftExpression.Address + op + rightExpression.Address));
+                    leftExpression.Address + " " + op + " " + rightExpression.Address));
             }
             else
             {

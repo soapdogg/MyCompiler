@@ -1,4 +1,4 @@
-﻿namespace MyCompiler.Program.ProgramNodes.Interfaces
+﻿namespace MyCompiler.Program.Interfaces
 {
     public interface ILabelable
     {

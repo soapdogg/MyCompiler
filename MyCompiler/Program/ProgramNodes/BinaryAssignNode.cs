@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using MyCompiler.Program.Interfaces;
 using MyCompiler.Program.ProgramNodes.Components;
 using MyCompiler.Program.ProgramNodes.Interfaces;
 using MyCompiler.Program.ProgramNodes.Utilities;
@@ -8,7 +9,7 @@ namespace MyCompiler.Program.ProgramNodes
     public class BinaryAssignNode : IBinaryAssignNode
     {
         private readonly Translatable translatable;
-        private bool isLeftArray;
+        private readonly bool isLeftArray;
         private readonly IExpressionNode leftExpression;
         private readonly IExpressionNode rightExpression;
 
@@ -18,7 +19,10 @@ namespace MyCompiler.Program.ProgramNodes
         {
             translatable = new Translatable();
             leftExpression = new ExpressionNode(left);
+            var value = leftExpression.Child as ILeftHandValue;
+            value?.SetAsLValue();
             rightExpression = new ExpressionNode(right);
+            isLeftArray = leftExpression.Child is BinaryArrayOperatorNode;
         }
 
         public string Translate()
@@ -69,5 +73,7 @@ namespace MyCompiler.Program.ProgramNodes
                 rightExpression.Address));
             return sb.ToString();
         }
+
+        public string Type => "bool";
     }
 }

@@ -4,5 +4,6 @@ namespace MyCompiler.Program.ProgramNodes.Interfaces
 {
     public interface IVariableDeclarationNode : IPrettyPrintable, IParsable 
     {
+        string Id { get; }
     }
 }

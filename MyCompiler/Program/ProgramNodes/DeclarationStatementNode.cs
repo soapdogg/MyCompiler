@@ -7,6 +7,7 @@ namespace MyCompiler.Program.ProgramNodes
     public class DeclarationStatementNode : IDeclarationStatementNode
     {
         public string Address => string.Empty;
+        public string Type => string.Empty;
 
         public void Parse(ITokenizer tokenizer)
         {

@@ -8,13 +8,14 @@ namespace MyCompiler.Program.ProgramNodes
     public class VariableDeclarationNode : IVariableDeclarationNode
     {
         private IAssignInitializerNode assignInitializer;
-        private string variableName;
         private IArrayTypeNode arrayType;
         private bool hasArrayType, hasAssignInitializer;
 
+        public string Id { get; private set; }
+
         public void Parse(ITokenizer tokenizer)
         {
-            variableName = tokenizer.Pop().Value;
+            Id = tokenizer.Pop().Value;
             hasArrayType = tokenizer.PeekTokenType() is LeftBracketTokenType;
             if (hasArrayType)
             {
@@ -32,7 +33,7 @@ namespace MyCompiler.Program.ProgramNodes
         public string PrettyPrint()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append(variableName);
+            sb.Append(Id);
             if (hasArrayType) sb.Append(arrayType.PrettyPrint());
             if (hasAssignInitializer) sb.Append(assignInitializer.PrettyPrint());
             return sb.ToString();

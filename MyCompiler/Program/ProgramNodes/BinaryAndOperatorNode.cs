@@ -45,5 +45,7 @@ namespace MyCompiler.Program.ProgramNodes
             sb.Append(rightExpression.PrettyPrint());
             return sb.ToString();
         }
+
+        public string Type => "bool";
     }
 }

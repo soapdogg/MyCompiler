@@ -10,15 +10,18 @@ namespace MyCompiler.Program.ProgramNodes
         private readonly Translatable translatable;
         private readonly string op;
         private readonly IExpressionNode expression;
-        private bool isLeftArray;
+        private readonly bool isLeftArray;
 
         public UnaryPreOperatorNode(IExpressionChild child, string op)
         {
             translatable = new Translatable();
             expression = new ExpressionNode(child);
             this.op = op;
+            isLeftArray = expression.Child is BinaryArrayOperatorNode;
+            translatable.Type = expression.Type;
         }
 
+        public string Type => translatable.Type;
         public string Address => translatable.Address;
 
         public string Translate()

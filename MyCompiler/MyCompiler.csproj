@@ -83,9 +83,9 @@
     <Compile Include="Program\ProgramNodes\Interfaces\IExpressionStatementNode.cs" />
     <Compile Include="Program\ProgramNodes\Interfaces\IForStatementNode.cs" />
     <Compile Include="Program\ProgramNodes\Interfaces\IFunctionDeclarationNode.cs" />
-    <Compile Include="Program\ProgramNodes\Components\Interfaces\ILabelable.cs" />
+    <Compile Include="Program\Interfaces\ILabelable.cs" />
     <Compile Include="Program\ProgramNodes\Interfaces\IIfStatementNode.cs" />
-    <Compile Include="Program\ProgramNodes\Interfaces\ILeftHandValue.cs" />
+    <Compile Include="Program\Interfaces\ILeftHandValue.cs" />
     <Compile Include="Program\Interfaces\IParsable.cs" />
     <Compile Include="Program\Interfaces\IPrettyPrintable.cs" />
     <Compile Include="Program\ProgramNodes\Interfaces\IProgramRootNode.cs" />
@@ -114,6 +114,7 @@
     <Compile Include="Program\ProgramNodes\Utilities\CounterUtilities.cs" />
     <Compile Include="Program\ProgramNodes\Utilities\ExpressionChildGenerator.cs" />
     <Compile Include="Program\ProgramNodes\Utilities\PrettyPrintingUtilities.cs" />
+    <Compile Include="Program\ProgramNodes\Utilities\TypeTracker.cs" />
     <Compile Include="Program\ProgramNodes\VariableDeclarationListNode.cs" />
     <Compile Include="Program\ProgramNodes\VariableDeclarationNode.cs" />
     <Compile Include="Program\ProgramNodes\VariableExpressionNode.cs" />

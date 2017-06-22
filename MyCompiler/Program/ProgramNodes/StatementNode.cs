@@ -34,12 +34,13 @@ namespace MyCompiler.Program.ProgramNodes
 
         public IStatementChild Child { get; private set; }
         public string Address => translatable.Address;
+        public string Type => translatable.Type;
 
         public void Parse(ITokenizer tokenizer)
         {
             Child = statementChildDictionary.ContainsKey(tokenizer.PeekTokenType())
                 ? statementChildDictionary[tokenizer.PeekTokenType()]
-                : (IStatementChild) new ExpressionStatementNode();
+                : new ExpressionStatementNode();
             Child = Child.NewStatementChildInstance();
             Child.Parse(tokenizer);
         }

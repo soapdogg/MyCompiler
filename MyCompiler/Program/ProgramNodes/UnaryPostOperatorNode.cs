@@ -9,7 +9,7 @@ namespace MyCompiler.Program.ProgramNodes
     {
         private readonly Translatable translatable;
         private readonly string op;
-        private bool isLeftArray;
+        private readonly bool isLeftArray;
         private readonly IExpressionNode expression;
 
         public UnaryPostOperatorNode(IExpressionChild child, string op)
@@ -17,9 +17,12 @@ namespace MyCompiler.Program.ProgramNodes
             translatable = new Translatable();
             expression = new ExpressionNode(child);
             this.op = op;
+            isLeftArray = expression.Child is BinaryArrayOperatorNode;
+            translatable.Type = expression.Type;
         }
 
         public string Address => translatable.Address;
+        public string Type => translatable.Type;
 
         public string Translate()
         {

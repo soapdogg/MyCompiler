@@ -178,7 +178,7 @@ namespace MyCompiler.Program.ProgramNodes.Utilities
             {
                 tokenizer.Pop();
                 SimpleCToken token = tokenizer.Previous();
-                return new ConstantNode(token.Value);
+                return new ConstantNode(token.Value, token.TokenType is IntegerConstantTokenType);
             }
             if (tokenizer.PeekTokenType() is IdentifierTokenType)
             {

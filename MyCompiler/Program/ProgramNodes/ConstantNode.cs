@@ -7,15 +7,16 @@ namespace MyCompiler.Program.ProgramNodes
     {
         private readonly Translatable translatable;
         private readonly string stringRepresentation;
-        private string variableType;
 
-        public ConstantNode(string value)
+        public ConstantNode(string value, bool isInt)
         {
             translatable = new Translatable();
             stringRepresentation = value;
+            Type = isInt ? "int" : "double";
         }
 
         public string Address => translatable.Address;
+        public string Type { get; }
 
         public string Translate()
         {

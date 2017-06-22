@@ -7,19 +7,16 @@ namespace MyCompiler.Program.ProgramNodes.Components
     {
         public bool IsTranslated { get; private set; }
         public string Address { get; set; }
-        public string VariableType { get; protected set; }
+        public string Type { get; set; }
         
-        public void MarkAsTranslated()
-        {
-            IsTranslated = true;
-        }
+        public void MarkAsTranslated() => IsTranslated = true;
 
         public string Translate()
         {
             MarkAsTranslated();
             string tempId = CounterUtilities.GetNextTempAvailable;
             Address =  tempId;
-            PrettyPrintingUtilities.AddToTypeTempIdDictionary(VariableType, tempId);
+            PrettyPrintingUtilities.AddToTypeTempIdDictionary(Type, tempId);
             return tempId;
         }
     }

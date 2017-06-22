@@ -1,7 +1,7 @@
-﻿long test21(){
-    long x = 0;
-    long y = 1;
-    long z = 7;
+﻿int test21(){
+    int x = 0;
+    int y = 1;
+    int z = 7;
     int i;
     int j, k;
     k = 2;

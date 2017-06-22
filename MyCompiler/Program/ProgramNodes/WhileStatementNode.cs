@@ -20,6 +20,7 @@ namespace MyCompiler.Program.ProgramNodes
         }
 
         public string Address => translatable.Address;
+        public string Type => translatable.Type;
 
         public void Parse(ITokenizer tokenizer)
         {

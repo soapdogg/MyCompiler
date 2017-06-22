@@ -9,7 +9,7 @@ namespace MyCompiler.Program.ProgramNodes
 
         public TypeNode(string type)
         {
-            this.stringRepresentation = type;
+            stringRepresentation = type;
         }
 
         public void Parse(ITokenizer tokenizer) => stringRepresentation = tokenizer.Pop().Value;

@@ -16,14 +16,16 @@ namespace MyCompiler.Program.ProgramNodes
             translatable = new Translatable();
             expression = new ExpressionNode(child);
             this.op = op;
+            translatable.Type = expression.Type;
         }
 
         public string Address => translatable.Address;
+        public string Type => translatable.Type;
 
         public string Translate()
         {
-            if (!op.Equals(PLUS)) return translatable.Translate();
             string a = expression.Translate();
+            if (!op.Equals(PLUS)) return translatable.Translate();
             translatable.MarkAsTranslated();
             translatable.Address = a;
             return a;

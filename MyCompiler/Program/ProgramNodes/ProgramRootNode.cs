@@ -11,6 +11,7 @@ namespace MyCompiler.Program.ProgramNodes
         private IList<IDeclarationStatementNode> declarationStatements;
 
         public string Address => string.Empty;
+        public string Type => string.Empty;
 
         public void Parse(ITokenizer tokenizer)
         {

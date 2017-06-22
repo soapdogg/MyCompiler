@@ -9,15 +9,18 @@ namespace MyCompiler.Program.ProgramNodes
         private readonly Translatable translatable;
         private readonly string stringRepresentation;
 
-        public string VariableType { get; }
-        public bool IsLValue { get; }
+        public string Type => translatable.Type;
+        public bool IsLValue { get; private set; }
         public string LValueString => stringRepresentation;
+        public void SetAsLValue() => IsLValue = true;
+
         public string Address => translatable.Address;
 
         public VariableExpressionNode(string value)
         {
             translatable = new Translatable();
             stringRepresentation = value;
+            translatable.Type = TypeTracker.GetType(value);
         }
 
         public string Translate()

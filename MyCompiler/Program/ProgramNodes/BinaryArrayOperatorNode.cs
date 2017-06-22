@@ -10,10 +10,12 @@ namespace MyCompiler.Program.ProgramNodes
         private readonly Translatable translatable;
         private readonly IVariableExpressionNode outerExpression;
         private readonly IExpressionNode innerExpression;
-        private string variableType;
 
-        public bool IsLValue { get; }
+        public bool IsLValue { get; private set; }
+        public string Type => translatable.Type;
         public string LValueString => outerExpression.LValueString + "[" + innerExpression.Address + "]";
+        public void SetAsLValue() => IsLValue = true;
+
         public string TranslatedInnerExpression => innerExpression.PrettyPrint();
         public string Address => translatable.Address;
 
@@ -21,13 +23,13 @@ namespace MyCompiler.Program.ProgramNodes
         {
             translatable = new Translatable();
             outerExpression = outer;
+            translatable.Type = outer.Type;
             innerExpression = new ExpressionNode(inner);
         }
 
         public string Translate()
         {
             innerExpression.Translate();
-            variableType = outerExpression.VariableType;
             if (IsLValue)
             {
                 translatable.MarkAsTranslated();

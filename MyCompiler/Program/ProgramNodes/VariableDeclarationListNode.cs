@@ -13,6 +13,7 @@ namespace MyCompiler.Program.ProgramNodes
         private IList<IVariableDeclarationNode> variableDeclarations;
 
         public string Address => string.Empty;
+        public string Type => string.Empty;
 
         public string Translate() => string.Empty;
 
@@ -23,12 +24,14 @@ namespace MyCompiler.Program.ProgramNodes
             IVariableDeclarationNode variableDeclaration = new VariableDeclarationNode();
             variableDeclaration.Parse(tokenizer);
             variableDeclarations.Add(variableDeclaration);
+            TypeTracker.AddType(variableDeclaration.Id, type.PrettyPrint());
             while (tokenizer.PeekTokenType() is CommaTokenType)
             {
                 tokenizer.Pop(); //comma token 
                 IVariableDeclarationNode v = new VariableDeclarationNode();
                 v.Parse(tokenizer);
                 variableDeclarations.Add(v);
+                TypeTracker.AddType(v.Id, type.PrettyPrint());
             }
             tokenizer.Pop(); // semicolon token
         }
@@ -38,15 +41,14 @@ namespace MyCompiler.Program.ProgramNodes
             StringBuilder sb = new StringBuilder();
             sb.Append(PrettyPrintingUtilities.GetTabbedNewLine());
             sb.Append(type.PrettyPrint());
-            IEnumerator<IVariableDeclarationNode> enumerator = variableDeclarations.GetEnumerator();
-            bool hasNext = true;
-            while (hasNext)
+            sb.Append(' ');
+            for (var index = 0; index < variableDeclarations.Count; index++)
             {
-                sb.Append(enumerator.Current.PrettyPrint());
-                hasNext = enumerator.MoveNext();
-                if (hasNext) sb.Append(",");
+                var variableDeclarationNode = variableDeclarations[index];
+                sb.Append(variableDeclarationNode.PrettyPrint());
+                if (index != variableDeclarations.Count - 1) sb.Append(", ");
             }
-            enumerator.Dispose();
+
             sb.Append(";");
             return sb.ToString();
         }

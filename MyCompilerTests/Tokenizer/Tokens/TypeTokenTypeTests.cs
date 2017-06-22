@@ -33,23 +33,6 @@ namespace MyCompilerTests.Tokenizer.Tokens
             Assert.IsFalse(t.Pattern.IsMatch("doublewfvf"));
         }
 
-        [TestMethod]
-        public void FloatMatchesTest()
-        {
-            Assert.IsTrue(t.Pattern.IsMatch("float"));
-        }
-
-        [TestMethod]
-        public void FloatBeforeDoesntMatchTest()
-        {
-            Assert.IsFalse(t.Pattern.IsMatch("ffloat"));
-        }
-
-        [TestMethod]
-        public void FloatAfterDoesntMatchTest()
-        {
-            Assert.IsFalse(t.Pattern.IsMatch("floatjvh"));
-        }
 
         [TestMethod]
         public void IntMatchesTest()
@@ -68,41 +51,6 @@ namespace MyCompilerTests.Tokenizer.Tokens
         {
             Assert.IsFalse(t.Pattern.IsMatch("int34cdf"));
         }
-
-        [TestMethod]
-        public void LongMatchesTest()
-        {
-            Assert.IsTrue(t.Pattern.IsMatch("long"));
-        }
-
-        [TestMethod]
-        public void LongBeforeDoesntMatchTest()
-        {
-            Assert.IsFalse(t.Pattern.IsMatch("34fdlong"));
-        }
-
-        [TestMethod]
-        public void LongAfterDoesntMatchTest()
-        {
-            Assert.IsFalse(t.Pattern.IsMatch("longg"));
-        }
-
-        [TestMethod]
-        public void VoidMatchesTest()
-        {
-            Assert.IsTrue(t.Pattern.IsMatch("void"));
-        }
-
-        [TestMethod]
-        public void VoidBeforeDoesntMatchTest()
-        {
-            Assert.IsFalse(t.Pattern.IsMatch("654vjvoid"));
-        }
-
-        [TestMethod]
-        public void VoidAfterDoesntMatchTest()
-        {
-            Assert.IsFalse(t.Pattern.IsMatch("voidlolsdfasdf"));
-        }
+       
     }
 }

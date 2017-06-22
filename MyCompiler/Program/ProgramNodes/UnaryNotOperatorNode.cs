@@ -32,5 +32,6 @@ namespace MyCompiler.Program.ProgramNodes
         public string GetLabel(int i) => labelable.GetLabel(i);
 
         public string PrettyPrint() => innerExpression.PrettyPrint();
+        public string Type => "bool";
     }
 }

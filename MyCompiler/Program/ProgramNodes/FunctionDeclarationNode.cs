@@ -12,6 +12,7 @@ namespace MyCompiler.Program.ProgramNodes
         private IBasicBlockNode basicBlock;
 
         public string Address => string.Empty;
+        public string Type => string.Empty;
 
         public FunctionDeclarationNode(string typeString, string functionName)
         {
@@ -33,6 +34,7 @@ namespace MyCompiler.Program.ProgramNodes
         {
             StringBuilder sb = new StringBuilder();
             sb.Append(type.PrettyPrint());
+            sb.Append(' ');
             sb.Append(functionName);
             sb.Append("(){");
             sb.Append(PrettyPrintingUtilities.GetPrettyPrintTempDeclarations());

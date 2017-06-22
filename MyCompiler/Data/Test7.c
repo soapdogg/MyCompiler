@@ -7,6 +7,7 @@
     int x = 0;
     int y = 1;
     int z = 5;
-    a[x] = x = y + z;
+	x = y + z;
+	a[x] = x;
     return a[x];
 }
