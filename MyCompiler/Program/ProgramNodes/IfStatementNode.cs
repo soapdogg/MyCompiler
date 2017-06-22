@@ -34,6 +34,7 @@ namespace MyCompiler.Program.ProgramNodes
             trueBody.Parse(tokenizer);
             hasFalse = tokenizer.PeekTokenType() is ElseTokenType;
             if (!hasFalse) return;
+            tokenizer.Pop(); //else token
             falseBody = new StatementNode();
             falseBody.Parse(tokenizer);
         }
