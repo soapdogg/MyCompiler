@@ -21,7 +21,7 @@ namespace MyCompiler.Program.ProgramNodes.Utilities
                 IExpressionChild right = ParseLogicalOr(tokenizer);
                 left = token.TokenType is BinaryAssignTokenType
                     ? (IExpressionChild)new BinaryAssignNode(left, right)
-                    : new BinaryAssignOperatorNode(left, right, token.Value);
+                    : new BinaryAssignOperatorNode(left, right, token.Value.Replace("=",""));
             }
             return left;
         }
@@ -166,7 +166,7 @@ namespace MyCompiler.Program.ProgramNodes.Utilities
                 IExpressionChild right = ParseUnary(tokenizer);
                 if (token.TokenType is PlusOrMinusTokenType || token.TokenType is BitNegationOperatorTokenType) return new UnaryOperatorNode(right, token.Value);
                 if (token.TokenType is UnaryNotOperatorTokenType) return new UnaryNotOperatorNode(right);
-                return new UnaryPreOperatorNode(right, token.Value);
+                return new UnaryPreOperatorNode(right, token.Value[0].ToString());
             }
             return ParsePrimary(tokenizer);
         }
@@ -196,7 +196,7 @@ namespace MyCompiler.Program.ProgramNodes.Utilities
                 {
                     tokenizer.Pop(); //Post operator
                     token = tokenizer.Previous();
-                    varExpr = new UnaryPostOperatorNode(varExpr, token.Value);
+                    varExpr = new UnaryPostOperatorNode(varExpr, token.Value[0].ToString());
                 }
                 return varExpr;
             }

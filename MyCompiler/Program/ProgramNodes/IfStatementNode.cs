@@ -42,7 +42,7 @@ namespace MyCompiler.Program.ProgramNodes
 
         public string Translate()
         {
-            SetLabel(Labelable.SECOND, CounterUtilities.GetNextLabelAvailable);
+            SetLabel(Labelable.FALSE, CounterUtilities.GetNextLabelAvailable);
             SetLabel(Labelable.TRUE, CounterUtilities.GetNextLabelAvailable);
             booleanExpression.SetLabel(Labelable.TRUE, GetLabel(Labelable.TRUE));
             SetLabel(Labelable.SECOND, hasFalse ? CounterUtilities.GetNextLabelAvailable : GetLabel(Labelable.FALSE));

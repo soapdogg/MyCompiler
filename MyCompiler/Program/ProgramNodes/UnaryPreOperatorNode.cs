@@ -57,7 +57,7 @@ namespace MyCompiler.Program.ProgramNodes
             string leftChildLValue = leftChild.LValueString;
             StringBuilder sb = new StringBuilder();
             sb.Append(PrettyPrintingUtilities.GetTabbedNewLineAndVariableAssignment(leftChildLValue,
-                leftChildLValue + op + " 1"));
+                leftChildLValue + " " + op + " 1"));
             sb.Append(PrettyPrintingUtilities.GetTabbedNewLineAndVariableAssignment(Address, leftChildLValue));
             return sb.ToString();
         }

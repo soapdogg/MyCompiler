@@ -42,7 +42,9 @@ namespace MyCompiler.Program.ProgramNodes
             sb.Append(PrettyPrintingUtilities.GetTabbedNewLine());
             sb.Append("if (");
             sb.Append(leftExpression.Address);
+            sb.Append(' ');
             sb.Append(op);
+            sb.Append(' ');
             sb.Append(rightExpression.Address);
             sb.Append(") ");
             sb.Append(PrettyPrintingUtilities.GetPrettyPrintedGoto(labelable.GetLabel(Labelable.TRUE)));

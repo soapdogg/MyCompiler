@@ -48,7 +48,7 @@ namespace MyCompiler.Program.ProgramNodes
             sb.Append(PrettyPrintingUtilities
                 .GetTabbedNewLineAndVariableAssignment(Address, Address + " " + op + " 1"));
             sb.Append(PrettyPrintingUtilities.GetTabbedNewLineAndVariableAssignment(leftChildLValue, Address));
-            string xop = op.Contains("+") ? "-" : "+";
+            string xop = op.Contains("+") ? " -" : " +";
             sb.Append(PrettyPrintingUtilities.GetTabbedNewLineAndVariableAssignment(Address, Address + xop + " 1"));
             return sb.ToString();
         }
@@ -60,7 +60,7 @@ namespace MyCompiler.Program.ProgramNodes
             StringBuilder sb = new StringBuilder();
             sb.Append(PrettyPrintingUtilities.GetTabbedNewLineAndVariableAssignment(Address, leftChildLValue));
             sb.Append(PrettyPrintingUtilities.GetTabbedNewLineAndVariableAssignment(leftChildLValue,
-                leftChildLValue + op + " 1"));
+                leftChildLValue + " " + op + " 1"));
             return sb.ToString();
         }
     }
