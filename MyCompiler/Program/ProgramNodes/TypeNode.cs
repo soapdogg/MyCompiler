@@ -1,18 +1,15 @@
 ﻿using MyCompiler.Program.ProgramNodes.Interfaces;
-using MyCompiler.Tokenizer;
 
 namespace MyCompiler.Program.ProgramNodes
 {
     public class TypeNode : ITypeNode
     {
-        private string stringRepresentation;
+        private readonly string stringRepresentation;
 
         public TypeNode(string type)
         {
             stringRepresentation = type;
         }
-
-        public void Parse(ITokenizer tokenizer) => stringRepresentation = tokenizer.Pop().Value;
 
         public string PrettyPrint() => stringRepresentation;
     }

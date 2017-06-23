@@ -49,6 +49,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program\ParsingTests.cs" />
+    <Compile Include="Program\PrettyPrintingTests.cs" />
+    <Compile Include="Program\TranslatingTests.cs" />
     <Compile Include="Tokenizer\SimpleCTokenTests.cs" />
     <Compile Include="Tokenizer\TokenizerTests.cs" />
     <Compile Include="Tokenizer\Tokens\BaseTokenTypeTests.cs" />
