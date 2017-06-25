@@ -32,17 +32,22 @@ namespace MyCompiler.Program.ProgramNodes.Utilities
 
         public static string GetPrettyPrintTempDeclarations()
         {
+            int tempsPerLine = 5;
             StringBuilder sb = new StringBuilder();
             foreach (var l in typeTempIdDictionary)
             {
-                sb.Append(GetTabbedNewLine());
-                sb.Append(l.Key);
-                sb.Append(' ');
+                int counter = 0;
                 for (var index = 0; index < l.Value.Count; index++)
                 {
+                    if (counter++ % tempsPerLine == 0)
+                    {
+                        sb.Append(GetTabbedNewLine());
+                        sb.Append(l.Key);
+                        sb.Append(' ');
+                    }
                     var id = l.Value[index];
                     sb.Append(id);
-                    if (index != l.Value.Count - 1) sb.Append(", ");
+                    if (index != l.Value.Count - 1 && counter % tempsPerLine != 0) sb.Append(", ");
                     else sb.Append(';');
                 }
             }
