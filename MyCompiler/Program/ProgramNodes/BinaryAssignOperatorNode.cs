@@ -9,33 +9,35 @@ namespace MyCompiler.Program.ProgramNodes
     public class BinaryAssignOperatorNode : IBinaryAssignOperatorNode
     {
         private readonly Translatable translatable;
+        private readonly Typable typable;
         private readonly string op;
         private readonly IExpressionNode leftExpression, rightExpression;
         private readonly bool isLeftArray;
 
-        public string Type => translatable.Type;
-        public string Address => translatable.Address;
+        public string Type => typable.Type;
+        public string Address => typable.Address;
 
         public BinaryAssignOperatorNode(IExpressionChild left, IExpressionChild right, string op)
         {
             translatable = new Translatable();
+            typable = new Typable();
             leftExpression = new ExpressionNode(left);
             var value = leftExpression.Child as ILeftHandValue;
             value?.SetAsLValue();
             rightExpression = new ExpressionNode(right);
             this.op = op;
-            translatable.Type = leftExpression.Type.Equals("double") || rightExpression.Type.Equals("double")
-
+            typable.Type = leftExpression.Type.Equals("double") || rightExpression.Type.Equals("double")
                 ? "double"
                 : "int";
             isLeftArray = leftExpression.Child is BinaryArrayOperatorNode;
         }
 
-        public string Translate()
+        public void Translate()
         {
             leftExpression.Translate();
             rightExpression.Translate();
-            return translatable.Translate();
+            translatable.Translate();
+            typable.GenerateNewAddress();
         }
 
         public string PrettyPrint()
@@ -49,10 +51,7 @@ namespace MyCompiler.Program.ProgramNodes
 
         public string GetLabel(int i) => string.Empty;
 
-        private string PrettyPrintTranslated()
-        {
-            return isLeftArray ? PrettyPrintLeftArray() : PrettyPrintLeftVariable();
-        }
+        private string PrettyPrintTranslated() => isLeftArray ? PrettyPrintLeftArray() : PrettyPrintLeftVariable();
 
         private string PrettyPrintLeftArray()
         {

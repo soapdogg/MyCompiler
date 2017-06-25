@@ -9,7 +9,8 @@
         else{
            if(i == 9){
                 i++;
-           } else if(i != 6){
+           } 
+		   else if(i != 6){
              --i;
              i += j;
            }

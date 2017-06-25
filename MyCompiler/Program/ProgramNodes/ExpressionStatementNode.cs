@@ -14,9 +14,6 @@ namespace MyCompiler.Program.ProgramNodes
             translatable = new Translatable();
         }
 
-        public string Address => translatable.Address;
-        public string Type => translatable.Type;
-
         public void Parse(ITokenizer tokenizer)
         {
             expression = new ExpressionNode();
@@ -24,10 +21,10 @@ namespace MyCompiler.Program.ProgramNodes
             tokenizer.Pop(); // semicolon
         }
 
-        public string Translate()
+        public void Translate()
         {
-            translatable.MarkAsTranslated();
-            return expression.Translate();
+            translatable.Translate();
+            expression.Translate();
         }
 
         public string PrettyPrint() => translatable.IsTranslated ? expression.PrettyPrint() : expression.PrettyPrint() + ";";

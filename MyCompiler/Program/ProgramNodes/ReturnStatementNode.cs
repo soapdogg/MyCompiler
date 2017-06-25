@@ -17,9 +17,6 @@ namespace MyCompiler.Program.ProgramNodes
             translatable = new Translatable();
         }
 
-        public string Address => translatable.Address;
-        public string Type => translatable.Type;
-
         public void Parse(ITokenizer tokenizer)
         {
             tokenizer.Pop(); //return token
@@ -29,11 +26,11 @@ namespace MyCompiler.Program.ProgramNodes
             tokenizer.Pop(); //semicolon token
         }
 
-        public string Translate()
+        public void Translate()
         {
-            if (!shouldBeTranslated) return string.Empty;
-            translatable.MarkAsTranslated();
-            return expression.Translate();
+            if (!shouldBeTranslated) return;
+            translatable.Translate();
+            expression.Translate();
         }
 
         public IStatementChild NewStatementChildInstance() => new ReturnStatementNode();

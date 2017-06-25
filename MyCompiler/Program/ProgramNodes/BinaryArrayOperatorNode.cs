@@ -8,34 +8,32 @@ namespace MyCompiler.Program.ProgramNodes
     public class BinaryArrayOperatorNode : IBinaryArrayOperatorNode
     {
         private readonly Translatable translatable;
+        private readonly Typable typable;
         private readonly IVariableExpressionNode outerExpression;
         private readonly IExpressionNode innerExpression;
 
         public bool IsLValue { get; private set; }
-        public string Type => translatable.Type;
+        public string Type => typable.Type;
         public string LValueString => outerExpression.LValueString + "[" + innerExpression.Address + "]";
         public void SetAsLValue() => IsLValue = true;
 
         public string TranslatedInnerExpression => innerExpression.PrettyPrint();
-        public string Address => translatable.Address;
+        public string Address => typable.Address;
 
         public BinaryArrayOperatorNode(IVariableExpressionNode outer, IExpressionChild inner)
         {
             translatable = new Translatable();
+            typable = new Typable();
             outerExpression = outer;
-            translatable.Type = outer.Type;
+            typable.Type = outer.Type;
             innerExpression = new ExpressionNode(inner);
         }
 
-        public string Translate()
+        public void Translate()
         {
             innerExpression.Translate();
-            if (IsLValue)
-            {
-                translatable.MarkAsTranslated();
-                return string.Empty;
-            }
-            return translatable.Translate();
+            translatable.Translate();
+            if (!IsLValue) typable.Address = typable.GenerateNewAddress();
         }
 
         public string PrettyPrint()

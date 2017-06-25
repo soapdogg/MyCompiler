@@ -10,12 +10,13 @@ namespace MyCompiler.Program.ProgramNodes
     public class VariableDeclarationListNode : IVariableDeclarationListNode
     {
         private ITypeNode type;
+        private readonly bool isInMethod;
         private IList<IVariableDeclarationNode> variableDeclarations;
 
-        public string Address => string.Empty;
-        public string Type => string.Empty;
-
-        public string Translate() => string.Empty;
+        public VariableDeclarationListNode(bool inMethod)
+        {
+            isInMethod = inMethod;
+        }
 
         public void Parse(ITokenizer tokenizer)
         {
@@ -39,7 +40,7 @@ namespace MyCompiler.Program.ProgramNodes
         public string PrettyPrint()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append(PrettyPrintingUtilities.GetTabbedNewLine());
+            if(isInMethod) sb.Append(PrettyPrintingUtilities.GetTabbedNewLine());
             sb.Append(type.PrettyPrint());
             sb.Append(' ');
             for (var index = 0; index < variableDeclarations.Count; index++)
@@ -53,6 +54,6 @@ namespace MyCompiler.Program.ProgramNodes
             return sb.ToString();
         }
 
-        public IStatementChild NewStatementChildInstance() => new VariableDeclarationListNode();
+        public IStatementChild NewStatementChildInstance() => new VariableDeclarationListNode(true);
     }
 }

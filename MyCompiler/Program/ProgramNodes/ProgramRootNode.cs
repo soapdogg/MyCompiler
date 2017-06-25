@@ -10,9 +10,6 @@ namespace MyCompiler.Program.ProgramNodes
     {
         private IList<IDeclarationStatementNode> declarationStatements;
 
-        public string Address => string.Empty;
-        public string Type => string.Empty;
-
         public void Parse(ITokenizer tokenizer)
         {
             declarationStatements = new List<IDeclarationStatementNode>();
@@ -24,11 +21,10 @@ namespace MyCompiler.Program.ProgramNodes
             }
         }
 
-        public string Translate()
+        public void Translate()
         {
             foreach (var declarationStatementNode in declarationStatements)
                 declarationStatementNode.Translate();
-            return string.Empty;
         }
 
         public string PrettyPrint()

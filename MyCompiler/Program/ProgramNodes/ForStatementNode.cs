@@ -8,7 +8,6 @@ namespace MyCompiler.Program.ProgramNodes
 {
     public class ForStatementNode : IForStatementNode
     {
-        private readonly Translatable translatable;
         private readonly Labelable labelable;
         private IExpressionNode initExpressionNode, incrementExpressionNode;
         private IExpressionNode testExpressionNode;
@@ -16,12 +15,8 @@ namespace MyCompiler.Program.ProgramNodes
 
         public ForStatementNode()
         {
-            translatable = new Translatable();
             labelable = new Labelable(3);
         }
-
-        public string Address => translatable.Address;
-        public string Type => translatable.Type;
 
         public void Parse(ITokenizer tokenizer)
         {
@@ -40,7 +35,7 @@ namespace MyCompiler.Program.ProgramNodes
             body.Parse(tokenizer);
         }
 
-        public string Translate()
+        public void Translate()
         {
             testExpressionNode.SetLabel(Labelable.SECOND, CounterUtilities.GetNextLabelAvailable);
             SetLabel(Labelable.START, CounterUtilities.GetNextLabelAvailable);
@@ -48,7 +43,7 @@ namespace MyCompiler.Program.ProgramNodes
             initExpressionNode.Translate();
             testExpressionNode.Translate();
             incrementExpressionNode.Translate();
-            return body.Translate();
+            body.Translate();
         }
 
         public string PrettyPrint()

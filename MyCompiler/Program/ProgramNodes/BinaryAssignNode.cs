@@ -9,15 +9,18 @@ namespace MyCompiler.Program.ProgramNodes
     public class BinaryAssignNode : IBinaryAssignNode
     {
         private readonly Translatable translatable;
+        private readonly Typable typable;
         private readonly bool isLeftArray;
         private readonly IExpressionNode leftExpression;
         private readonly IExpressionNode rightExpression;
 
-        public string Address => translatable.Address;
+        public string Address => typable.Address;
+        public string Type => typable.Type;
 
         public BinaryAssignNode(IExpressionChild left, IExpressionChild right)
         {
             translatable = new Translatable();
+            typable = new Typable();
             leftExpression = new ExpressionNode(left);
             var value = leftExpression.Child as ILeftHandValue;
             value?.SetAsLValue();
@@ -25,18 +28,14 @@ namespace MyCompiler.Program.ProgramNodes
             isLeftArray = leftExpression.Child is BinaryArrayOperatorNode;
         }
 
-        public string Translate()
+        public void Translate()
         {
             leftExpression.Translate();
-            string rightAddress = rightExpression.Translate();
-            translatable.MarkAsTranslated();
-            if (rightAddress.Equals(string.Empty))
-            {
-                translatable.Address = rightExpression.Child.Address;
-                return string.Empty;
-            }
-            translatable.Address = rightAddress;
-            return rightAddress;
+            rightExpression.Translate();
+            string rightAddress = rightExpression.Address;
+            translatable.Translate();
+            ITypable t = rightExpression.Child as ITypable;
+            typable.Address = rightAddress.Equals(string.Empty) && t != null ? t.Address : rightAddress;
         }
 
         public string PrettyPrint()
@@ -73,7 +72,5 @@ namespace MyCompiler.Program.ProgramNodes
                 rightExpression.Address));
             return sb.ToString();
         }
-
-        public string Type => "bool";
     }
 }

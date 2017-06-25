@@ -8,19 +8,14 @@ namespace MyCompiler.Program.ProgramNodes
 {
     public class DoWhileStatementNode : IDoWhileStatementNode
     {
-        private readonly Translatable translatable;
         private readonly Labelable labelable;
         private IExpressionNode expression;
         private IStatementNode body;
 
         public DoWhileStatementNode()
         {
-            translatable = new Translatable();
             labelable = new Labelable(2);
         }
-
-        public string Address => translatable.Address;
-        public string Type => translatable.Type;
 
         public void Parse(ITokenizer tokenizer)
         {
@@ -35,12 +30,12 @@ namespace MyCompiler.Program.ProgramNodes
             tokenizer.Pop(); //semicolon
         }
 
-        public string Translate()
+        public void Translate()
         {
             expression.SetLabel(Labelable.TRUE, CounterUtilities.GetNextLabelAvailable);
             expression.SetLabel(Labelable.SECOND, CounterUtilities.GetNextLabelAvailable);
             expression.Translate();
-            return body.Translate();
+            body.Translate();
         }
 
         public string PrettyPrint()

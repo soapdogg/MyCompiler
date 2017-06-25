@@ -8,27 +8,29 @@ namespace MyCompiler.Program.ProgramNodes
     {
         private const string PLUS = "+";
         private readonly Translatable translatable;
+        private readonly Typable typable;
         private readonly IExpressionNode expression;
         private readonly string op;
 
         public UnaryOperatorNode(IExpressionChild child, string op)
         {
             translatable = new Translatable();
+            typable = new Typable();
             expression = new ExpressionNode(child);
             this.op = op;
-            translatable.Type = expression.Type;
+            typable.Type = expression.Type;
         }
 
-        public string Address => translatable.Address;
-        public string Type => translatable.Type;
+        public string Address => typable.Address;
+        public string Type => typable.Type;
 
-        public string Translate()
+        public void Translate()
         {
-            string a = expression.Translate();
-            if (!op.Equals(PLUS)) return translatable.Translate();
-            translatable.MarkAsTranslated();
-            translatable.Address = a;
-            return a;
+            expression.Translate();
+            string a = expression.Address;
+            translatable.Translate();
+            if (!op.Equals(PLUS)) typable.GenerateNewAddress();
+            else typable.Address = a;
         }
 
         public string PrettyPrint()

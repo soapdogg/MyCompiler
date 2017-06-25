@@ -1,4 +1,5 @@
-﻿using MyCompiler.Program.ProgramNodes.Components;
+﻿using MyCompiler.Program.Interfaces;
+using MyCompiler.Program.ProgramNodes.Components;
 using MyCompiler.Program.ProgramNodes.Interfaces;
 using MyCompiler.Program.ProgramNodes.Utilities;
 using MyCompiler.Tokenizer;
@@ -21,20 +22,33 @@ namespace MyCompiler.Program.ProgramNodes
         }
 
         public IExpressionChild Child { get; private set; }
-        public string Type => Child.Type;
-        public string Address => Child.Address;
+        public string Type
+        {
+            get
+            {
+                ITypable t = Child as ITypable;
+                return t != null ? t.Type : string.Empty;
+            }
+        }
+
+        public string Address
+        {
+            get
+            {
+                ITypable t = Child as ITypable;
+                return t != null ? t.Address: string.Empty;
+            }
+        }
 
         public void Parse(ITokenizer tokenizer)
         {
             Child = ExpressionChildGenerator.ParseExpression(tokenizer);
         }
 
-        public string Translate()
+        public void Translate()
         {
-            string address = Child.Translate();
-            translatable.Address = address;
-            translatable.MarkAsTranslated();
-            return address;
+            Child.Translate();
+            translatable.Translate();
         }
 
         public string PrettyPrint() => Child.PrettyPrint();

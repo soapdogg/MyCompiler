@@ -15,10 +15,7 @@ namespace MyCompiler.Program
 
         public void Parse(ITokenizer tokenizer) => root.Parse(tokenizer);
 
-        public string Address => string.Empty;
-        public string Type => string.Empty;
-
-        public string Translate() => root.Translate();
+        public void Translate() => root.Translate();
 
         public string PrettyPrint() => root.PrettyPrint();
     }

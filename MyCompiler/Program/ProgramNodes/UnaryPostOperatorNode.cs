@@ -8,6 +8,7 @@ namespace MyCompiler.Program.ProgramNodes
     public class UnaryPostOperatorNode : IUnaryPostOperatorNode
     {
         private readonly Translatable translatable;
+        private readonly Typable typable;
         private readonly string op;
         private readonly bool isLeftArray;
         private readonly IExpressionNode expression;
@@ -15,19 +16,21 @@ namespace MyCompiler.Program.ProgramNodes
         public UnaryPostOperatorNode(IExpressionChild child, string op)
         {
             translatable = new Translatable();
+            typable = new Typable();
             expression = new ExpressionNode(child);
             this.op = op;
             isLeftArray = expression.Child is BinaryArrayOperatorNode;
-            translatable.Type = expression.Type;
+            typable.Type = expression.Type;
         }
 
-        public string Address => translatable.Address;
-        public string Type => translatable.Type;
+        public string Address => typable.Address;
+        public string Type => typable.Type;
 
-        public string Translate()
+        public void Translate()
         {
             expression.Translate();
-            return translatable.Translate();
+            translatable.Translate();
+            typable.GenerateNewAddress();
         }
 
         public string PrettyPrint() => translatable.IsTranslated ? PrettyPrintTranslated() : expression.PrettyPrint() + op;

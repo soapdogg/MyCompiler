@@ -16,15 +16,12 @@ namespace MyCompiler.Program.ProgramNodes
             innerExpression = new ExpressionNode(inner);
         }
 
-        public string Address => translatable.Address;
-
-        public string Translate()
+        public void Translate()
         {
             innerExpression.SetLabel(Labelable.TRUE, labelable.GetLabel(Labelable.SECOND));
             innerExpression.SetLabel(Labelable.SECOND, labelable.GetLabel(Labelable.TRUE));
             innerExpression.Translate();
-            translatable.MarkAsTranslated();
-            return string.Empty;
+            translatable.Translate();
         }
 
         public void SetLabel(int i, string label) => labelable.SetLabel(i, label);
@@ -32,6 +29,5 @@ namespace MyCompiler.Program.ProgramNodes
         public string GetLabel(int i) => labelable.GetLabel(i);
 
         public string PrettyPrint() => innerExpression.PrettyPrint();
-        public string Type => "bool";
     }
 }

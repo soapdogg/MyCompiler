@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text;
-using MyCompiler.Program.ProgramNodes.Components;
 using MyCompiler.Program.ProgramNodes.Interfaces;
+using MyCompiler.Program.ProgramNodes.Utilities;
 using MyCompiler.Tokenizer;
 using MyCompiler.Tokenizer.Tokens;
 
@@ -9,17 +9,12 @@ namespace MyCompiler.Program.ProgramNodes
 {
     public class BasicBlockNode : IBasicBlockNode
     {
-        private readonly Translatable translatable;
         private readonly IList<IStatementNode> statements;
 
         public BasicBlockNode()
         {
-            translatable = new Translatable();
             statements = new List<IStatementNode>();
         }
-
-        public string Address => translatable.Address;
-        public string Type => translatable.Type;
 
         public void Parse(ITokenizer tokenizer)
         {
@@ -33,18 +28,20 @@ namespace MyCompiler.Program.ProgramNodes
             tokenizer.Pop(); //right brace
         }
 
-        public string Translate()
+        public void Translate()
         {
             foreach (var statementNode in statements)
                 statementNode.Translate();
-            return string.Empty;
         }
 
         public string PrettyPrint()
         {
             StringBuilder sb = new StringBuilder();
             foreach (var statementNode in statements)
+            {
+                //sb.Append(PrettyPrintingUtilities.GetTabbedNewLine());
                 sb.Append(statementNode.PrettyPrint());
+            }
             return sb.ToString();
         }
 

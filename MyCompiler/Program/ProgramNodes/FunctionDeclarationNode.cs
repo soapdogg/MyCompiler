@@ -11,9 +11,6 @@ namespace MyCompiler.Program.ProgramNodes
         private readonly ITypeNode type;
         private IBasicBlockNode basicBlock;
 
-        public string Address => string.Empty;
-        public string Type => string.Empty;
-
         public FunctionDeclarationNode(string typeString, string functionName)
         {
             type = new TypeNode(typeString);
@@ -28,7 +25,7 @@ namespace MyCompiler.Program.ProgramNodes
             basicBlock.Parse(tokenizer);
         }
 
-        public string Translate() => basicBlock.Translate();
+        public void Translate() => basicBlock.Translate();
 
         public string PrettyPrint()
         {

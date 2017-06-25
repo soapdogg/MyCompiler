@@ -2,8 +2,6 @@
 {
     public interface ITranslatable
     {
-        string Type { get; }
-        string Address { get; }
-        string Translate();
+        void Translate();
     }
 }

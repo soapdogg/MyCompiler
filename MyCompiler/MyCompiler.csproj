@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Driver.cs" />
+    <Compile Include="Program\Interfaces\ITypable.cs" />
     <Compile Include="Program\IProgram.cs" />
     <Compile Include="Program\MyProgram.cs" />
     <Compile Include="Program\ProgramNodes\ArrayTypeNode.cs" />
@@ -56,6 +57,7 @@
     <Compile Include="Program\ProgramNodes\BinaryOrOperatorNode.cs" />
     <Compile Include="Program\ProgramNodes\BinaryRelationalOperatorNode.cs" />
     <Compile Include="Program\ProgramNodes\Components\Labelable.cs" />
+    <Compile Include="Program\ProgramNodes\Components\Typable.cs" />
     <Compile Include="Program\ProgramNodes\ConstantNode.cs" />
     <Compile Include="Program\ProgramNodes\DeclarationStatementNode.cs" />
     <Compile Include="Program\ProgramNodes\DoWhileStatementNode.cs" />

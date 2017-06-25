@@ -2,7 +2,7 @@
 
 namespace MyCompiler.Program.ProgramNodes.Interfaces
 {
-    public interface IVariableExpressionNode : ILeftHandValue, IExpressionChild
+    public interface IVariableExpressionNode : ILeftHandValue, IExpressionChild, ITypable
     {
     }
 }

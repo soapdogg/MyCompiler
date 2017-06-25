@@ -7,27 +7,28 @@ namespace MyCompiler.Program.ProgramNodes
     public class VariableExpressionNode : IVariableExpressionNode
     {
         private readonly Translatable translatable;
+        private readonly Typable typable;
         private readonly string stringRepresentation;
 
-        public string Type => translatable.Type;
+        public string Type => typable.Type;
         public bool IsLValue { get; private set; }
         public string LValueString => stringRepresentation;
         public void SetAsLValue() => IsLValue = true;
 
-        public string Address => translatable.Address;
+        public string Address => typable.Address;
 
         public VariableExpressionNode(string value)
         {
             translatable = new Translatable();
+            typable = new Typable();
             stringRepresentation = value;
-            translatable.Type = TypeTracker.GetType(value);
+            typable.Type = TypeTracker.GetType(value);
         }
 
-        public string Translate()
+        public void Translate()
         {
-            if (!IsLValue) return translatable.Translate();
-            translatable.MarkAsTranslated();
-            return string.Empty;
+            translatable.Translate();
+            if (!IsLValue) typable.GenerateNewAddress();
         }
 
         public string PrettyPrint() => translatable.IsTranslated 

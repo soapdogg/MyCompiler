@@ -18,10 +18,8 @@ namespace MyCompiler.Program.ProgramNodes
             leftExpression = new ExpressionNode(left);
             rightExpression = new ExpressionNode(right);
         }
-
-        public string Address => translatable.Address;
-
-        public string Translate()
+        
+        public void Translate()
         {
             leftExpression.SetLabel(Labelable.TRUE, CounterUtilities.GetNextLabelAvailable);
             leftExpression.SetLabel(Labelable.SECOND, labelable.GetLabel(Labelable.SECOND));
@@ -29,8 +27,7 @@ namespace MyCompiler.Program.ProgramNodes
             rightExpression.SetLabel(Labelable.SECOND, labelable.GetLabel(Labelable.SECOND));
             leftExpression.Translate();
             rightExpression.Translate();
-            translatable.MarkAsTranslated();
-            return string.Empty;
+            translatable.Translate();
         }
 
         public void SetLabel(int i, string label) => labelable.SetLabel(i, label);
@@ -45,7 +42,5 @@ namespace MyCompiler.Program.ProgramNodes
             sb.Append(rightExpression.PrettyPrint());
             return sb.ToString();
         }
-
-        public string Type => "bool";
     }
 }

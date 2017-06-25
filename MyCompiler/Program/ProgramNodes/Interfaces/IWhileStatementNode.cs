@@ -2,7 +2,7 @@
 
 namespace MyCompiler.Program.ProgramNodes.Interfaces
 {
-    public interface IWhileStatementNode : IStatementChild, ILabelable
+    public interface IWhileStatementNode : IStatementChild, ILabelable, ITranslatable
     {
     }
 }

@@ -9,7 +9,6 @@ namespace MyCompiler.Program.ProgramNodes
 {
     public class IfStatementNode : IIfStatementNode
     {
-        private readonly Translatable translatable;
         private readonly Labelable labelable;
         private IStatementNode trueBody, falseBody;
         private IExpressionNode booleanExpression;
@@ -17,12 +16,8 @@ namespace MyCompiler.Program.ProgramNodes
 
         public IfStatementNode()
         {
-            translatable = new Translatable();
             labelable = new Labelable(3);
         }
-
-        public string Address => translatable.Address;
-        public string Type => translatable.Type;
 
         public void Parse(ITokenizer tokenizer)
         {
@@ -40,7 +35,7 @@ namespace MyCompiler.Program.ProgramNodes
             falseBody.Parse(tokenizer);
         }
 
-        public string Translate()
+        public void Translate()
         {
             SetLabel(Labelable.FALSE, CounterUtilities.GetNextLabelAvailable);
             SetLabel(Labelable.TRUE, CounterUtilities.GetNextLabelAvailable);
@@ -50,7 +45,6 @@ namespace MyCompiler.Program.ProgramNodes
             booleanExpression.Translate();
             trueBody.Translate();
             if (hasFalse) falseBody.Translate();
-            return string.Empty;
         }
 
         public string PrettyPrint()

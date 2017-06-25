@@ -6,23 +6,24 @@ namespace MyCompiler.Program.ProgramNodes
     public class ConstantNode : IConstantNode
     {
         private readonly Translatable translatable;
+        private readonly Typable typable;
         private readonly string stringRepresentation;
 
         public ConstantNode(string value, bool isInt)
         {
             translatable = new Translatable();
+            typable = new Typable();
             stringRepresentation = value;
-            Type = isInt ? "int" : "double";
+            typable.Type = isInt ? "int" : "double";
         }
 
-        public string Address => translatable.Address;
-        public string Type { get; }
+        public string Address => typable.Address;
+        public string Type => typable.Type;
 
-        public string Translate()
+        public void Translate()
         {
-            translatable.MarkAsTranslated();
-            translatable.Address = stringRepresentation;
-            return string.Empty;
+            translatable.Translate();
+            typable.Address = stringRepresentation;
         }
 
         public string PrettyPrint() => translatable.IsTranslated ? string.Empty : stringRepresentation;

@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
-using MyCompiler.Program.ProgramNodes.Components;
+using System.Text;
+using MyCompiler.Program.Interfaces;
 using MyCompiler.Program.ProgramNodes.Interfaces;
+using MyCompiler.Program.ProgramNodes.Utilities;
 using MyCompiler.Tokenizer;
 using MyCompiler.Tokenizer.Tokens;
 using MyCompiler.Tokenizer.Tokens.Interfaces;
@@ -9,7 +11,6 @@ namespace MyCompiler.Program.ProgramNodes
 {
     public class StatementNode : IStatementNode
     {
-        private readonly Translatable translatable;
         private static readonly IDictionary<ITokenType, IStatementChild> statementChildDictionary;
 
         static StatementNode()
@@ -23,18 +24,11 @@ namespace MyCompiler.Program.ProgramNodes
                     [new ReturnTokenType()] = new ReturnStatementNode(),
                     [new LeftBraceTokenType()] = new BasicBlockNode(),
                     [new IfTokenType()] = new IfStatementNode(),
-                    [new TypeTokenType()] = new VariableDeclarationListNode()
+                    [new TypeTokenType()] = new VariableDeclarationListNode(true)
                 };
         }
 
-        public StatementNode()
-        {
-            translatable = new Translatable();
-        }
-
         public IStatementChild Child { get; private set; }
-        public string Address => translatable.Address;
-        public string Type => translatable.Type;
 
         public void Parse(ITokenizer tokenizer)
         {
@@ -45,8 +39,18 @@ namespace MyCompiler.Program.ProgramNodes
             Child.Parse(tokenizer);
         }
 
-        public string Translate() => Child.Translate();
+        public void Translate()
+        {
+            ITranslatable translatable = Child as ITranslatable;
+            translatable?.Translate();
+        }
 
-        public string PrettyPrint() => Child.PrettyPrint();
+        public string PrettyPrint()
+        {
+            StringBuilder sb = new StringBuilder();
+            //sb.Append(PrettyPrintingUtilities.GetTabbedNewLine());
+            sb.Append(Child.PrettyPrint());
+            return sb.ToString();
+        }
     }
 }

@@ -8,28 +8,31 @@ namespace MyCompiler.Program.ProgramNodes
     public class BinaryOperatorNode : IBinaryOperatorNode
     {
         private readonly Translatable translatable;
+        private readonly Typable typable;
         private readonly IExpressionNode leftExpression, rightExpression;
         private readonly string op;
 
         public BinaryOperatorNode(IExpressionChild left, IExpressionChild right, string op)
         {
             translatable = new Translatable();
+            typable = new Typable();
             leftExpression = new ExpressionNode(left);
             rightExpression = new ExpressionNode(right);
             this.op = op;
-            translatable.Type = leftExpression.Type.Equals("double") || rightExpression.Type.Equals("double")
+            typable.Type = leftExpression.Type.Equals("double") || rightExpression.Type.Equals("double")
                 ? "double"
                 : "int";
         }
 
-        public string Address => translatable.Address;
-        public string Type => translatable.Type;
+        public string Address => typable.Address;
+        public string Type => typable.Type;
 
-        public string Translate()
+        public void Translate()
         {
             leftExpression.Translate();
             rightExpression.Translate();
-          return translatable.Translate();
+            translatable.Translate();
+            typable.GenerateNewAddress();
         }
 
         public string PrettyPrint()
