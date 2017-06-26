@@ -142,6 +142,7 @@
     <Compile Include="Tokenizer\Tokens\IdentifierTokenType.cs" />
     <Compile Include="Tokenizer\Tokens\IfTokenType.cs" />
     <Compile Include="Tokenizer\Tokens\IntegerConstantTokenType.cs" />
+    <Compile Include="Tokenizer\Tokens\Interfaces\TokenType.cs" />
     <Compile Include="Tokenizer\Tokens\InvalidTokenType.cs" />
     <Compile Include="Tokenizer\Tokens\Interfaces\ITokenType.cs" />
     <Compile Include="Tokenizer\Tokens\LeftBraceTokenType.cs" />

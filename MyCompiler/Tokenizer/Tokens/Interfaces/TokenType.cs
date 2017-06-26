@@ -1,0 +1,35 @@
+﻿namespace MyCompiler.Tokenizer.Tokens.Interfaces
+{
+    public enum TokenType
+    {
+        And,
+        AssignOp,
+        Assign,
+        Op,
+        Or,
+        Relational,
+        Negation,
+        Comma,
+        Do,
+        Else,
+        Eof,
+        Float,
+        For,
+        Identifier,
+        If,
+        Integer,
+        LBrace,
+        LBracket,
+        LParent,
+        PlusMinus,
+        PrePost,
+        Return,
+        RBrace,
+        RBracket,
+        RParent,
+        Semi,
+        Type,
+        Not,
+        While
+    }
+}

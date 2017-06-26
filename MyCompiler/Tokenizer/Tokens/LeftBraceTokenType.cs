@@ -1,4 +1,6 @@
 ﻿using System.Text.RegularExpressions;
+using MyCompiler.Tokenizer.Tokens.Interfaces;
+
 namespace MyCompiler.Tokenizer.Tokens
 {
     public class LeftBraceTokenType : BaseTokenType
@@ -7,6 +9,6 @@ namespace MyCompiler.Tokenizer.Tokens
 
         public override bool Equals(object obj) => obj is LeftBraceTokenType;
 
-        public override int GetHashCode() => 18;
+        public override int GetHashCode() => (int) TokenType.LBrace;
     }
 }
