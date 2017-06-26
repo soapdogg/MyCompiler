@@ -22,7 +22,7 @@ namespace MyCompiler.Program.ProgramNodes
             tokenizer.Pop(); //return token
             expression = new ExpressionNode();
             expression.Parse(tokenizer);
-            shouldBeTranslated = false; //expression.Child
+            shouldBeTranslated = !(expression.Child is IConstantNode || expression.Child is IVariableExpressionNode); //expression.Child
             tokenizer.Pop(); //semicolon token
         }
 
