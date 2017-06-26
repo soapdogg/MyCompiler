@@ -11,11 +11,15 @@ namespace MyCompiler.Program.ProgramNodes
         private IArrayTypeNode arrayType;
         private bool hasArrayType, hasAssignInitializer;
 
-        public string Id { get; private set; }
+        public string Id { get; }
+
+        public VariableDeclarationNode(string id)
+        {
+            Id = id;
+        }
 
         public void Parse(ITokenizer tokenizer)
         {
-            Id = tokenizer.Pop().Value;
             hasArrayType = tokenizer.PeekTokenType() is LeftBracketTokenType;
             if (hasArrayType)
             {

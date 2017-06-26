@@ -12,24 +12,31 @@ namespace MyCompiler.Program.ProgramNodes
         private ITypeNode type;
         private readonly bool isInMethod;
         private IList<IVariableDeclarationNode> variableDeclarations;
+        private IVariableDeclarationNode first;
 
-        public VariableDeclarationListNode(bool inMethod)
+        public VariableDeclarationListNode()
         {
-            isInMethod = inMethod;
+            isInMethod = true;
+        }
+
+        public VariableDeclarationListNode(string typeString, string identifierString)
+        {
+            isInMethod = false;
+            type = new TypeNode(typeString);
+            variableDeclarations = new List<IVariableDeclarationNode>();
+            first = new VariableDeclarationNode(identifierString);
+            TypeTracker.AddType(identifierString, typeString);
         }
 
         public void Parse(ITokenizer tokenizer)
         {
-            type = new TypeNode(tokenizer.Pop().Value);
-            variableDeclarations = new List<IVariableDeclarationNode>();
-            IVariableDeclarationNode variableDeclaration = new VariableDeclarationNode();
-            variableDeclaration.Parse(tokenizer);
-            variableDeclarations.Add(variableDeclaration);
-            TypeTracker.AddType(variableDeclaration.Id, type.PrettyPrint());
+            if(isInMethod) ParseTypeAndIdentifier(tokenizer);
+            first.Parse(tokenizer);
+            variableDeclarations.Add(first);
             while (tokenizer.PeekTokenType() is CommaTokenType)
             {
                 tokenizer.Pop(); //comma token 
-                IVariableDeclarationNode v = new VariableDeclarationNode();
+                IVariableDeclarationNode v = new VariableDeclarationNode(tokenizer.Pop().Value);
                 v.Parse(tokenizer);
                 variableDeclarations.Add(v);
                 TypeTracker.AddType(v.Id, type.PrettyPrint());
@@ -54,6 +61,14 @@ namespace MyCompiler.Program.ProgramNodes
             return sb.ToString();
         }
 
-        public IStatementChild NewStatementChildInstance() => new VariableDeclarationListNode(true);
+        public IStatementChild NewStatementChildInstance() => new VariableDeclarationListNode();
+
+        private void ParseTypeAndIdentifier(ITokenizer tokenizer)
+        {
+            type = new TypeNode(tokenizer.Pop().Value);
+            variableDeclarations = new List<IVariableDeclarationNode>();
+            first = new VariableDeclarationNode(tokenizer.Pop().Value);
+            TypeTracker.AddType(first.Id, type.PrettyPrint());
+        }
     }
 }

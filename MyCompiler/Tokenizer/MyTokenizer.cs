@@ -102,10 +102,6 @@ namespace MyCompiler.Tokenizer
 
         public string PeekValue() => Peek().Value;
 
-        public bool IsAtEnd() => PeekTokenType() is EndOfFileTokenType;
-
-        public void Retreat() => --current;
-
         private bool TokenizeLine(string inputText)
         {
 			string remainingText = inputText.TrimStart();

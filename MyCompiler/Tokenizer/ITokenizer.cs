@@ -13,7 +13,5 @@ namespace MyCompiler.Tokenizer
         SimpleCToken Peek();
         ITokenType PeekTokenType();
         string PeekValue();
-        bool IsAtEnd();
-        void Retreat();
     }
 }

@@ -15,11 +15,7 @@ namespace MyCompiler.Program.ProgramNodes
             if (tokenizer.PeekTokenType() is LeftParenthesesTokenType)
                 Child = new FunctionDeclarationNode(typeToken.Value, identifierToken.Value);
             else
-            {
-                Child = new VariableDeclarationListNode(false);
-                tokenizer.Retreat();
-                tokenizer.Retreat();
-            }
+                Child = new VariableDeclarationListNode(typeToken.Value, identifierToken.Value);
             Child.Parse(tokenizer);
         }
 

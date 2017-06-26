@@ -2,7 +2,6 @@
 using System.Text;
 using MyCompiler.Program.Interfaces;
 using MyCompiler.Program.ProgramNodes.Interfaces;
-using MyCompiler.Program.ProgramNodes.Utilities;
 using MyCompiler.Tokenizer;
 using MyCompiler.Tokenizer.Tokens;
 using MyCompiler.Tokenizer.Tokens.Interfaces;
@@ -24,7 +23,7 @@ namespace MyCompiler.Program.ProgramNodes
                     [new ReturnTokenType()] = new ReturnStatementNode(),
                     [new LeftBraceTokenType()] = new BasicBlockNode(),
                     [new IfTokenType()] = new IfStatementNode(),
-                    [new TypeTokenType()] = new VariableDeclarationListNode(true)
+                    [new TypeTokenType()] = new VariableDeclarationListNode()
                 };
         }
 
