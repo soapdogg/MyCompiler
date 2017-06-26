@@ -8,14 +8,8 @@ namespace MyCompiler.Program.ProgramNodes
 {
     public class DoWhileStatementNode : IDoWhileStatementNode
     {
-        private readonly Labelable labelable;
         private IExpressionNode expression;
         private IStatementNode body;
-
-        public DoWhileStatementNode()
-        {
-            labelable = new Labelable(2);
-        }
 
         public void Parse(ITokenizer tokenizer)
         {

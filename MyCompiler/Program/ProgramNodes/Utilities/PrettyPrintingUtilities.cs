@@ -6,7 +6,7 @@ namespace MyCompiler.Program.ProgramNodes.Utilities
 {
     public static class PrettyPrintingUtilities
     {
-        private static IDictionary<string, List<string>> typeTempIdDictionary;
+        private static readonly IDictionary<string, List<string>> typeTempIdDictionary;
 
         static PrettyPrintingUtilities()
         {
