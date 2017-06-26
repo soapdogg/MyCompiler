@@ -53,8 +53,16 @@ namespace MyCompiler.Program.ProgramNodes
 
         public string PrettyPrint() => Child.PrettyPrint();
 
-        public void SetLabel(int i, string label) => Child.SetLabel(i, label);
+        public void SetLabel(int i, string label)
+        {
+            ILabelable l = Child as ILabelable;
+            l?.SetLabel(i, label);
+        }
 
-        public string GetLabel(int i) => Child.GetLabel(i);
+        public string GetLabel(int i)
+        {
+            ILabelable l = Child as ILabelable;
+            return l != null ? l.GetLabel(i) : string.Empty;
+        }
     }
 }

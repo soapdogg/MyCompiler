@@ -57,9 +57,5 @@ namespace MyCompiler.Program.ProgramNodes
             }
             return sb.ToString();
         }
-
-        public void SetLabel(int i, string label){}
-
-        public string GetLabel(int i) => string.Empty;
     }
 }

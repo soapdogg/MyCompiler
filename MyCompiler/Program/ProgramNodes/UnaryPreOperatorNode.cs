@@ -35,10 +35,6 @@ namespace MyCompiler.Program.ProgramNodes
 
         public string PrettyPrint() => translatable.IsTranslated ? PrettyPrintTranslated() : expression.PrettyPrint() + op;
 
-        public void SetLabel(int i, string label) { }
-
-        public string GetLabel(int i) => string.Empty;
-
         private string PrettyPrintTranslated() => isLeftArray ? PrettyPrintLeftArray() : PrettyPrintLeftVariable();
 
         private string PrettyPrintLeftArray()

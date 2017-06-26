@@ -49,9 +49,5 @@ namespace MyCompiler.Program.ProgramNodes
         }
 
         public IStatementChild NewStatementChildInstance() => new DoWhileStatementNode();
-
-        public void SetLabel(int i, string label) => labelable.SetLabel(i, label);
-
-        public string GetLabel(int i) => labelable.GetLabel(i);
     }
 }

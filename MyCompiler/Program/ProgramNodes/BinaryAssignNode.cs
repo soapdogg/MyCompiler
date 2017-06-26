@@ -46,10 +46,6 @@ namespace MyCompiler.Program.ProgramNodes
                     rightExpression.PrettyPrint());
         }
 
-        public void SetLabel(int i, string label) { }
-
-        public string GetLabel(int i) => string.Empty;
-
         private string PrettyPrintTranslated()
         {
             string innerExpressionString = string.Empty;

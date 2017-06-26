@@ -42,9 +42,5 @@ namespace MyCompiler.Program.ProgramNodes
                     PrettyPrintingUtilities.GetTabbedNewLineAndVariableAssignment(Address, op + expression.Address);
             return expressionString;
         }
-
-        public void SetLabel(int i, string label){}
-
-        public string GetLabel(int i) => string.Empty;
     }
 }

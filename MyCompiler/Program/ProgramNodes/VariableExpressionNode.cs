@@ -34,9 +34,5 @@ namespace MyCompiler.Program.ProgramNodes
         public string PrettyPrint() => translatable.IsTranslated 
             ? PrettyPrintingUtilities.GetTabbedNewLineAndVariableAssignment(Address, stringRepresentation) 
             : stringRepresentation;
-
-        public void SetLabel(int i, string label){}
-
-        public string GetLabel(int i) => string.Empty;
     }
 }
