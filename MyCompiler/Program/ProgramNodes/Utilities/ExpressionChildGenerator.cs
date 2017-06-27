@@ -6,22 +6,21 @@ namespace MyCompiler.Program.ProgramNodes.Utilities
 {
     public static class ExpressionChildGenerator
     {
-        public static IExpressionChild ParseExpression(ITokenizer tokenizer)
-        {
-            return ParseAssignmentOperator(tokenizer);
-        }
+        public static IExpressionChild ParseExpression(ITokenizer tokenizer) => ParseAssignmentOperator(tokenizer);
 
         private static IExpressionChild ParseAssignmentOperator(ITokenizer tokenizer)
         {
+
             IExpressionChild left = ParseLogicalOr(tokenizer);
             while (tokenizer.PeekTokenType() is BinaryAssignTokenType || tokenizer.PeekTokenType() is BinaryAssignOperatorTokenType)
             {
-                tokenizer.Pop();
-                SimpleCToken token = tokenizer.Previous();
-                IExpressionChild right = ParseLogicalOr(tokenizer);
-                left = token.TokenType is BinaryAssignTokenType
+                //Consume assign or assign op
+                SimpleCToken token = tokenizer.Pop();
+                IExpressionChild right = ParseAssignmentOperator(tokenizer);
+                right = token.TokenType is BinaryAssignTokenType
                     ? (IExpressionChild)new BinaryAssignNode(left, right)
                     : new BinaryAssignOperatorNode(left, right, token.Value.Replace("=",""));
+                return right;
             }
             return left;
         }
@@ -31,7 +30,7 @@ namespace MyCompiler.Program.ProgramNodes.Utilities
             IExpressionChild left = ParseLogicalAnd(tokenizer);
             while (tokenizer.PeekTokenType() is BinaryOrOperatorTokenType)
             {
-                tokenizer.Pop();
+                tokenizer.Pop(); // consume logical or token
                 IExpressionChild right = ParseLogicalAnd(tokenizer);
                 left = new BinaryOrOperatorNode(left, right);
             }
@@ -43,18 +42,19 @@ namespace MyCompiler.Program.ProgramNodes.Utilities
             IExpressionChild left = ParseBitwiseOr(tokenizer);
             while (tokenizer.PeekTokenType() is BinaryAndOperatorTokenType)
             {
-                tokenizer.Pop();
+                tokenizer.Pop(); // consume logical and token
                 IExpressionChild right = ParseBitwiseOr(tokenizer);
                 left = new BinaryAndOperatorNode(left, right);
             }
             return left;
         }
+
         private static IExpressionChild ParseBitwiseOr(ITokenizer tokenizer)
         {
             IExpressionChild left = ParseBitwiseXor(tokenizer);
             while ((tokenizer.PeekTokenType() is BinaryOperatorTokenType) && tokenizer.PeekValue().Equals("|"))
             {
-                tokenizer.Pop();
+                tokenizer.Pop(); // consume bitwise or
                 IExpressionChild right = ParseBitwiseXor(tokenizer);
                 left = new BinaryOperatorNode(left, right, "|");
             }

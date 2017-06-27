@@ -8,7 +8,7 @@ namespace MyCompiler
     {
         static void Main()
         {
-            ITokenizer t = new MyTokenizer(@"Data", @"test22.c");
+            ITokenizer t = new MyTokenizer(@"Data", @"test5.c");
             t.Tokenize();
             IProgram p = new MyProgram();
             p.Parse(t);
