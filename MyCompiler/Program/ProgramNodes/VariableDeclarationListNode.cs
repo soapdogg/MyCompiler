@@ -50,7 +50,7 @@ namespace MyCompiler.Program.ProgramNodes
             if(isInMethod) sb.Append(PrettyPrintingUtilities.GetTabbedNewLine());
             sb.Append(type.PrettyPrint());
             sb.Append(' ');
-            for (var index = 0; index < variableDeclarations.Count; index++)
+            for (var index = 0; index < variableDeclarations.Count; ++index)
             {
                 var variableDeclarationNode = variableDeclarations[index];
                 sb.Append(variableDeclarationNode.PrettyPrint());

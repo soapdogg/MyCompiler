@@ -1,4 +1,5 @@
-﻿using MyCompiler.Program.ProgramNodes.Components;
+﻿using System.Text;
+using MyCompiler.Program.ProgramNodes.Components;
 using MyCompiler.Program.ProgramNodes.Interfaces;
 using MyCompiler.Program.ProgramNodes.Utilities;
 
@@ -35,12 +36,11 @@ namespace MyCompiler.Program.ProgramNodes
 
         public string PrettyPrint()
         {
-            if (!translatable.IsTranslated) return op + expression.PrettyPrint();
-            string expressionString = expression.PrettyPrint();
+            if (!translatable.IsTranslated) return $"{op}{expression.PrettyPrint()}";
+            StringBuilder expressionString = new StringBuilder(expression.PrettyPrint());
             if (!op.Equals(PLUS))
-                expressionString +=
-                    PrettyPrintingUtilities.GetTabbedNewLineAndVariableAssignment(Address, op + expression.Address);
-            return expressionString;
+                expressionString.Append(PrettyPrintingUtilities.GetTabbedNewLineAndVariableAssignment(Address, $"{op}{expression.Address}"));
+            return expressionString.ToString();
         }
     }
 }

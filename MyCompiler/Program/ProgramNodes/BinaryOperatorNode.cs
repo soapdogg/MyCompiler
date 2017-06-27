@@ -43,7 +43,7 @@ namespace MyCompiler.Program.ProgramNodes
                 sb.Append(leftExpression.PrettyPrint());
                 sb.Append(rightExpression.PrettyPrint());
                 sb.Append(PrettyPrintingUtilities.GetTabbedNewLineAndVariableAssignment(Address,
-                    leftExpression.Address + " " + op + " " + rightExpression.Address));
+                    $"{leftExpression.Address} {op} {rightExpression.Address}"));
             }
             else
             {

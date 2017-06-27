@@ -6,8 +6,8 @@
 
         private static int labelCounter;
 
-        public static string GetNextTempAvailable => "_t" + ++tempCounter;
+        public static string GetNextTempAvailable => $"_t{++tempCounter}";
 
-        public static string GetNextLabelAvailable => "_l" + ++labelCounter;
+        public static string GetNextLabelAvailable => $"_l{++labelCounter}";
     }
 }

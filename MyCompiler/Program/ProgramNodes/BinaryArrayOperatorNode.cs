@@ -14,7 +14,7 @@ namespace MyCompiler.Program.ProgramNodes
 
         public bool IsLValue { get; private set; }
         public string Type => typable.Type;
-        public string LValueString => outerExpression.LValueString + "[" + innerExpression.Address + "]";
+        public string LValueString => $"{outerExpression.LValueString}[{innerExpression.Address}]";
         public void SetAsLValue() => IsLValue = true;
 
         public string TranslatedInnerExpression => innerExpression.PrettyPrint();

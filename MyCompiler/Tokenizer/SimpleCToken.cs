@@ -20,7 +20,7 @@ namespace MyCompiler.Tokenizer
 
         public override string ToString()
         {
-            return "TokenType: " + TokenType + "\tValue: " + Value;
+            return $"TokenType: {TokenType}\tValue: {Value}";
         }
 
         public override bool Equals(object obj)

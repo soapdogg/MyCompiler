@@ -21,14 +21,14 @@ namespace MyCompiler.Program.ProgramNodes.Utilities
 
         public static string GetTabbedNewLine() => "\n\t";
 
-        public static string GetVariableAssignment(string left, string right) => left + " = " + right + ";";
+        public static string GetVariableAssignment(string left, string right) => $"{left} = {right};";
 
         public static string GetTabbedNewLineAndVariableAssignment(string left, string right) 
-            => GetTabbedNewLine() + GetVariableAssignment(left, right);
+            => $"{GetTabbedNewLine()}{GetVariableAssignment(left, right)}";
 
-        public static string GetPrettyPrintedLabel(string label) => "\n\t" + label + ": ;";
+        public static string GetPrettyPrintedLabel(string label) => $"\n\t{label}: ;";
 
-        public static string GetPrettyPrintedGoto(string label) => "goto " + label + ";";
+        public static string GetPrettyPrintedGoto(string label) => $"goto {label};";
 
         public static string GetPrettyPrintTempDeclarations()
         {
@@ -37,7 +37,7 @@ namespace MyCompiler.Program.ProgramNodes.Utilities
             foreach (var l in typeTempIdDictionary)
             {
                 int counter = 0;
-                for (var index = 0; index < l.Value.Count; index++)
+                for (var index = 0; index < l.Value.Count; ++index)
                 {
                     if (counter++ % tempsPerLine == 0)
                     {

@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Collections.Generic;
+using System.Text;
 using MyCompiler.Tokenizer.Exceptions;
 using MyCompiler.Tokenizer.Tokens;
 using MyCompiler.Tokenizer.Tokens.Interfaces;
@@ -57,9 +58,9 @@ namespace MyCompiler.Tokenizer
         public MyTokenizer(params string [] pathArray)
         {
             Initialize();
-            string path = @"C:\Users\Eric\Documents\Github\MyCompiler\MyCompiler"; 
-            foreach (string s in pathArray) path += Path.DirectorySeparatorChar + s;
-            lines = File.ReadAllLines(path);
+            StringBuilder path = new StringBuilder(@"C:\Users\Eric\Documents\Github\MyCompiler\MyCompiler"); 
+            foreach (string s in pathArray) path.AppendFormat("{0}{1}", Path.DirectorySeparatorChar, s);
+            lines = File.ReadAllLines(path.ToString());
         }
 
         public MyTokenizer(List<SimpleCToken> t)

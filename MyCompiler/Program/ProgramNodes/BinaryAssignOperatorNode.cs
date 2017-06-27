@@ -44,7 +44,7 @@ namespace MyCompiler.Program.ProgramNodes
         {
             return translatable.IsTranslated
                 ? PrettyPrintTranslated()
-                : leftExpression.PrettyPrint() + " "+ op + "=" +rightExpression.PrettyPrint();
+                : $"{leftExpression.PrettyPrint()} {op}={rightExpression.PrettyPrint()}";
         }
 
         private string PrettyPrintTranslated() => isLeftArray ? PrettyPrintLeftArray() : PrettyPrintLeftVariable();
@@ -58,7 +58,7 @@ namespace MyCompiler.Program.ProgramNodes
             sb.Append(PrettyPrintingUtilities.GetTabbedNewLineAndVariableAssignment(Address, leftChildLValue));
             sb.Append(rightExpression.PrettyPrint());
             sb.Append(PrettyPrintingUtilities.GetTabbedNewLineAndVariableAssignment(Address,
-                Address + " " +  op + " " + rightExpression.Address));
+                $"{Address} {op} {rightExpression.Address}"));
             sb.Append(PrettyPrintingUtilities.GetTabbedNewLineAndVariableAssignment(leftChildLValue, Address));
             return sb.ToString();
         }
@@ -70,7 +70,7 @@ namespace MyCompiler.Program.ProgramNodes
             StringBuilder sb = new StringBuilder();
             sb.Append(rightExpression.PrettyPrint());
             sb.Append(PrettyPrintingUtilities.GetTabbedNewLineAndVariableAssignment(Address,
-                leftChildLValue + " " + op + " " + rightExpression.Address));
+                $"{leftChildLValue} {op} {rightExpression.Address}"));
             sb.Append(PrettyPrintingUtilities.GetTabbedNewLineAndVariableAssignment(leftChildLValue, Address));
             return sb.ToString();
         }

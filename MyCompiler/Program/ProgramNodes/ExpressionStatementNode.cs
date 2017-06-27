@@ -29,7 +29,7 @@ namespace MyCompiler.Program.ProgramNodes
             expression.Translate();
         }
 
-        public string PrettyPrint() => translatable.IsTranslated ? expression.PrettyPrint() : expression.PrettyPrint() + ";";
+        public string PrettyPrint() => translatable.IsTranslated ? expression.PrettyPrint() : $"{expression.PrettyPrint()};";
 
         public IStatementChild NewStatementChildInstance() => new ExpressionStatementNode();
     }

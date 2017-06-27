@@ -1,4 +1,5 @@
-﻿using MyCompiler.Program.ProgramNodes.Interfaces;
+﻿using System.Text;
+using MyCompiler.Program.ProgramNodes.Interfaces;
 using MyCompiler.Program.ProgramNodes.Utilities;
 using MyCompiler.Tokenizer;
 using MyCompiler.Tokenizer.Tokens.Interfaces;
@@ -11,11 +12,17 @@ namespace MyCompiler.Program.ProgramNodes
 
         public void Parse(ITokenizer tokenizer)
         {
-            TokenConsumer.Consume(tokenizer.Pop(), TokenType.Assign); // Binary Assign Token
+            TokenConsumer.Consume(tokenizer.Pop(), TokenType.Assign); 
             expression = new ExpressionNode();
             expression.Parse(tokenizer);
         }
 
-        public string PrettyPrint() => " = " + expression.PrettyPrint();
+        public string PrettyPrint()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append(" = ");
+            sb.Append(expression.PrettyPrint());
+            return sb.ToString();
+        }
     }
 }
