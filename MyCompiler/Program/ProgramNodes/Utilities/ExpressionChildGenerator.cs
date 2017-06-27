@@ -1,6 +1,7 @@
-﻿using MyCompiler.Program.ProgramNodes.Interfaces;
+﻿using System.Linq;
+using MyCompiler.Program.ProgramNodes.Interfaces;
 using MyCompiler.Tokenizer;
-using MyCompiler.Tokenizer.Tokens;
+using MyCompiler.Tokenizer.Tokens.Interfaces;
 
 namespace MyCompiler.Program.ProgramNodes.Utilities
 {
@@ -10,14 +11,12 @@ namespace MyCompiler.Program.ProgramNodes.Utilities
 
         private static IExpressionChild ParseAssignmentOperator(ITokenizer tokenizer)
         {
-
             IExpressionChild left = ParseLogicalOr(tokenizer);
-            while (tokenizer.PeekTokenType() is BinaryAssignTokenType || tokenizer.PeekTokenType() is BinaryAssignOperatorTokenType)
+            while (DoesTypeMatchAccepted(tokenizer.PeekTokenType(), TokenType.Assign, TokenType.AssignOp))
             {
-                //Consume assign or assign op
                 SimpleCToken token = tokenizer.Pop();
                 IExpressionChild right = ParseAssignmentOperator(tokenizer);
-                right = token.TokenType is BinaryAssignTokenType
+                right = token.TokenType.GetHashCode() == (int) TokenType.Assign
                     ? (IExpressionChild)new BinaryAssignNode(left, right)
                     : new BinaryAssignOperatorNode(left, right, token.Value.Replace("=",""));
                 return right;
@@ -28,9 +27,9 @@ namespace MyCompiler.Program.ProgramNodes.Utilities
         private static IExpressionChild ParseLogicalOr(ITokenizer tokenizer)
         {
             IExpressionChild left = ParseLogicalAnd(tokenizer);
-            while (tokenizer.PeekTokenType() is BinaryOrOperatorTokenType)
+            while (DoesTypeMatchAccepted(tokenizer.PeekTokenType(), TokenType.Or))
             {
-                tokenizer.Pop(); // consume logical or token
+                tokenizer.Pop(); 
                 IExpressionChild right = ParseLogicalAnd(tokenizer);
                 left = new BinaryOrOperatorNode(left, right);
             }
@@ -40,9 +39,9 @@ namespace MyCompiler.Program.ProgramNodes.Utilities
         private static IExpressionChild ParseLogicalAnd(ITokenizer tokenizer)
         {
             IExpressionChild left = ParseBitwiseOr(tokenizer);
-            while (tokenizer.PeekTokenType() is BinaryAndOperatorTokenType)
+            while (DoesTypeMatchAccepted(tokenizer.PeekTokenType(), TokenType.And))
             {
-                tokenizer.Pop(); // consume logical and token
+                tokenizer.Pop(); 
                 IExpressionChild right = ParseBitwiseOr(tokenizer);
                 left = new BinaryAndOperatorNode(left, right);
             }
@@ -52,9 +51,9 @@ namespace MyCompiler.Program.ProgramNodes.Utilities
         private static IExpressionChild ParseBitwiseOr(ITokenizer tokenizer)
         {
             IExpressionChild left = ParseBitwiseXor(tokenizer);
-            while ((tokenizer.PeekTokenType() is BinaryOperatorTokenType) && tokenizer.PeekValue().Equals("|"))
+            while (DoesValueMatchAccepted(tokenizer.PeekValue(), "|"))
             {
-                tokenizer.Pop(); // consume bitwise or
+                tokenizer.Pop(); 
                 IExpressionChild right = ParseBitwiseXor(tokenizer);
                 left = new BinaryOperatorNode(left, right, "|");
             }
@@ -64,7 +63,7 @@ namespace MyCompiler.Program.ProgramNodes.Utilities
         private static IExpressionChild ParseBitwiseXor(ITokenizer tokenizer)
         {
             IExpressionChild left = ParseBitwiseAnd(tokenizer);
-            while (tokenizer.PeekTokenType() is BinaryOperatorTokenType && tokenizer.PeekValue().Equals("^"))
+            while (DoesValueMatchAccepted(tokenizer.PeekValue(), "^"))
             {
                 tokenizer.Pop();
                 IExpressionChild right = ParseBitwiseAnd(tokenizer);
@@ -76,7 +75,7 @@ namespace MyCompiler.Program.ProgramNodes.Utilities
         private static IExpressionChild ParseBitwiseAnd(ITokenizer tokenizer)
         {
             IExpressionChild left = ParseRelationalEquals(tokenizer);
-            while (tokenizer.PeekTokenType() is BinaryOperatorTokenType && tokenizer.PeekValue().Equals("&"))
+            while (DoesValueMatchAccepted(tokenizer.PeekValue(), "&"))
             {
                 tokenizer.Pop();
                 IExpressionChild right = ParseRelationalEquals(tokenizer);
@@ -88,11 +87,9 @@ namespace MyCompiler.Program.ProgramNodes.Utilities
         private static IExpressionChild ParseRelationalEquals(ITokenizer tokenizer)
         {
             IExpressionChild left = ParseRelationalOperator(tokenizer);
-            while (tokenizer.PeekTokenType() is BinaryRelationalOperatorTokenType &&
-                   (tokenizer.PeekValue().Equals("==") || tokenizer.PeekValue().Equals("!=")))
+            while (DoesValueMatchAccepted(tokenizer.PeekValue(), "!=", "=="))
             {
-                tokenizer.Pop();
-                SimpleCToken token = tokenizer.Previous();
+                SimpleCToken token = tokenizer.Pop();
                 IExpressionChild right = ParseRelationalOperator(tokenizer);
                 left = new BinaryRelationalOperatorNode(left, right, token.Value);
             }
@@ -102,11 +99,9 @@ namespace MyCompiler.Program.ProgramNodes.Utilities
         private static IExpressionChild ParseRelationalOperator(ITokenizer tokenizer)
         {
             IExpressionChild left = ParseShift(tokenizer);
-            while (tokenizer.PeekTokenType() is BinaryRelationalOperatorTokenType &&
-                   (tokenizer.PeekValue().Contains(">") || tokenizer.PeekValue().Contains("<")))
+            while (DoesValueMatchAccepted(tokenizer.PeekValue(), "<", "<=", ">", ">="))
             {
-                tokenizer.Pop();
-                SimpleCToken token = tokenizer.Previous();
+                SimpleCToken token = tokenizer.Pop();
                 IExpressionChild right = ParseShift(tokenizer);
                 left = new BinaryRelationalOperatorNode(left, right, token.Value);
             }
@@ -116,10 +111,9 @@ namespace MyCompiler.Program.ProgramNodes.Utilities
         private static IExpressionChild ParseShift(ITokenizer tokenizer)
         {
             IExpressionChild left = ParseTerm(tokenizer);
-            while (tokenizer.PeekTokenType() is BinaryOperatorTokenType && (tokenizer.PeekValue().Equals("<<") || tokenizer.PeekValue().Equals(">>")))
+            while (DoesValueMatchAccepted(tokenizer.PeekValue(), "<<", ">>"))
             {
-                tokenizer.Pop();
-                SimpleCToken token = tokenizer.Previous();
+                SimpleCToken token = tokenizer.Pop();
                 IExpressionChild right = ParseTerm(tokenizer);
                 left = new BinaryOperatorNode(left, right, token.Value);
             }
@@ -129,10 +123,9 @@ namespace MyCompiler.Program.ProgramNodes.Utilities
         private static IExpressionChild ParseTerm(ITokenizer tokenizer)
         {
             IExpressionChild left = ParseFactor(tokenizer);
-            while (tokenizer.PeekTokenType() is PlusOrMinusTokenType)
+            while (DoesTypeMatchAccepted(tokenizer.PeekTokenType(), TokenType.PlusMinus))
             {
-                tokenizer.Pop();
-                SimpleCToken token = tokenizer.Previous();
+                SimpleCToken token = tokenizer.Pop();
                 IExpressionChild right = ParseFactor(tokenizer);
                 left = new BinaryOperatorNode(left, right, token.Value);
             }
@@ -142,12 +135,9 @@ namespace MyCompiler.Program.ProgramNodes.Utilities
         private static IExpressionChild ParseFactor(ITokenizer tokenizer)
         {
             IExpressionChild left = ParseUnary(tokenizer);
-            while (tokenizer.PeekTokenType() is BinaryOperatorTokenType &&
-                   (tokenizer.PeekValue().Equals("*") || tokenizer.PeekValue().Equals("/") ||
-                    tokenizer.PeekValue().Equals("%")))
+            while (DoesValueMatchAccepted(tokenizer.PeekValue(), "*", "/", "%"))
             {
-                tokenizer.Pop();
-                SimpleCToken token = tokenizer.Previous();
+                SimpleCToken token = tokenizer.Pop();
                 IExpressionChild right = ParseUnary(tokenizer);
                 left = new BinaryOperatorNode(left, right, token.Value);
             }
@@ -156,16 +146,12 @@ namespace MyCompiler.Program.ProgramNodes.Utilities
 
         private static IExpressionChild ParseUnary(ITokenizer tokenizer)
         {
-            if (tokenizer.PeekTokenType() is PlusOrMinusTokenType ||
-                   tokenizer.PeekTokenType() is PreOrPostOperatorTokenType
-                   || tokenizer.PeekTokenType() is BitNegationOperatorTokenType
-                   || tokenizer.PeekTokenType() is UnaryNotOperatorTokenType)
+            if (DoesTypeMatchAccepted(tokenizer.PeekTokenType(), TokenType.PlusMinus, TokenType.PrePost, TokenType.Negation, TokenType.Not))
             {
-                tokenizer.Pop();
-                SimpleCToken token = tokenizer.Previous();
+                SimpleCToken token = tokenizer.Pop();
                 IExpressionChild right = ParseUnary(tokenizer);
-                if (token.TokenType is PlusOrMinusTokenType || token.TokenType is BitNegationOperatorTokenType) return new UnaryOperatorNode(right, token.Value);
-                if (token.TokenType is UnaryNotOperatorTokenType) return new UnaryNotOperatorNode(right);
+                if (DoesTypeMatchAccepted(token.TokenType, TokenType.PlusMinus, TokenType.Negation)) return new UnaryOperatorNode(right, token.Value);
+                if (DoesTypeMatchAccepted(token.TokenType, TokenType.Not)) return new UnaryNotOperatorNode(right);
                 return new UnaryPreOperatorNode(right, token.Value[0].ToString());
             }
             return ParsePrimary(tokenizer);
@@ -173,38 +159,53 @@ namespace MyCompiler.Program.ProgramNodes.Utilities
 
         private static IExpressionChild ParsePrimary(ITokenizer tokenizer)
         {
-            if (tokenizer.PeekTokenType() is FloatingPointConstantTokenType ||
-                tokenizer.PeekTokenType() is IntegerConstantTokenType)
-            {
-                tokenizer.Pop();
-                SimpleCToken token = tokenizer.Previous();
-                return new ConstantNode(token.Value, token.TokenType is IntegerConstantTokenType);
-            }
-            if (tokenizer.PeekTokenType() is IdentifierTokenType)
-            {
-                tokenizer.Pop();
-                SimpleCToken token = tokenizer.Previous();
-                IExpressionChild varExpr = new VariableExpressionNode(token.Value);
-                if (tokenizer.PeekTokenType() is LeftBracketTokenType)
-                {
-                    tokenizer.Pop(); //left bracket
-                    IExpressionChild inside = ParseExpression(tokenizer);
-                    tokenizer.Pop(); //right bracket
-                    varExpr = new BinaryArrayOperatorNode((IVariableExpressionNode)varExpr, inside);
-                }
-                if (tokenizer.PeekTokenType() is PreOrPostOperatorTokenType)
-                {
-                    tokenizer.Pop(); //Post operator
-                    token = tokenizer.Previous();
-                    varExpr = new UnaryPostOperatorNode(varExpr, token.Value[0].ToString());
-                }
-                return varExpr;
-            }
+            if (DoesTypeMatchAccepted(tokenizer.PeekTokenType(), TokenType.Float, TokenType.Integer)) return ParseConstant(tokenizer);
+            if (DoesTypeMatchAccepted(tokenizer.PeekTokenType(), TokenType.Identifier)) return ParseIdentifier(tokenizer);
+            return ParseInnerExpression(tokenizer);
+        }
 
-            tokenizer.Pop();//left parentheses
-            IExpressionChild result = ParseExpression(tokenizer);
-            tokenizer.Pop(); //right parentheses
+        private static IExpressionChild ParseConstant(ITokenizer tokenizer)
+        {
+            SimpleCToken token = tokenizer.Pop();
+            return new ConstantNode(token.Value, token.TokenType.GetHashCode() == (int) TokenType.Integer);
+        }
+
+        private static IExpressionChild ParseIdentifier(ITokenizer tokenizer)
+        {
+            SimpleCToken token = tokenizer.Pop();
+            IExpressionChild result = new VariableExpressionNode(token.Value);
+            if (DoesTypeMatchAccepted(tokenizer.PeekTokenType(), TokenType.LBracket))
+            {
+                tokenizer.Pop();
+                IExpressionChild inside = ParseExpression(tokenizer);
+                TokenConsumer.Consume(tokenizer.Pop(), TokenType.RBracket);
+                result = new BinaryArrayOperatorNode((IVariableExpressionNode) result, inside);
+            }
+            if (DoesTypeMatchAccepted(tokenizer.PeekTokenType(), TokenType.PrePost))
+            {
+                token = tokenizer.Pop();
+                result = new UnaryPostOperatorNode(result, token.Value[0].ToString());
+            }
             return result;
+        }
+
+        private static IExpressionChild ParseInnerExpression(ITokenizer tokenizer)
+        {
+            TokenConsumer.Consume(tokenizer.Pop(), TokenType.LParent);
+            IExpressionChild result = ParseExpression(tokenizer);
+            TokenConsumer.Consume(tokenizer.Pop(), TokenType.RParent);
+            return result;
+        }
+
+        private static bool DoesTypeMatchAccepted(ITokenType actual, params TokenType [] accepted)
+        {
+            int actualHash = actual.GetHashCode();
+            return accepted.Any(type => (int) type == actualHash);
+        }
+
+        private static bool DoesValueMatchAccepted(string actual, params string[] accepted)
+        {
+            return accepted.Any(s => s.Equals(actual));
         }
     }
 }

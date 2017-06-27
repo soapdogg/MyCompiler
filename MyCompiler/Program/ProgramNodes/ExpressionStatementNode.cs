@@ -1,6 +1,8 @@
 ﻿using MyCompiler.Program.ProgramNodes.Components;
 using MyCompiler.Program.ProgramNodes.Interfaces;
+using MyCompiler.Program.ProgramNodes.Utilities;
 using MyCompiler.Tokenizer;
+using MyCompiler.Tokenizer.Tokens.Interfaces;
 
 namespace MyCompiler.Program.ProgramNodes
 {
@@ -18,7 +20,7 @@ namespace MyCompiler.Program.ProgramNodes
         {
             expression = new ExpressionNode();
             expression.Parse(tokenizer);
-            tokenizer.Pop(); // semicolon
+            TokenConsumer.Consume(tokenizer.Pop(), TokenType.Semi);
         }
 
         public void Translate()

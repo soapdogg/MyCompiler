@@ -1,6 +1,6 @@
 ﻿using System.IO;
 using System.Collections.Generic;
-using System.Linq;
+using MyCompiler.Tokenizer.Exceptions;
 using MyCompiler.Tokenizer.Tokens;
 using MyCompiler.Tokenizer.Tokens.Interfaces;
 
@@ -69,13 +69,9 @@ namespace MyCompiler.Tokenizer
 
         public List<SimpleCToken> Tokenize()
         {
-            bool continueScanning = true;
-            for (int i = 0; i < lines.Length && continueScanning; ++i)
-            {
-                string line = lines[i];
-                continueScanning = TokenizeLine(line);
-            }
-            if(!(tokens.Last().TokenType is InvalidTokenType)) tokens.Add(new SimpleCToken(new EndOfFileTokenType(), "END_OF_FILE"));
+            foreach (string line in lines)
+                TokenizeLine(line);
+            tokens.Add(new SimpleCToken(new EndOfFileTokenType(), "END_OF_FILE"));
 			return tokens;
         }
 
@@ -86,8 +82,6 @@ namespace MyCompiler.Tokenizer
         }
 
         public int Size => tokens.Count;
-
-        public SimpleCToken Previous() => tokens[current - 1];
 
         public SimpleCToken Pop()
         {
@@ -102,7 +96,7 @@ namespace MyCompiler.Tokenizer
 
         public string PeekValue() => Peek().Value;
 
-        private bool TokenizeLine(string inputText)
+        private void TokenizeLine(string inputText)
         {
 			string remainingText = inputText.TrimStart();
 			while (!string.IsNullOrWhiteSpace(remainingText))
@@ -116,12 +110,9 @@ namespace MyCompiler.Tokenizer
 				}
 				else
 				{
-					var invalidTokenMatch = CreateInvalidTokenMatch(remainingText);
-					tokens.Add(new SimpleCToken(invalidTokenMatch.TokenType, invalidTokenMatch.Value));
-					return false;
+				    throw new InvalidTokenTypeException(remainingText);
 				}
 			}
-            return true;
         }
         
         private static TokenMatch FindMatch(string inputText)
@@ -132,17 +123,6 @@ namespace MyCompiler.Tokenizer
                 if (match.IsMatch) return match;
             }
             return new TokenMatch { IsMatch = false }; 
-        }
-
-        private static TokenMatch CreateInvalidTokenMatch(string inputText)
-        {
-            return new TokenMatch
-            {
-                IsMatch = true,
-                RemainingText = inputText.Substring(inputText.Length),
-                TokenType = new InvalidTokenType(),
-                Value = inputText
-            };   
         }
 
         private void Initialize()

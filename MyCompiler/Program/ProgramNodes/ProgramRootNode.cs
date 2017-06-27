@@ -2,7 +2,7 @@
 using System.Text;
 using MyCompiler.Program.ProgramNodes.Interfaces;
 using MyCompiler.Tokenizer;
-using MyCompiler.Tokenizer.Tokens;
+using MyCompiler.Tokenizer.Tokens.Interfaces;
 
 namespace MyCompiler.Program.ProgramNodes
 {
@@ -13,7 +13,7 @@ namespace MyCompiler.Program.ProgramNodes
         public void Parse(ITokenizer tokenizer)
         {
             declarationStatements = new List<IDeclarationStatementNode>();
-            while (!(tokenizer.PeekTokenType() is EndOfFileTokenType))
+            while ((tokenizer.PeekTokenType().GetHashCode() != (int)TokenType.Eof))
             {
                 IDeclarationStatementNode statement = new DeclarationStatementNode();
                 statement.Parse(tokenizer);

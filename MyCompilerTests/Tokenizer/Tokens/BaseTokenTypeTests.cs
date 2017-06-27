@@ -13,7 +13,7 @@ namespace MyCompilerTests.Tokenizer.Tokens
         [TestInitialize]
         public void TestInitialize()
         {
-            t = new InvalidTokenType();
+            t = new EndOfFileTokenType();
         }
 
         [TestMethod]
@@ -22,7 +22,7 @@ namespace MyCompilerTests.Tokenizer.Tokens
             TokenMatch tm = t.Match("tokenMatch123");
             Assert.IsTrue(tm.IsMatch);
             Assert.IsTrue(tm.RemainingText.Equals(string.Empty));
-            Assert.IsInstanceOfType(tm.TokenType, typeof(InvalidTokenType));
+            Assert.IsInstanceOfType(tm.TokenType, typeof(EndOfFileTokenType));
             Assert.AreEqual("tokenMatch123", tm.Value);
         }
 

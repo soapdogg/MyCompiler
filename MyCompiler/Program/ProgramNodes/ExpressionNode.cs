@@ -22,6 +22,7 @@ namespace MyCompiler.Program.ProgramNodes
         }
 
         public IExpressionChild Child { get; private set; }
+
         public string Type
         {
             get

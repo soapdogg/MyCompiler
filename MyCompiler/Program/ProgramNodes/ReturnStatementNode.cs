@@ -3,6 +3,7 @@ using MyCompiler.Program.ProgramNodes.Components;
 using MyCompiler.Program.ProgramNodes.Interfaces;
 using MyCompiler.Program.ProgramNodes.Utilities;
 using MyCompiler.Tokenizer;
+using MyCompiler.Tokenizer.Tokens.Interfaces;
 
 namespace MyCompiler.Program.ProgramNodes
 {
@@ -19,11 +20,11 @@ namespace MyCompiler.Program.ProgramNodes
 
         public void Parse(ITokenizer tokenizer)
         {
-            tokenizer.Pop(); //return token
+            TokenConsumer.Consume(tokenizer.Pop(), TokenType.Return);
             expression = new ExpressionNode();
             expression.Parse(tokenizer);
             shouldBeTranslated = !(expression.Child is IConstantNode || expression.Child is IVariableExpressionNode); //expression.Child
-            tokenizer.Pop(); //semicolon token
+            TokenConsumer.Consume(tokenizer.Pop(), TokenType.Semi); 
         }
 
         public void Translate()

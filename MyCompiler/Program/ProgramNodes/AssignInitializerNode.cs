@@ -1,5 +1,7 @@
 ﻿using MyCompiler.Program.ProgramNodes.Interfaces;
+using MyCompiler.Program.ProgramNodes.Utilities;
 using MyCompiler.Tokenizer;
+using MyCompiler.Tokenizer.Tokens.Interfaces;
 
 namespace MyCompiler.Program.ProgramNodes
 {
@@ -9,7 +11,7 @@ namespace MyCompiler.Program.ProgramNodes
 
         public void Parse(ITokenizer tokenizer)
         {
-            tokenizer.Pop(); // Binary Assign Token
+            TokenConsumer.Consume(tokenizer.Pop(), TokenType.Assign); // Binary Assign Token
             expression = new ExpressionNode();
             expression.Parse(tokenizer);
         }

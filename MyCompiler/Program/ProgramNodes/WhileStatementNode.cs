@@ -3,6 +3,7 @@ using MyCompiler.Program.ProgramNodes.Components;
 using MyCompiler.Program.ProgramNodes.Interfaces;
 using MyCompiler.Program.ProgramNodes.Utilities;
 using MyCompiler.Tokenizer;
+using MyCompiler.Tokenizer.Tokens.Interfaces;
 
 namespace MyCompiler.Program.ProgramNodes
 {
@@ -19,11 +20,11 @@ namespace MyCompiler.Program.ProgramNodes
 
         public void Parse(ITokenizer tokenizer)
         {
-            tokenizer.Pop(); //while token
-            tokenizer.Pop(); //left parenthese token
+            TokenConsumer.Consume(tokenizer.Pop(), TokenType.While);
+            TokenConsumer.Consume(tokenizer.Pop(), TokenType.LParent);
             expression = new ExpressionNode();
             expression.Parse(tokenizer);
-            tokenizer.Pop(); //right parenthese token
+            TokenConsumer.Consume(tokenizer.Pop(), TokenType.RParent);
             body = new StatementNode();
             body.Parse(tokenizer);
         }

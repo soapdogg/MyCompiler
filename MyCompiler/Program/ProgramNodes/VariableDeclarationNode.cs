@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using MyCompiler.Program.ProgramNodes.Interfaces;
 using MyCompiler.Tokenizer;
-using MyCompiler.Tokenizer.Tokens;
+using MyCompiler.Tokenizer.Tokens.Interfaces;
 
 namespace MyCompiler.Program.ProgramNodes
 {
@@ -20,13 +20,13 @@ namespace MyCompiler.Program.ProgramNodes
 
         public void Parse(ITokenizer tokenizer)
         {
-            hasArrayType = tokenizer.PeekTokenType() is LeftBracketTokenType;
+            hasArrayType = tokenizer.PeekTokenType().GetHashCode() == (int) TokenType.LBracket;
             if (hasArrayType)
             {
                 arrayType = new ArrayTypeNode();
                 arrayType.Parse(tokenizer);
             }
-            hasAssignInitializer = tokenizer.PeekTokenType() is BinaryAssignTokenType;
+            hasAssignInitializer = tokenizer.PeekTokenType().GetHashCode()  == (int) TokenType.Assign;
             if (hasAssignInitializer)
             {
                 assignInitializer = new AssignInitializerNode();

@@ -3,6 +3,7 @@ using MyCompiler.Program.ProgramNodes.Components;
 using MyCompiler.Program.ProgramNodes.Interfaces;
 using MyCompiler.Program.ProgramNodes.Utilities;
 using MyCompiler.Tokenizer;
+using MyCompiler.Tokenizer.Tokens.Interfaces;
 
 namespace MyCompiler.Program.ProgramNodes
 {
@@ -20,17 +21,17 @@ namespace MyCompiler.Program.ProgramNodes
 
         public void Parse(ITokenizer tokenizer)
         {
-            tokenizer.Pop(); // for token
-            tokenizer.Pop(); //left parenthese token
+            TokenConsumer.Consume(tokenizer.Pop(), TokenType.For); 
+            TokenConsumer.Consume(tokenizer.Pop(), TokenType.LParent); 
             initExpressionNode = new ExpressionNode();
             initExpressionNode.Parse(tokenizer);
-            tokenizer.Pop(); // semicolon token
+            TokenConsumer.Consume(tokenizer.Pop(), TokenType.Semi); 
             testExpressionNode = new ExpressionNode();
             testExpressionNode.Parse(tokenizer);
-            tokenizer.Pop(); // semicolon token
+            TokenConsumer.Consume(tokenizer.Pop(), TokenType.Semi); 
             incrementExpressionNode = new ExpressionNode();
             incrementExpressionNode.Parse(tokenizer);
-            tokenizer.Pop(); //right parenthese token
+            TokenConsumer.Consume(tokenizer.Pop(), TokenType.RParent);
             body = new StatementNode();
             body.Parse(tokenizer);
         }

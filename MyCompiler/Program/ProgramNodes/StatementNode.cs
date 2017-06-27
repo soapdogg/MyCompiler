@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Text;
 using MyCompiler.Program.Interfaces;
 using MyCompiler.Program.ProgramNodes.Interfaces;
 using MyCompiler.Tokenizer;
@@ -44,12 +43,6 @@ namespace MyCompiler.Program.ProgramNodes
             translatable?.Translate();
         }
 
-        public string PrettyPrint()
-        {
-            StringBuilder sb = new StringBuilder();
-            //sb.Append(PrettyPrintingUtilities.GetTabbedNewLine());
-            sb.Append(Child.PrettyPrint());
-            return sb.ToString();
-        }
+        public string PrettyPrint() => Child.PrettyPrint();
     }
 }

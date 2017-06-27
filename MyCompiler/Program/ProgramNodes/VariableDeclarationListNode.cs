@@ -3,7 +3,7 @@ using System.Text;
 using MyCompiler.Program.ProgramNodes.Interfaces;
 using MyCompiler.Program.ProgramNodes.Utilities;
 using MyCompiler.Tokenizer;
-using MyCompiler.Tokenizer.Tokens;
+using MyCompiler.Tokenizer.Tokens.Interfaces;
 
 namespace MyCompiler.Program.ProgramNodes
 {
@@ -33,15 +33,15 @@ namespace MyCompiler.Program.ProgramNodes
             if(isInMethod) ParseTypeAndIdentifier(tokenizer);
             first.Parse(tokenizer);
             variableDeclarations.Add(first);
-            while (tokenizer.PeekTokenType() is CommaTokenType)
+            while (tokenizer.PeekTokenType().GetHashCode() ==  (int) TokenType.Comma)
             {
-                tokenizer.Pop(); //comma token 
+                TokenConsumer.Consume(tokenizer.Pop(), TokenType.Comma);
                 IVariableDeclarationNode v = new VariableDeclarationNode(tokenizer.Pop().Value);
                 v.Parse(tokenizer);
                 variableDeclarations.Add(v);
                 TypeTracker.AddType(v.Id, type.PrettyPrint());
             }
-            tokenizer.Pop(); // semicolon token
+            TokenConsumer.Consume(tokenizer.Pop(), TokenType.Semi);
         }
 
         public string PrettyPrint()

@@ -8,13 +8,23 @@ namespace MyCompiler
     {
         static void Main()
         {
-            ITokenizer t = new MyTokenizer(@"Data", @"test5.c");
-            t.Tokenize();
-            IProgram p = new MyProgram();
-            p.Parse(t);
-            p.Translate();
-            Console.WriteLine(p.PrettyPrint());
-            Console.ReadLine();
+            try
+            {
+                ITokenizer t = new MyTokenizer(@"Data", @"test14.c");
+                t.Tokenize();
+                IProgram p = new MyProgram();
+                p.Parse(t);
+                p.Translate();
+                Console.WriteLine(p.PrettyPrint());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            finally
+            {
+                Console.ReadLine();
+            }
         }
     }
 }

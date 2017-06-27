@@ -3,6 +3,7 @@ using MyCompiler.Program.ProgramNodes.Components;
 using MyCompiler.Program.ProgramNodes.Interfaces;
 using MyCompiler.Program.ProgramNodes.Utilities;
 using MyCompiler.Tokenizer;
+using MyCompiler.Tokenizer.Tokens.Interfaces;
 
 namespace MyCompiler.Program.ProgramNodes
 {
@@ -13,15 +14,15 @@ namespace MyCompiler.Program.ProgramNodes
 
         public void Parse(ITokenizer tokenizer)
         {
-            tokenizer.Pop(); // do token
+            TokenConsumer.Consume(tokenizer.Pop(), TokenType.Do); 
             body = new StatementNode();
             body.Parse(tokenizer);
-            tokenizer.Pop(); //while token
-            tokenizer.Pop(); //left parentheses
+            TokenConsumer.Consume(tokenizer.Pop(), TokenType.While);
+            TokenConsumer.Consume(tokenizer.Pop(), TokenType.LParent);
             expression = new ExpressionNode();
             expression.Parse(tokenizer);
-            tokenizer.Pop(); //right parentheses
-            tokenizer.Pop(); //semicolon
+            TokenConsumer.Consume(tokenizer.Pop(), TokenType.RParent); 
+            TokenConsumer.Consume(tokenizer.Pop(), TokenType.Semi);
         }
 
         public void Translate()

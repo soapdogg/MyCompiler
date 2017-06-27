@@ -1,8 +1,9 @@
 ﻿using System.Text;
 using MyCompiler.Program.Interfaces;
 using MyCompiler.Program.ProgramNodes.Interfaces;
+using MyCompiler.Program.ProgramNodes.Utilities;
 using MyCompiler.Tokenizer;
-using MyCompiler.Tokenizer.Tokens;
+using MyCompiler.Tokenizer.Tokens.Interfaces;
 
 namespace MyCompiler.Program.ProgramNodes
 {
@@ -10,12 +11,13 @@ namespace MyCompiler.Program.ProgramNodes
     {
         public void Parse(ITokenizer tokenizer)
         {
+            TokenConsumer.Consume(tokenizer.Peek(), TokenType.Type);
             SimpleCToken typeToken = tokenizer.Pop();
+            TokenConsumer.Consume(tokenizer.Peek(), TokenType.Identifier);
             SimpleCToken identifierToken = tokenizer.Pop();
-            if (tokenizer.PeekTokenType() is LeftParenthesesTokenType)
-                Child = new FunctionDeclarationNode(typeToken.Value, identifierToken.Value);
-            else
-                Child = new VariableDeclarationListNode(typeToken.Value, identifierToken.Value);
+            Child = tokenizer.PeekTokenType().GetHashCode() == (int) TokenType.LParent
+                ? (IDeclarationChild) new FunctionDeclarationNode(typeToken.Value, identifierToken.Value)
+                : new VariableDeclarationListNode(typeToken.Value, identifierToken.Value);
             Child.Parse(tokenizer);
         }
 

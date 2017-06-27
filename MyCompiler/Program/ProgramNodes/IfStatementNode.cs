@@ -3,7 +3,7 @@ using MyCompiler.Program.ProgramNodes.Components;
 using MyCompiler.Program.ProgramNodes.Interfaces;
 using MyCompiler.Program.ProgramNodes.Utilities;
 using MyCompiler.Tokenizer;
-using MyCompiler.Tokenizer.Tokens;
+using MyCompiler.Tokenizer.Tokens.Interfaces;
 
 namespace MyCompiler.Program.ProgramNodes
 {
@@ -21,16 +21,16 @@ namespace MyCompiler.Program.ProgramNodes
 
         public void Parse(ITokenizer tokenizer)
         {
-            tokenizer.Pop(); //if token
-            tokenizer.Pop(); //left parenthese token
+            TokenConsumer.Consume(tokenizer.Pop(), TokenType.If);
+            TokenConsumer.Consume(tokenizer.Pop(), TokenType.LParent);
             booleanExpression = new ExpressionNode();
             booleanExpression.Parse(tokenizer);
-            tokenizer.Pop(); //right parenthese token
+            TokenConsumer.Consume(tokenizer.Pop(), TokenType.RParent);
             trueBody = new StatementNode();
             trueBody.Parse(tokenizer);
-            hasFalse = tokenizer.PeekTokenType() is ElseTokenType;
+            hasFalse = tokenizer.PeekTokenType().GetHashCode() == (int)TokenType.Else;
             if (!hasFalse) return;
-            tokenizer.Pop(); //else token
+            TokenConsumer.Consume(tokenizer.Pop(), TokenType.Else); //else token
             falseBody = new StatementNode();
             falseBody.Parse(tokenizer);
         }
